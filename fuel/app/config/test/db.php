@@ -1,16 +1,18 @@
 <?php
 /**
- * The test database settings. These get merged with the global settings.
- *
- * This environment is primarily used by unit tests, to run on a controlled environment.
+ * The development database settings. These get merged with the global settings.
  */
 
+Config::load("env");
+
 return array(
-	'default' => array(
-		'connection'  => array(
-			'dsn'        => 'mysql:host=localhost;dbname=fuel_test',
-			'username'   => 'fuel_app',
-			'password'   => 'super_secret_password',
-		),
-	),
+  'default' => array(
+    'type'  => Config::get('DB.TYPE'),
+    'connection' => array(
+      'host'     => Config::get('DB.HOST'),
+      'database' => Config::get('DB.NAME'),
+      'username' => Config::get('DB.USERNAME'),
+      'password' => Config::get('DB.PASSWORD'),
+    ),
+  ),
 );
