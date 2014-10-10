@@ -13,6 +13,10 @@ Autoloader::add_classes(array(
 // Register the autoloader
 Autoloader::register();
 
+Config::load('dir');
+Config::load('app');
+Config::load('env');
+
 /**
  * Your environment.  Can be set to any of the following:
  *
@@ -21,11 +25,7 @@ Autoloader::register();
  * Fuel::STAGING
  * Fuel::PRODUCTION
  */
-Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::DEVELOPMENT);
+Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Config::get('FUEL.ENV'));
 
 // Initialize the framework with the config file.
 Fuel::init('config.php');
-
-Config::load('dir');
-Config::load('app');
-Config::load('env');
