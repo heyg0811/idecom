@@ -2,12 +2,12 @@
 	<div class="col-xs-12 column" id="content">
 		<div class="row">
 			<div class="col-xs-12">
-				<button id="trigger" class="btn btn-default pull-right" data-effect="slidein">製作所</button>
+				<button id="trigger" class="btn btn-success btn-lg pull-right" data-effect="slidein">製作所</button>
 			</div>
 			<div class="col-xs-12" id="list">
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/people" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -17,7 +17,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -27,7 +27,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/sports" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -37,7 +37,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/business" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -47,7 +47,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/cats" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -57,7 +57,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/fashion" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -67,7 +67,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/technics" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -77,7 +77,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/abstract" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -87,7 +87,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/animals" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -97,7 +97,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/food" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -107,7 +107,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/nightlife" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -117,7 +117,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/nature" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -127,7 +127,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/fashion/5" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -137,7 +137,7 @@
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/nightlife/3" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						<blockquote>
 							<p>
 								Lorem ipsum dolor sit amet, consectetur  adipisicing elit.

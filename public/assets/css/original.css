@@ -5,13 +5,14 @@ body,
 #content {
 	height: 100%;
 	overflow: hidden;
+	color:#FFF;
 }
 body{
-	background:#343838;
+	background:#36393B;
 }
 #content{
 	overflow:scroll;
-	background: #343838;
+	background: #FFFFEA;
 	padding-bottom:30px;
 }
 
@@ -29,7 +30,7 @@ body{
 	visibility:hidden;
 	width: 300px;
 	height: 100%;
-	background: #008C9E;
+	background: #45484B;
 	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
 }
@@ -45,17 +46,17 @@ body{
 }
 #sidemenu li a{
 	display: block;
-	background-color: #008C9E;
+	background-color: #45484B;
 	padding: 17px 10px;
 	text-decoration: none;
-	color: #333;
+	color: #fff;
 	width: auto;
 	margin: 0px 0px;
 	text-align: left;
 	font-size: 15px;
 }
 #sidemenu li a:hover{
-	background-color: #00B4CC;
+	background-color: #4B4E51;
 }
 
 .menu-bottom{

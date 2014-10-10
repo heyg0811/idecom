@@ -28,13 +28,13 @@
 				</nav>
 			</div>
 			<div class="col-xs-12">
-				<button id="trigger" class="btn btn-default pull-right" data-effect="slidein">製作所</button>
+				<button id="trigger" class="btn btn-success btn-lg pull-right" data-effect="slidein">製作所</button>
 			</div>
 			<div class="col-sm-6 col-xs-12">
 				<div class="col-xs-12" id="product">
 					<div class="col-xs-12">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/people" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 							<blockquote>
 								<p>
 									Lorem ipsum dolor sit amet, consectetur  adipisicing elit.
@@ -46,82 +46,82 @@
 				<div class="col-xs-12" id="product-img">
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 					<div class="col-md-3 col-sm-4 col-xs-6">
 						<div class="thumbnail">
-							<img alt="" src="http://lorempixel.com/1000/600/city" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 						</div>
 					</div>
 				</div>
@@ -129,52 +129,52 @@
 			<div class="col-sm-6 col-xs-12" id="product-etc">
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/sports" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/business" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/cats" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/fashion" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/technics" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/sports/2" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/business/3" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/cats/4" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/fashion/5" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 				<div class="col-md-4 col-sm-6 col-xs-12">
 					<div class="thumbnail">
-						<img alt="" src="http://lorempixel.com/1000/600/technics" />
+						<?php echo Asset::img('noimage.jpg'); ?>
 					</div>
 				</div>
 			</div>

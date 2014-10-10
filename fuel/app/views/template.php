@@ -10,7 +10,7 @@
 	<body>
 		<div class="container-fluid" id="container">
       <div class="scalein sidemenu" id="sidemenu">
-        <img class="logo" src="img/logo.jpg" alt="">
+        <?php echo Asset::img('noimage.jpg',array('class'=>'logo')); ?>
         <ul>
           <li class="active"><a href="#"><span class="glyphicon glyphicon-star"></span> めにゅー１</a></li>
           <li><a href="#"><span class="glyphicon glyphicon-star"></span> めにゅー２</a></li>
