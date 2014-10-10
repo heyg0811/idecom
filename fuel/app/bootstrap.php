@@ -4,10 +4,10 @@ require COREPATH.'bootstrap.php';
 
 
 Autoloader::add_classes(array(
-	// Add classes you want to override here
+// Add classes you want to override here
 	// Example: 'View' => APPPATH.'classes/view.php',
-  'Config'     => APPPATH . 'classes/config.php',
-  'Validation' => APPPATH . 'classes/validation.php',
+	'Config'     => APPPATH . 'classes/config.php',
+	'Validation' => APPPATH . 'classes/validation.php',
 ));
 
 // Register the autoloader
@@ -25,3 +25,7 @@ Fuel::$env = (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : Fuel::DEVELOP
 
 // Initialize the framework with the config file.
 Fuel::init('config.php');
+
+Config::load('dir');
+Config::load('app');
+Config::load('env');

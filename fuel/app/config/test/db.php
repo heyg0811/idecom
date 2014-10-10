@@ -3,8 +3,6 @@
  * The development database settings. These get merged with the global settings.
  */
 
-Config::load("env");
-
 return array(
   'default' => array(
     'type'  => Config::get('DB.TYPE'),

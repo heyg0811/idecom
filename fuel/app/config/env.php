@@ -8,7 +8,7 @@
  */
 
 return array(
-  // データベース関連
+// データベース関連
   'DB' => array(
     'TYPE'      => 'mysqli',
     'HOST'      => 'localhost',
