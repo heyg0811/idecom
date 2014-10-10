@@ -19,7 +19,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_Welcome extends Controller
+class Controller_Welcome extends Controller_Template
 {
 
 	/**
@@ -30,7 +30,18 @@ class Controller_Welcome extends Controller
 	 */
 	public function action_index()
 	{
-		return Response::forge(View::forge('welcome/index'));
+		$this->template->content = View::forge('welcome/index');
+	}
+
+	/**
+	 * The basic welcome message
+	 *
+	 * @access  public
+	 * @return  Response
+	 */
+	public function action_writer()
+	{
+		$this->template->content = View::forge('welcome/writer');
 	}
 
 	/**
