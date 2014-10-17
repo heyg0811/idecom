@@ -35,6 +35,10 @@ blockquote small {
   background-color: transparent;
 }
 
+.navbar-header {
+    float:left;
+}
+
 .nav-pills>li>a{
   border-radius:0px;
 }

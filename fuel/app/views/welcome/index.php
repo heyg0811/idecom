@@ -1,6 +1,3 @@
-<div class="col-xs-12 text-center">
-	<?php echo Asset::img('logo-bar.png',array('style'=>'max-width:100%;')); ?>
-</div>
 <div class="visible-sm visible-xs col-sm-12 text-center" id="filter-top">
 	<div class="container-fluid">
 		<ul class="list-inline">
