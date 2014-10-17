@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>IDECOM | Dashboard</title>
+    <title>IDECOM</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -307,14 +307,19 @@
               <!-- /.search form -->
               <!-- sidebar menu: : style can be found in sidebar.less -->
               <ul class="sidebar-menu">
-                  <li class="active">
-                      <a href="index.html">
-                          <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                  <li>
+                      <a href="/dashboard/index">
+                          <i class="fa fa-dashboard"></i> <span>解析　Dashboard</span>
                       </a>
                   </li>
                   <li>
-                      <a href="pages/widgets.html">
-                          <i class="fa fa-th"></i> <span>Widgets</span> <small class="badge pull-right bg-green">new</small>
+                      <a href="/product/list">
+                          <i class="fa fa-folder-open-o"></i> <span>作品　Product</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="/recruit/list">
+                          <i class="fa fa-users"></i> <span>募集　Recruit</span>
                       </a>
                   </li>
                   <li class="treeview">
@@ -400,12 +405,18 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Dashboard
-            <small>Control panel</small>
+            <?php echo $title; ?>
+            <small><?php echo $subtitle; ?></small>
           </h1>
           <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Dashboard</li>
+            <li><a href="/"><i class="fa fa-tags"></i> Home</a></li>
+            <?php if (count(Uri::segments()) == 0): ?>
+              <li><?php echo 'Dashboard'; ?></li>
+              <li><?php echo 'Index'; ?></li>
+            <?php else: ?>
+              <li><?php echo ucfirst(Uri::segment(1)); ?></li>
+              <li><?php echo ucfirst(Uri::segment(2)); ?></li>
+            <?php endif; ?>
           </ol>
         </section>
         <!-- Main content -->
