@@ -1,26 +1,42 @@
 <?php
 /**
- * Fuel is a fast, lightweight, community driven PHP5 framework.
- *
- * @package    Fuel
- * @version    1.7
- * @author     Fuel Development Team
- * @license    MIT License
- * @copyright  2010 - 2014 Fuel Development Team
- * @link       http://fuelphp.com
+ * @brif    掲示板関連ファイル
+ * @author  Sakamoto
+ * @date    2014/09/13
  */
 
 /**
- * The Welcome Controller.
- *
- * A basic controller example.  Has examples of how to set the
- * response body and status.
- *
- * @package  app
- * @extends  Controller
+ * @brif    掲示板用
+ * @package app
+ * @extends Controller_Template
  */
 class Controller_Bbs extends Controller_Template
 {
+	  /**
+  * @brif   前処理
+  * @access public
+  * @return
+  */
+  public function before()
+  {
+    // 決まり文句
+    parent::before();
+
+    $this->template->title = '掲示板';
+  }
+
+  /**
+  * @brif     後処理
+  * @detail   $response をパラメータとして追加し、after() を Controller_Template 互換にする
+  * @access  public
+  * @return   Response
+  */
+  public function after($response)
+  {
+    // 決まり文句
+    $response = parent::after($response);
+    return $response;
+  }
 
 	/**
 	 * The basic welcome message
@@ -30,6 +46,7 @@ class Controller_Bbs extends Controller_Template
 	 */
 	public function action_index()
 	{
+		$this->template->subtitle = '一覧';
 		$this->template->content = View::forge('bbs/index');
 	}
 
@@ -41,6 +58,7 @@ class Controller_Bbs extends Controller_Template
 	 */
 	public function action_bbs()
 	{
+		$this->template->subtitle = '詳細';
 		$this->template->content = View::forge('bbs/bbs');
 	}
 

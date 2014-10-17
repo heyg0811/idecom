@@ -1,7 +1,9 @@
 <style type="text/css" media="screen">
-.col-md-10{
+.comment-body{
 	background-color: #FEF0E3;
-	margin:15px;
+}
+.comment{
+	margin:20px;
 }
 
 	}
@@ -9,17 +11,14 @@
 
 
 <?php for ($i=0; $i < 20; $i++): ?>
-	<div class="row">
-
+	<div class="row comment">
 		<div class="col-md-2">
 			<?php echo Asset::img('noimage.jpg'); ?>
 		</div>
-
-		<div  class="col-md-10">
+		<div  class="col-md-9 comment-body">
 				<p> <i class="fa fa-fw fa-comment-o"></i>1. ID : B????  <?php echo date('Y-m-D H:i:s',time()); ?></p>
 				<p style="margin-left: 15px;">本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん
-						本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん</p>
-			<hr size="10;">
+						本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん</p>
 		</div>
 
 	</div>
