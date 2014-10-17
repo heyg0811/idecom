@@ -1,18 +1,18 @@
 <?php
 /**
- * @brif    募集ページ関連ファイル
+ * @brif    作品ページ関連ファイル
  * @author  Sakamoto
  * @date    2014/09/13
  */
 
 /**
- * @brif    募集ページ用
+ * @brif    作品ページ用
  * @package app
  * @extends Controller_Template
  */
-class Controller_Recruit extends Controller_Template
+class Controller_Product extends Controller_Template
 {
-/**
+  /**
   * @brif   前処理
   * @access public
   * @return
@@ -22,7 +22,7 @@ class Controller_Recruit extends Controller_Template
     // 決まり文句
     parent::before();
 
-    $this->template->title = '募集';
+    $this->template->title = '作品';
   }
 
   /**
@@ -38,25 +38,25 @@ class Controller_Recruit extends Controller_Template
     return $response;
   }
 
-/**
-   * @brif    募集一覧
+  /**
+   * @brif    作品一覧
    * @access  public
    * @return
    */
-	public function action_list()
+  public function action_list()
   {
     $this->template->subtitle = '一覧';
-		$this->template->content = View::forge('recruit/list');
-	}
+    $this->template->content = View::forge('product/list');
+  }
 
-/**
-   * @brif    募集詳細
+  /**
+   * @brif    作品詳細
    * @access  public
    * @return
    */
   public function action_detail()
   {
     $this->template->subtitle = '詳細';
-    $this->template->content = View::forge('recruit/detail');
+    $this->template->content = View::forge('product/detail');
   }
 }
