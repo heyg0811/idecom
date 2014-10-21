@@ -113,14 +113,14 @@ $(function() {
         fillColor: "#ebf4f9",
         height: '50',
         width: '80'
-    });    
+    });
 
     //The Calender
     $("#calendar").datepicker();
 
     //SLIMSCROLL FOR CHAT WIDGET
     $('#chat-box').slimScroll({
-        height: '250px'
+        height: '500px'
     });
 
     /* Morris.js Charts */
