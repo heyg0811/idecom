@@ -1,3 +1,4 @@
+
 <div class="author-box">
   <aside class="author col-xs-12 col-sm-12">
     <div class="author-frame">
@@ -27,7 +28,7 @@
     <div class="author-frame">
       <div class="row">
         <div class="col-xs-12 author-grade">
-          <div class="pg_logo"><?php echo Asset::img('pg_logo/java.png', array('class' => 'pg_logo')); ?></div>
+          <div class="pg_logo"><?php echo Asset::img('pg_logo/Java.svg', array('class' => 'pg_logo')); ?></div>
           <div class="progress pg_logo_ber">
             <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
               <span class="sr-only">40% Complete (success)</span>
@@ -35,7 +36,7 @@
           </div>
         </div>
         <div class="col-xs-12 author-grade">
-          <div class="pg_logo"><?php echo Asset::img('pg_logo/C.png', array('class' => 'pg_logo')); ?></div>
+          <div class="pg_logo"><?php echo Asset::img('pg_logo/C_sharp.svg', array('class' => 'pg_logo')); ?></div>
           <div class="progress pg_logo_ber">
             <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
               <span class="sr-only">40% Complete (success)</span>
@@ -43,14 +44,15 @@
           </div>
         </div>
         <div class="col-xs-12 author-grade">
-          <div class="pg_logo"><?php echo Asset::img('pg_logo/php.png', array('class' => 'pg_logo')); ?></div>
-          <div class="progress pg_logo_ber">
+          <div class="pg_logo"><?php echo Asset::img('pg_logo/PHP.svg', array('class' => 'pg_logo')); ?></div>
+          <div class="progress pg_logo_ber padding-left-5">
             <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
               <span class="sr-only">40% Complete (success)</span>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </aside>
 
   <div class="row author-timeline">
@@ -62,27 +64,55 @@
         </span>
       </li>
       <!-- /.timeline-label -->
-
       <!-- timeline item -->
       <li>
-        <!-- timeline icon -->
         <i class="fa fa-envelope bg-blue"></i>
         <div class="timeline-item">
           <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-          <h3 class="timeline-header"><a href="#">Support Team</a> ...</h3>
-
+          <h3 class="timeline-header"><a href="#">Support Team</a> sent you and email</h3>
           <div class="timeline-body">
-            ...
-            Content goes here
+            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+            weebly ning heekya handango imeem plugg dopplr jibjab, movity
+            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+            quora plaxo ideeli hulu weebly balihoo...
           </div>
-
-          <div class='timeline-footer'>
-            <a class="btn btn-primary btn-xs">...</a>
+          <div class="timeline-footer">
           </div>
         </div>
       </li>
       <!-- END timeline item -->
+      <!-- timeline item -->
+      <li>
+        <i class="fa fa-user bg-aqua"></i>
+        <div class="timeline-item">
+          <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+          <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+        </div>
+      </li>
+      <!-- END timeline item -->
+      <!-- timeline item -->
+      <li>
+        <i class="fa fa-comments bg-yellow"></i>
+        <div class="timeline-item">
+          <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+          <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+          <div class="timeline-body">
+            Take me to your leader!
+            Switzerland is small and neutral!
+            We are more like Germany, ambitious and misunderstood!
+          </div>
+        </div>
+      </li>
+      <!-- END timeline item -->
+      <!-- timeline time label -->
+      <li class="time-label">
+        <span class="bg-green">
+          3 Jan. 2014
+        </span>
+      </li>
+      <li>
+        <i class="fa fa-clock-o"></i>
+      </li>
     </ul>
   </div>
 </div>
