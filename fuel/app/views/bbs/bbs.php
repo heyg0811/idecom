@@ -1,27 +1,26 @@
 <style type="text/css" media="screen">
 .comment-body{
-	background-color: #FEF0E3;
+  background-color: #FEF0E3;
 }
 .comment{
-	margin:20px;
+  margin:20px;
 }
 
-	}
 </style>
 
 
 <?php for ($i=0; $i < 20; $i++): ?>
-	<div class="row comment">
-		<div class="col-md-2">
-			<?php echo Asset::img('noimage.jpg'); ?>
-		</div>
-		<div  class="col-md-9 comment-body">
-				<p> <i class="fa fa-fw fa-comment-o"></i>1. ID : B????  <?php echo date('Y-m-D H:i:s',time()); ?></p>
-				<p style="margin-left: 15px;">本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん
-						本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん</p>
-		</div>
+  <div class="row comment">
+    <div class="col-md-2">
+      <?php echo Asset::img('noimage.jpg'); ?>
+    </div>
+    <div  class="col-md-9 comment-body">
+        <p> <i class="fa fa-fw fa-comment-o"></i>1. ID : B????  <?php echo date('Y-m-D H:i:s',time()); ?></p>
+        <p style="margin-left: 15px;">本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん
+            本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん</p>
+    </div>
 
-	</div>
+  </div>
 <?php endfor; ?>
 
 <form class="form-horizontal" role="form">

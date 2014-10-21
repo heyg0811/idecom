@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html
+xmlns="http://www.w3.org/1999/xhtml"
+xmlns:svg="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+lang="en">
   <head>
     <meta charset="UTF-8">
     <title>IDECOM</title>
@@ -320,6 +324,11 @@
                   <li>
                       <a href="/recruit/list">
                           <i class="fa fa-users"></i> <span>募集　Recruit</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a href="/bbs/bbs">
+                          <i class="fa fa-comments-o"></i> <span>掲示板　BBS</span>
                       </a>
                   </li>
                   <li class="treeview">

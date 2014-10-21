@@ -8,9 +8,9 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus in eius blanditiis doloribus
           </p>
         </div>
-        <a href="#" class="small-box-footer">
+        <a href="/author/index" class="small-box-footer">
           <h4>
-            <i class="fa fa-desktop" style="margin-right:4px;"></i>さくひんたいとる
+            <i class="fa fa-desktop" style="margin-right:4px;"></i>作者名
           </h4>
         </a>
       </div>
