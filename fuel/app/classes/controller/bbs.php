@@ -46,7 +46,7 @@ class Controller_Bbs extends Controller_Template
 	 */
 	public function action_index()
 	{
-		$this->template->subtitle = '一覧';
+		$this->template->subtitle = 'スレッド一覧';
 		$this->template->content = View::forge('bbs/index');
 	}
 
@@ -56,10 +56,10 @@ class Controller_Bbs extends Controller_Template
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_bbs()
+	public function action_thread()
 	{
-		$this->template->subtitle = '詳細';
-		$this->template->content = View::forge('bbs/bbs');
+		$this->template->subtitle = 'スレッド詳細';
+		$this->template->content = View::forge('bbs/thread');
 	}
 
 
