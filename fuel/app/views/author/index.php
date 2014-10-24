@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="col-xs-12 author-grade">
-          <div class="pg_logo"><?php echo Asset::img('pg_logo/PHP.svg', array('class' => 'pg_logo')); ?></div>
+          <div class="pg_logo"><?php echo Asset::img('pg_logo/Php.svg', array('class' => 'pg_logo')); ?></div>
           <div class="progress pg_logo_ber padding-left-5">
             <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
               <span class="sr-only">40% Complete (success)</span>
