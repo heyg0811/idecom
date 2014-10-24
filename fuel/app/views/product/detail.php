@@ -1,14 +1,14 @@
 <div class="col-sm-6 col-xs-12">
   <div class="col-xs-12" id="product">
     <div class="col-xs-12">
-      <div class="small-box bg-green">
+      <div class="small-box bg-blue">
         <?php echo Asset::img('noimage.jpg'); ?>
         <div class="inner">
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus in eius blanditiis doloribus
           </p>
         </div>
-        <a href="/author/index" class="small-box-footer">
+        <a href="/author/detail" class="small-box-footer">
           <h4>
             <i class="fa fa-desktop" style="margin-right:4px;"></i>作者名
           </h4>

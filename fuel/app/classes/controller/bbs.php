@@ -44,10 +44,10 @@ class Controller_Bbs extends Controller_Template
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_index()
+	public function action_list()
 	{
 		$this->template->subtitle = 'スレッド一覧';
-		$this->template->content = View::forge('bbs/index');
+		$this->template->content = View::forge('bbs/list');
 	}
 
 	/**

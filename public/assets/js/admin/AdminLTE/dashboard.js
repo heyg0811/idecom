@@ -120,7 +120,7 @@ $(function() {
 
     //SLIMSCROLL FOR CHAT WIDGET
     $('#chat-box').slimScroll({
-        height: '500px'
+        height: '350px'
     });
 
     /* Morris.js Charts */

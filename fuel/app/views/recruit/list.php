@@ -14,7 +14,7 @@
 				<?php echo Asset::img('noimage.jpg'); ?>
 				<div class="inner">
 					<h4>
-						<i class="fa fa-users" style="margin-right:4px;"></i> ぼしゅうたいとる
+						<i class="fa fa-bullhorn" style="margin-right:4px;"></i> ぼしゅうたいとる
 					</h4>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus in eius blanditiis doloribus

@@ -10,11 +10,11 @@
 <div class="col-md-10" id="list">
   <?php for ($i=0; $i < 12; $i++): ?>
     <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="small-box bg-blue">
+      <div class="small-box bg-green">
         <?php echo Asset::img('noimage.jpg'); ?>
         <div class="inner">
           <h4>
-            <i class="fa fa-desktop" style="margin-right:4px;"></i> さくひんたいとる
+            <i class="fa fa-user" style="margin-right:4px;"></i> さくしゃめい
           </h4>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus in eius blanditiis doloribus
