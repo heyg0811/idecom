@@ -43,10 +43,10 @@ class Controller_Author extends Controller_Template
    * @access  public
    * @return
    */
-  public function action_index()
+  public function action_Detail()
   {
     $this->template->subtitle = '詳細';
-    $this->template->content = View::forge('author/index');
+    $this->template->content = View::forge('author/Detail');
   }
 
 
