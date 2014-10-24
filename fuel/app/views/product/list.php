@@ -8,7 +8,7 @@
   </div>
 </div>
 <div class="col-md-10" id="list">
-  <?php for ($i=0; $i < 12; $i++): ?>
+  <?php for ($i = 0; $i < 12; $i++): ?>
     <div class="col-md-4 col-sm-6 col-xs-12">
       <div class="small-box bg-blue">
         <?php echo Asset::img('noimage.jpg'); ?>

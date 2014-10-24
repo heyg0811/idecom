@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @brif    掲示板関連ファイル
  * @author  Sakamoto
@@ -10,15 +11,14 @@
  * @package app
  * @extends Controller_Template
  */
-class Controller_Bbs extends Controller_Template
-{
-	  /**
-  * @brif   前処理
-  * @access public
-  * @return
-  */
-  public function before()
-  {
+class Controller_Bbs extends Controller_Template {
+
+  /**
+   * @brif   前処理
+   * @access public
+   * @return
+   */
+  public function before() {
     // 決まり文句
     parent::before();
 
@@ -26,41 +26,37 @@ class Controller_Bbs extends Controller_Template
   }
 
   /**
-  * @brif     後処理
-  * @detail   $response をパラメータとして追加し、after() を Controller_Template 互換にする
-  * @access  public
-  * @return   Response
-  */
-  public function after($response)
-  {
+   * @brif     後処理
+   * @detail   $response をパラメータとして追加し、after() を Controller_Template 互換にする
+   * @access  public
+   * @return   Response
+   */
+  public function after($response) {
     // 決まり文句
     $response = parent::after($response);
     return $response;
   }
 
-	/**
-	 * The basic welcome message
-	 *
-	 * @access  public
-	 * @return  Response
-	 */
-	public function action_list()
-	{
-		$this->template->subtitle = 'スレッド一覧';
-		$this->template->content = View::forge('bbs/list');
-	}
+  /**
+   * The basic welcome message
+   *
+   * @access  public
+   * @return  Response
+   */
+  public function action_list() {
+    $this->template->subtitle = 'スレッド一覧';
+    $this->template->content = View::forge('bbs/list');
+  }
 
-	/**
-	 * The basic welcome message
-	 *
-	 * @access  public
-	 * @return  Response
-	 */
-	public function action_thread()
-	{
-		$this->template->subtitle = 'スレッド詳細';
-		$this->template->content = View::forge('bbs/thread');
-	}
-
+  /**
+   * The basic welcome message
+   *
+   * @access  public
+   * @return  Response
+   */
+  public function action_thread() {
+    $this->template->subtitle = 'スレッド詳細';
+    $this->template->content = View::forge('bbs/thread');
+  }
 
 }

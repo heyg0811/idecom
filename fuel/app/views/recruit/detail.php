@@ -1,12 +1,12 @@
 <style>
   .recruit-thumbnail
-    {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      max-width: 100%;
-      width: 100%;
-    }
+  {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    width: 100%;
+  }
 </style>
 <div class="col-sm-4" >
   <div class="box box-solid bg-red-gradient">
@@ -29,32 +29,32 @@
     </div>
     <div class="box-footer text-black">
       <h3 class="box-title text-center">技術</h3>
-          <div class="row">
-            <div class="col-sm-12">
-              <!-- Progress bars -->
-              <div class="clearfix">
-                <span class="pull-left"><p>JAVA</p></span>
-                <small class="pull-right">50%</small>
-              </div>
-              <div class="progress xs">
-                <div class="progress-bar progress-bar-green" style="width: 50%;"></div>
-              </div>
-              <div class="clearfix">
-                <span class="pull-left"><p>C#</p></span>
-                <small class="pull-right">40%</small>
-              </div>
-              <div class="progress xs">
-                <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-              </div>
-              <div class="clearfix">
-                <span class="pull-left"><p>PHP</p></span>
-                <small class="pull-right">60%</small>
-              </div>
-              <div class="progress xs">
-                <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
-              </div>
-            </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <!-- Progress bars -->
+          <div class="clearfix">
+            <span class="pull-left"><p>JAVA</p></span>
+            <small class="pull-right">50%</small>
           </div>
+          <div class="progress xs">
+            <div class="progress-bar progress-bar-green" style="width: 50%;"></div>
+          </div>
+          <div class="clearfix">
+            <span class="pull-left"><p>C#</p></span>
+            <small class="pull-right">40%</small>
+          </div>
+          <div class="progress xs">
+            <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
+          </div>
+          <div class="clearfix">
+            <span class="pull-left"><p>PHP</p></span>
+            <small class="pull-right">60%</small>
+          </div>
+          <div class="progress xs">
+            <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -70,7 +70,7 @@
       <h4>h4. Bootstrap heading</h4>
       <h5>h5. Bootstrap heading</h5>
       <h6>h6. Bootstrap heading</h6>
-      <?php echo Asset::img('noimage.jpg',array('class'=>'img-resposive col-sm-6','style'=>'border-radius:2px;')); ?>
+      <?php echo Asset::img('noimage.jpg', array('class' => 'img-resposive col-sm-6', 'style' => 'border-radius:2px;')); ?>
       <dl class="col-sm-6">
         <dt>Description lists</dt>
         <dd>A description list is perfect for defining terms.</dd>

@@ -19,82 +19,82 @@
   <div class="col-xs-12" id="product-img">
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
     <div class="col-md-3 col-sm-4 col-xs-6">
       <div class="thumbnail">
-      <?php echo Asset::img('noimage.jpg'); ?>
+        <?php echo Asset::img('noimage.jpg'); ?>
       </div>
     </div>
   </div>
