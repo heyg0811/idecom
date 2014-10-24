@@ -1,58 +1,53 @@
 
 <div class="author-box">
   <aside class="author col-xs-12 col-sm-12">
-    <div class="author-frame">
-      <div class="row">
-        <div class="col-xs-12 author-grade">山田健二</div>
+    <div class="box box-solid bg-green">
+      <div class="box-header">
+        <h3 class="box-title">山田健二</h3>
       </div>
-    </div>
-    <div class="author-frame">
-      <div class="row">
-        <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
-      </div></div>
-    <div class="author-frame">
-      <div class="row">
-        <div class="col-xs-4 author-grade">学年</div><div class="col-xs-8 author-grade">3A</div>
-      </div>
-    </div>
-    <div class="author-frame">
-      <div class="row">
-        <div class="col-xs-4 author-grade">専攻</div><div class="col-xs-8 author-grade">ITスペシャリスト</div>
-      </div>
-    </div>
-    <div class="author-frame">
-      <div class="row">
-        <div class="col-xs-12 author-grade">スキル</div>
-      </div>
-    </div>
-    <div class="author-frame">
-      <div class="row">
-        <div class="col-xs-12 author-grade">
-          <div class="pg_logo"><?php echo Asset::img('pg_logo/Java.svg', array('class' => 'pg_logo')); ?></div>
-          <div class="progress pg_logo_ber">
-            <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-              <span class="sr-only">40% Complete (success)</span>
+        <div class="box-body">
+          <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
+          <div>
+            <div class="row">
+              <div class="col-xs-4 author-grade">学年</div><div class="col-xs-8 author-grade">3A</div>
+            </div>
+            <div class="row">
+              <div class="col-xs-4 author-grade">専攻</div><div class="col-xs-8 author-grade">ITスペシャリスト</div>
+            </div>
+          </div>                                 
+        </div><!-- /.box-body -->
+        <div class="box-footer no-border text-black">
+          <h3 class="box-title text-center">技術</h3>
+          <div class="author-frame">
+            <div class="row">
+              <div class="col-sm-12">
+                <!-- Progress bars -->
+                <div class="clearfix">
+                  <span class="pull-left"><p>JAVA</p></span>
+                  <small class="pull-right">50%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: 50%;"></div>
+                </div>
+                <div class="clearfix">
+                  <span class="pull-left"><p>C#</p></span>
+                  <small class="pull-right">40%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
+                </div>
+                <div class="clearfix">
+                  <span class="pull-left"><p>PHP</p></span>
+                  <small class="pull-right">60%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-xs-12 author-grade">
-          <div class="pg_logo"><?php echo Asset::img('pg_logo/C_sharp.svg', array('class' => 'pg_logo')); ?></div>
-          <div class="progress pg_logo_ber">
-            <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
-              <span class="sr-only">40% Complete (success)</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-xs-12 author-grade">
-          <div class="pg_logo"><?php echo Asset::img('pg_logo/Php.svg', array('class' => 'pg_logo')); ?></div>
-          <div class="progress pg_logo_ber padding-left-5">
-            <div class="progress-bar progress-bar-green" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-              <span class="sr-only">40% Complete (success)</span>
-            </div>
-          </div>
-        </div>
+        </div><!-- /.box-footer -->
       </div>
-    </div>
   </aside>
 
   <div class="row author-timeline">
@@ -128,13 +123,13 @@
     top: 0;
     bottom:100%;
     width: 240px;
-    background-color: #39cccc;
-    color: rgba(255, 255, 255, 0.9);
+    color: #000;
     float:left;
+    border-radius: 50px;
   }
   .author-frame
   {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    //border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   .author-timeline
   {
@@ -151,8 +146,7 @@
       top: 0;
       bottom:100%;
       width: 100%;
-      background-color: #39cccc;
-      color: rgba(255, 255, 255, 0.9);
+      color: #000;
     }
     img.author-thumbnail
     {
@@ -172,6 +166,7 @@
   .author-grade
   {
     text-align: center;
+
   }
   img.author-thumbnail {
     width: 200px;
@@ -193,5 +188,14 @@
   .pg_logo_ber
   {
     margin-top: 15px;
+  }
+  .progress {
+    height: 15px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
   }
 </style>
