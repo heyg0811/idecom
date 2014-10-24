@@ -342,17 +342,6 @@
                       <i class="fa fa-comments-o"></i> <span>掲示板　BBS</span>
                     </a>
                   </li>
-                  <li class="treeview">
-                    <a href="#">
-                      <i class="fa fa-edit"></i> <span>Forms</span>
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </a>
-                    <ul class="treeview-menu">
-                      <li><a href="pages/forms/general.html"><i class="fa fa-angle-double-right"></i> General Elements</a></li>
-                      <li><a href="pages/forms/advanced.html"><i class="fa fa-angle-double-right"></i> Advanced Elements</a></li>
-                      <li><a href="pages/forms/editors.html"><i class="fa fa-angle-double-right"></i> Editors</a></li>
-                    </ul>
-                  </li>
                 </ul>
               </section>
               <!-- /.sidebar -->
@@ -409,9 +398,6 @@
 
           <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
           <?php echo Asset::js('admin/AdminLTE/dashboard.js'); ?>
-
-          <!-- AdminLTE for demo purposes -->
-          <?php echo Asset::js('admin/AdminLTE/demo.js'); ?>
 
           <!-- Original -->
           <?php echo Asset::js('original.js'); ?>

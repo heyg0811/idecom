@@ -1,27 +1,33 @@
-
+<style>
+  .thread:hover{
+    opacity:0.5;
+  }
+</style>
 <?php for ($i = 0; $i < 20; $i++): ?>
   <div class="row" style="margin:10px;">
 
     <div class="col-sm-12">
-      <div class="panel box box-success">
+      <a href="/bbs/thread">
+      <div class="panel box box-success thread">
         <div class="row">
           <div class="col-sm-4">
-            <?php echo Asset::img('noimage.jpg', array('class' => 'img-responsive')); ?>
+            <?php echo Asset::img('noimage.jpg', array('class' => 'img-responsive thread-img')); ?>
           </div>
           <div class="col-sm-7 bbs-box">
             <div class="box-header">
               <div class="box-title">
-                <a href="/bbs/bbs"><i class="fa fa-fw fa-comment-o"></i>スレッド<?php echo $i ?></a>
+                <i class="fa fa-fw fa-comment-o"></i>スレッド<?php echo $i ?>
               </div>
             </div>
             <div class="panel-collapse collapse in">
               <div class="body">
-                本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん
+                <p class="text-black">本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん</p>
               </div>
             </div>
           </div>
         </div>
       </div>
+      </a>
     </div>
   </div>
 <?php endfor; ?>
@@ -52,7 +58,7 @@
   {
     margin: 10px -10px 10px 10px;
   }
-  @media screen and (min-width: 991px) {
+  @media screen and (max-width: 991px) {
     /* 991px以下の場合 */
     .bbs-box
     {
