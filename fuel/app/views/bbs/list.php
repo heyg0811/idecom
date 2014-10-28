@@ -5,10 +5,9 @@
 </style>
 <?php for ($i = 0; $i < 20; $i++): ?>
   <div class="row" style="margin:10px;">
-
     <div class="col-sm-12">
       <a href="/bbs/thread">
-      <div class="panel box box-success thread">
+      <div class="panel box box-info thread">
         <div class="row">
           <div class="col-sm-4">
             <?php echo Asset::img('noimage.jpg', array('class' => 'img-responsive thread-img')); ?>

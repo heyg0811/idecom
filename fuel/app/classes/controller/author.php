@@ -57,4 +57,14 @@ class Controller_Author extends Controller_Template {
     $this->template->content = View::forge('author/detail');
   }
 
+  /**
+   * @brif    作者編集
+   * @access  public
+   * @return
+   */
+  public function action_edit() {
+    $this->template->subtitle = '編集';
+    $this->template->content = View::forge('author/edit');
+  }
+
 }

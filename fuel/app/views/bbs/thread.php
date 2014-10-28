@@ -1,4 +1,4 @@
-<div class="box box-success">
+<div class="box box-info">
   <div class="box-header">
     <i class="fa fa-comments-o"></i>
     <h3 class="box-title">スレッドタイトル</h3>

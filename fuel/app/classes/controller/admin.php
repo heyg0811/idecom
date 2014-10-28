@@ -11,7 +11,7 @@
  * @package app
  * @extends Controller_Template
  */
-class Controller_Dashboard extends Controller_Template {
+class Controller_Admin extends Controller_Template {
 
   /**
    * @brif   前処理
@@ -22,7 +22,7 @@ class Controller_Dashboard extends Controller_Template {
     // 決まり文句
     parent::before();
 
-    $this->template->title = '解析';
+    $this->template->title = '管理';
   }
 
   /**
@@ -42,9 +42,29 @@ class Controller_Dashboard extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_index() {
+  public function action_dashboard() {
     $this->template->subtitle = '一覧';
-    $this->template->content = View::forge('dashboard/index');
+    $this->template->content = View::forge('admin/dashboard');
+  }
+
+  /**
+   * @brif    作品管理
+   * @access  public
+   * @return
+   */
+  public function action_product() {
+    $this->template->subtitle = '作品';
+    $this->template->content = View::forge('admin/product');
+  }
+
+  /**
+   * @brif    募集管理
+   * @access  public
+   * @return
+   */
+  public function action_recruit() {
+    $this->template->subtitle = '募集';
+    $this->template->content = View::forge('admin/recruit');
   }
 
 }

@@ -22,11 +22,19 @@
         <?php echo Asset::css('admin/daterangepicker/daterangepicker-bs3.css') ?>
         <!-- bootstrap wysihtml5 - text editor -->
         <?php echo Asset::css('admin/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') ?>
+        <!-- bootstrap wysihtml5 - text editor -->
+        <?php echo Asset::css('admin/bootstrap-slider/slider.css') ?>
         <!-- Theme style -->
         <?php echo Asset::css('admin/AdminLTE.css') ?>
         <!-- Original style -->
         <?php echo Asset::css('bootstrap-custom.css') ?>
         <?php echo Asset::css('original.css') ?>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
+        <!-- Morris.js charts -->
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -317,9 +325,9 @@
                       <i class="fa fa-angle-left pull-right"></i>
                     </a>
                     <ul class="treeview-menu">
-                      <li><a href="/dashboard/index"><i class="fa fa-angle-double-right"></i> ダッシュボード</a></li>
-                      <li><a href=""><i class="fa fa-angle-double-right"></i> 作品管理</a></li>
-                      <li><a href=""><i class="fa fa-angle-double-right"></i> 応募管理</a></li>
+                      <li><a href="/admin/dashboard"><i class="fa fa-angle-double-right"></i> ダッシュボード</a></li>
+                      <li><a href="/admin/product"><i class="fa fa-angle-double-right"></i> 作品管理</a></li>
+                      <li><a href="/admin/recruit"><i class="fa fa-angle-double-right"></i> 応募管理</a></li>
                     </ul>
                   </li>
                   <li>
@@ -371,11 +379,6 @@
               </section><!-- /.content -->
             </aside><!-- /.right-side -->
           </div><!-- ./wrapper -->
-          <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-          <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
-          <script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
-          <!-- Morris.js charts -->
-          <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
           <?php echo Asset::js('admin/plugins/morris/morris.min.js'); ?>
           <!-- Sparkline -->
           <?php echo Asset::js('admin/plugins/sparkline/jquery.sparkline.min.js'); ?>
@@ -398,6 +401,8 @@
 
           <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
           <?php echo Asset::js('admin/AdminLTE/dashboard.js'); ?>
+
+          <?php echo Asset::js('admin/plugins/bootstrap-slider/bootstrap-slider.js'); ?>
 
           <!-- Original -->
           <?php echo Asset::js('original.js'); ?>

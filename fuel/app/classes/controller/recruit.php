@@ -57,4 +57,23 @@ class Controller_Recruit extends Controller_Template {
     $this->template->content = View::forge('recruit/detail');
   }
 
+  /**
+   * @brif    募集編集
+   * @access  public
+   * @return
+   */
+  public function action_edit() {
+    $this->template->subtitle = '編集';
+    $this->template->content = View::forge('recruit/edit');
+  }
+
+  /**
+   * @brif    募集追加
+   * @access  public
+   * @return
+   */
+  public function action_add() {
+    $this->template->subtitle = '追加';
+    $this->template->content = View::forge('recruit/add');
+  }
 }
