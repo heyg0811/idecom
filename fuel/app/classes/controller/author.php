@@ -55,6 +55,8 @@ class Controller_Author extends Controller_Template {
   public function action_detail() {
     $this->template->subtitle = '詳細';
     $this->template->content = View::forge('author/detail');
+
+    $this->template->content->author = Model_Developer::find('1');
   }
 
   /**
@@ -65,6 +67,34 @@ class Controller_Author extends Controller_Template {
   public function action_edit() {
     $this->template->subtitle = '編集';
     $this->template->content = View::forge('author/edit');
+
+    // 初期表示時
+    if (!Security::check_token()) {
+      $this->template->content->developer = Model_Developer::find(1);
+      return;
+    }
+
+    //更新時
+    $validation = Model_Developer::developerValidate();
+    $errors = $validation->error();
+    if (!empty($errors)) {
+      // エラーの設定
+      $result_validate = $validation->show_errors();
+      $this->template->content->set_safe('errmsg', $result_validate);
+      return;
+    }
+
+    //editデータ取得
+    $input_data = Input::get();
+    //データ整形
+    $keys = array("NickName", "Address", "Grade", "Major", "Technology");
+    $val = array($input_data["NickName"], $input_data["Address"], $input_data["Grade"], $input_data["Major"], $input_data['skil']);
+    $data = array_combine($keys, $val);
+
+    //Developer更新
+    Model_Developer::updata(1, $data);
+
+    $this->template->content->developer = Model_Developer::find(1);
   }
 
 }

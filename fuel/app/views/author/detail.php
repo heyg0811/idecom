@@ -10,52 +10,45 @@
 </style>
 <div class="col-sm-4">
   <div class="box box-solid bg-green-gradient">
-    <div class="box-header">
-      <h3 class="box-title ">山田健二</h3>
-    </div>
-    <div class="box-body">
-      <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
-      <div>
-        <hr>
-        <div class="row">
-          <div class="col-xs-4 author-grade">学年</div><div class="col-xs-8 author-grade responsib">3A</div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-xs-4 author-grade">専攻</div><div class="col-xs-8 author-grade">ITスペシャリスト</div>
-        </div>
-        <hr>
+    <?php foreach ($author as $val): ?>
+      <div class="box-header">
+        <h3 class="box-title "><?php echo $val['NickName']; ?></h3>
       </div>
-    </div><!-- /.box-body -->
-    <div class="box-footer no-border text-black">
-      <h3 class="box-title text-center">技術</h3>
-      <div class="row">
-        <div class="col-sm-12">
-          <!-- Progress bars -->
-          <div class="clearfix">
-            <span class="pull-left"><p>JAVA</p></span>
-            <small class="pull-right">50%</small>
+      <div class="box-body">
+        <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
+        <div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-4 author-grade">学年</div><div class="col-xs-8 author-grade responsib"><?php echo $val['Grade']; ?></div>
           </div>
-          <div class="progress xs">
-            <div class="progress-bar progress-bar-green" style="width: 50%;"></div>
+          <hr>
+          <div class="row">
+            <div class="col-xs-4 author-grade">専攻</div><div class="col-xs-8 author-grade"><?php echo $val['Major']; ?></div>
           </div>
-          <div class="clearfix">
-            <span class="pull-left"><p>C#</p></span>
-            <small class="pull-right">40%</small>
-          </div>
-          <div class="progress xs">
-            <div class="progress-bar progress-bar-green" style="width: 40%;"></div>
-          </div>
-          <div class="clearfix">
-            <span class="pull-left"><p>PHP</p></span>
-            <small class="pull-right">60%</small>
-          </div>
-          <div class="progress xs">
-            <div class="progress-bar progress-bar-green" style="width: 60%;"></div>
+          <hr>
+        </div>
+      </div>
+      <div class="box-footer no-border text-black">
+        <h3 class="box-title text-center">技術</h3>
+        <div class="row">
+          <div class="col-sm-12">
+            <?php $i = 0; ?>
+            <?php foreach ($val['Technology'] as $tec): ?>
+              <?php if (!empty($tec)): ?>
+                <div class="clearfix">
+                  <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.' . $i); ?></p></span>
+                  <small class="pull-right"><?php echo $tec; ?>%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: <?php echo $tec; ?>%;"></div>
+                </div>
+              <?php endif; ?>
+              <?php $i++; ?>
+            <?php endforeach; ?>
           </div>
         </div>
       </div>
-    </div><!-- /.box-footer -->
+    <?php endforeach; ?>
   </div>
 </div>
 <div class="col-sm-8">
