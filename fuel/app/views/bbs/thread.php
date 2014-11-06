@@ -18,15 +18,17 @@
       </div><!-- /.item -->
     <?php endfor ?>
   </div><!-- /.chat -->
-  <form action="">
+
+  <form action="thread" method="post">
+    <?php echo \Form::csrf(); ?>
     <div class="box-footer">
       <div class="form-group">
         <label for="">レス</label>
-        <textarea class="form-control" rows="5" ></textarea>
+        <textarea name="comment" class="form-control" rows="5" ></textarea>
       </div>
     </div>
     <div class="box-footer">
-      <button class="btn btn-success btn-lg">投稿</button>
+      <input type="submit" value="投稿" class="btn btn-success btn-lg">
     </div>
   </form>
 </div><!-- /.box (chat box) -->
