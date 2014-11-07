@@ -13,7 +13,6 @@ class Model_Developer extends \Orm\Model {
       'id',
       'user_id',
       'nickname',
-      'address',
       'grade',
       'major',
       'technology',
@@ -40,20 +39,24 @@ class Model_Developer extends \Orm\Model {
     $validation->add('nickname', '名前')
             ->add_rule('min_length', 2)
             ->add_rule('max_length', 50);
-    $validation->add('address', 'メール')
-            ->add_rule('valid_email');
     $validation->add('grade', '学年')
             ->add_rule('exact_length', 1)
             ->add_rule('numeric_min', 1)
-            ->add_rule('numeric_max', 4)
-            ->add_rule('numeric');
+            ->add_rule('numeric_max', 4);
     $validation->add('major', '専攻')
             ->add_rule('max_length', 50);
-    if (!$validation->run()) {
-      //失敗
-      $errors = $validation->error();
-      return $errors;
+    if (Input::post('skil')) {
+      $form_options = Input::post('skil');
+      foreach ($form_options as $form_id => $option) {
+        $validation->add('skil.' . $form_id, '技術')
+                ->add_rule('min_length', 1)
+                ->add_rule('max_length', 3)
+                ->add_rule('numeric_min', 0)
+                ->add_rule('numeric_max', 100)
+                ->add_rule('match_pattern',"/^[0-9]{1,3}$/");
+      }
     }
+    $validation->run();
     return $validation;
   }
 
