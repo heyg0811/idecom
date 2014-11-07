@@ -21,6 +21,12 @@ class Auth_Opauth extends Auth\Auth_Opauth
     // process the callback data
     $this->callback();
 
+    $email = explode('@',$this->get('auth.info.email'));
+    if ($email[count($email)-1] !== 'oic.jp') {
+      // redirect to the url set
+      \Response::redirect('auth/error');
+    }
+
     // if there is no UID we don't know who this is
     if ($this->get('auth.uid', null) === null)
     {

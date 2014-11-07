@@ -143,12 +143,6 @@ class Controller_Auth extends Controller_Template {
       // get the Opauth object
       $opauth = \Auth_Opauth::forge(false);
 
-      $email = explode('@',$opauth->get('auth.info.email'));
-      if ($email[count($email)-1] !== 'oic.jp') {
-        // redirect to the url set
-        \Response::redirect('auth/error');
-      }
-
       // and process the callback
       $status = $opauth->login_or_register();
 
