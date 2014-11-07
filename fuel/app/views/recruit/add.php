@@ -1,3 +1,4 @@
+<?php echo Asset::js('plugin/ckeditor/ckeditor.js'); ?>
 <!-- general form elements -->
 <div class="box box-danger">
   <div class="box-header">
@@ -30,12 +31,6 @@
     </div>
   </form>
 </div><!-- /.box -->
-<script type="text/javascript">
-  $(function() {
-    /* BOOTSTRAP SLIDER */
-    $('.slider').slider();
-  });
-</script>
 <!-- general form elements -->
 <div class="box box-danger">
   <div class="box-header">
@@ -56,7 +51,7 @@
       </div>
       <div class="form-group">
         <label for="inputIntro">募集内容</label>
-        <textarea name="intro" class="form-control" id="inputIntro" rows="5" placeholder="募集紹介"></textarea>
+        <textarea name="intro" class="form-control ckeditor" id="inputIntro" rows="5" placeholder="募集紹介"></textarea>
       </div>
       <div class="form-group">
         <label for="exampleInputFile">サムネイル</label>
@@ -67,10 +62,4 @@
       <button type="submit" class="btn btn-danger">更新</button>
     </div>
   </form>
-</div><!-- /.box -->
-<script type="text/javascript">
-  $(function() {
-    /* BOOTSTRAP SLIDER */
-    $('.slider').slider();
-  });
-</script>
+</div><!-- /.box -->1
