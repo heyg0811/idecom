@@ -10,45 +10,43 @@
 </style>
 <div class="col-sm-4">
   <div class="box box-solid bg-green-gradient">
-    <?php foreach ($author as $val): ?>
-      <div class="box-header">
-        <h3 class="box-title "><?php echo $val['NickName']; ?></h3>
-      </div>
-      <div class="box-body">
-        <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
-        <div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-4 author-grade">学年</div><div class="col-xs-8 author-grade responsib"><?php echo $val['Grade']; ?></div>
-          </div>
-          <hr>
-          <div class="row">
-            <div class="col-xs-4 author-grade">専攻</div><div class="col-xs-8 author-grade"><?php echo $val['Major']; ?></div>
-          </div>
-          <hr>
-        </div>
-      </div>
-      <div class="box-footer no-border text-black">
-        <h3 class="box-title text-center">技術</h3>
+    <div class="box-header">
+      <h3 class="box-title "><?php echo $developer['nickname']; ?></h3>
+    </div>
+    <div class="box-body">
+      <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
+      <div>
+        <hr>
         <div class="row">
-          <div class="col-sm-12">
-            <?php $i = 0; ?>
-            <?php foreach ($val['Technology'] as $tec): ?>
-              <?php if (!empty($tec)): ?>
-                <div class="clearfix">
-                  <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.' . $i); ?></p></span>
-                  <small class="pull-right"><?php echo $tec; ?>%</small>
-                </div>
-                <div class="progress xs">
-                  <div class="progress-bar progress-bar-green" style="width: <?php echo $tec; ?>%;"></div>
-                </div>
-              <?php endif; ?>
-              <?php $i++; ?>
-            <?php endforeach; ?>
-          </div>
+          <div class="col-xs-4 author-grade">学年</div><div class="col-xs-8 author-grade responsib"><?php echo $developer['grade']; ?></div>
+        </div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-4 author-grade">専攻</div><div class="col-xs-8 author-grade"><?php echo $developer['major']; ?></div>
+        </div>
+        <hr>
+      </div>
+    </div>
+    <div class="box-footer no-border text-black">
+      <h3 class="box-title text-center">技術</h3>
+      <div class="row">
+        <div class="col-sm-12">
+          <?php $i = 0; ?>
+          <?php foreach ($developer['technology'] as $tec): ?>
+            <?php if (!empty($tec)): ?>
+              <div class="clearfix">
+                <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.' . $i); ?></p></span>
+                <small class="pull-right"><?php echo $tec; ?>%</small>
+              </div>
+              <div class="progress xs">
+                <div class="progress-bar progress-bar-green" style="width: <?php echo $tec; ?>%;"></div>
+              </div>
+            <?php endif; ?>
+            <?php $i++; ?>
+          <?php endforeach; ?>
         </div>
       </div>
-    <?php endforeach; ?>
+    </div>
   </div>
 </div>
 <div class="col-sm-8">

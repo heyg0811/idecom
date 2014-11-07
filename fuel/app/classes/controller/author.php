@@ -56,7 +56,11 @@ class Controller_Author extends Controller_Template {
     $this->template->subtitle = '詳細';
     $this->template->content = View::forge('author/detail');
 
-    $this->template->content->author = Model_Developer::find('1');
+    $user_id = 1;
+
+    $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
+      $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
+      $this->template->content->developer = $dev[1];
   }
 
   /**
@@ -68,14 +72,21 @@ class Controller_Author extends Controller_Template {
     $this->template->subtitle = '編集';
     $this->template->content = View::forge('author/edit');
 
+    $user_id = 1;
     // 初期表示時
     if (!Security::check_token()) {
-      $this->template->content->developer = Model_Developer::find(1);
+      $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
+      $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
+      $this->template->content->developer = $dev[1];
       return;
     }
 
+    //editデータ取得
+    $input_data = Input::get();
+
     //更新時
-    $validation = Model_Developer::developerValidate();
+    $validation = Model_Developer::validate();
+    
     $errors = $validation->error();
     if (!empty($errors)) {
       // エラーの設定
@@ -84,17 +95,27 @@ class Controller_Author extends Controller_Template {
       return;
     }
 
-    //editデータ取得
-    $input_data = Input::get();
-    //データ整形
-    $keys = array("NickName", "Address", "Grade", "Major", "Technology");
-    $val = array($input_data["NickName"], $input_data["Address"], $input_data["Grade"], $input_data["Major"], $input_data['skil']);
-    $data = array_combine($keys, $val);
-
     //Developer更新
-    Model_Developer::updata(1, $data);
+    //インスタンス生成
+    $developer_model = Model_Developer::forge();
 
-    $this->template->content->developer = Model_Developer::find(1);
+    //値設定
+    $data = array(
+        'nickname' => $input_data["nickname"],
+        'address' => $input_data["address"],
+        'grade' => $input_data["grade"],
+        'major' => $input_data["major"],
+        'technology' => Model_Developer::technology_encode($input_data['skil']),
+    );
+
+    $user = $developer_model->find('all', array('where' => array('user_id' => $user_id)));
+    //updata
+    if (!$user[1]->set($data)->save()) {
+      //失敗
+    }
+    $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
+    $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
+    $this->template->content->developer = $dev[1];
   }
 
 }
