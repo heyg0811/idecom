@@ -14,7 +14,7 @@ return array(
     'HOST'      => 'localhost',
     'NAME'      => 'idecom_db',
     'USERNAME'  => 'root',
-    'PASSWORD'  => 'nono0811',
+    'PASSWORD'  => 'root',
   ),
 
   /**
@@ -26,7 +26,7 @@ return array(
   * Fuel::PRODUCTION    // 製品環境
   */
   'FUEL' => array(
-    'ENV' => Fuel::PRODUCTION,
+    'ENV' => Fuel::DEVELOPMENT,
   ),
 
   /**
@@ -42,7 +42,7 @@ return array(
   *
   */
   'GOOGLE' => array(
-    'CLIENTID' => '386559768393-8rh7arqj0kqv6gs9tkf8sj3h92d8te4c.apps.googleusercontent.com',
-    'CLIENTSECRET' => 'ucPH2SylnJB7r-b_4ftR0xw5',
+    'CLIENTID' => '386559768393-2bse7a980tfr48qb67b5js219hho1bt9.apps.googleusercontent.com',
+    'CLIENTSECRET' => 'rxA_L23kIUnWQqCIZC5U0f6p',
   ),
 );

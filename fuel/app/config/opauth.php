@@ -82,8 +82,8 @@ return array(
 	 *    ),
 	 */
 		'Google' => array(
-			'client_id' => '386559768393-2bse7a980tfr48qb67b5js219hho1bt9.apps.googleusercontent.com',
-			'client_secret' => 'rxA_L23kIUnWQqCIZC5U0f6p',
+			'client_id' => Config::get('GOOGLE.CLIENTID'),
+			'client_secret' => Config::get('GOOGLE.CLIENTSECRET'),
 			'scope' => 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email',
 		),
 
