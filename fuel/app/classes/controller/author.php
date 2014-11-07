@@ -59,8 +59,8 @@ class Controller_Author extends Controller_Template {
     $user_id = 1;
 
     $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
-      $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
-      $this->template->content->developer = $dev[1];
+    $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
+    $this->template->content->developer = $dev[1];
   }
 
   /**
@@ -73,6 +73,10 @@ class Controller_Author extends Controller_Template {
     $this->template->content = View::forge('author/edit');
 
     $user_id = 1;
+
+
+
+
     // 初期表示時
     if (!Security::check_token()) {
       $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
@@ -82,16 +86,18 @@ class Controller_Author extends Controller_Template {
     }
 
     //editデータ取得
-    $input_data = Input::get();
+    $input_data = Input::post();
 
     //更新時
     $validation = Model_Developer::validate();
-    
     $errors = $validation->error();
     if (!empty($errors)) {
       // エラーの設定
       $result_validate = $validation->show_errors();
       $this->template->content->set_safe('errmsg', $result_validate);
+      $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
+      $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
+      $this->template->content->developer = $dev[1];
       return;
     }
 
@@ -102,7 +108,6 @@ class Controller_Author extends Controller_Template {
     //値設定
     $data = array(
         'nickname' => $input_data["nickname"],
-        'address' => $input_data["address"],
         'grade' => $input_data["grade"],
         'major' => $input_data["major"],
         'technology' => Model_Developer::technology_encode($input_data['skil']),

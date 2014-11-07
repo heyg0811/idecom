@@ -1,19 +1,18 @@
 <!-- general form elements -->
-<?php if (!empty($errmsg)): ?>
-  <?php echo $errmsg; ?>
-<?php endif; ?>
+
 <div class="box box-success">
+  <?php if (!empty($errmsg)): ?>
+  <hr>
+    <?php echo $errmsg; ?>
+  <hr>
+  <?php endif; ?>
   <!-- form start -->
-  <form role="form">
+  <form action="edit" method="post">
     <?php echo \Form::csrf(); ?>
     <div class="box-body">
       <div class="form-group">
         <label for="inputName">名前</label>
         <input type="text" class="form-control" id="inputName" name="nickname" placeholder="名前" value="<?php echo $developer['nickname']; ?>">
-      </div>
-      <div class="form-group">
-        <label for="inputEmail">メール</label>
-        <input type="email" class="form-control" id="inputEmail" name="address" placeholder="メール" value="<?php echo $developer['address']; ?>">
       </div>
       <div class="form-group row">
         <div class="col-xs-3">
