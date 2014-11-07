@@ -137,6 +137,8 @@
         "fuel/parser": "1.7.2",
         "fuelphp/upload": "2.0.1",
         "monolog/monolog": "1.5.*",
+        "opauth/opauth": "0.4.*",
+        "opauth/google": "dev-master",
         "michelf/php-markdown": "1.4.0"
     },
     "suggest": {
