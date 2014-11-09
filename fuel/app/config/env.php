@@ -33,8 +33,8 @@ return array(
   * Google ClientID ClientSercret
   *
   * idecom.heyg.pw
-  * -> 386559768393-8rh7arqj0kqv6gs9tkf8sj3h92d8te4c.apps.googleusercontent.com
-  * -> ucPH2SylnJB7r-b_4ftR0xw5
+  * -> 386559768393-0ti6je0jakp2fq2bfcqbuul9bk72sdia.apps.googleusercontent.com
+  * -> HUeacADWZ48oFyv0ZiekL8fz
   *
   * localhost
   * -> 386559768393-2bse7a980tfr48qb67b5js219hho1bt9.apps.googleusercontent.com
@@ -42,7 +42,7 @@ return array(
   *
   */
   'GOOGLE' => array(
-    'CLIENTID' => '386559768393-8rh7arqj0kqv6gs9tkf8sj3h92d8te4c.apps.googleusercontent.com',
-    'CLIENTSECRET' => 'ucPH2SylnJB7r-b_4ftR0xw5',
+    'CLIENTID' => '386559768393-0ti6je0jakp2fq2bfcqbuul9bk72sdia.apps.googleusercontent.com',
+    'CLIENTSECRET' => 'HUeacADWZ48oFyv0ZiekL8fz',
   ),
 );
