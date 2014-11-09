@@ -23,7 +23,7 @@ $_CONFIG = array(
 
     'disabled' => false,
     'uploadURL' => "/assets/js/plugin/kcfinder/upload",
-    'uploadDir' => "/Develop/GitHubProjects/idecom/public/assets/js/plugin/kcfinder/upload",
+    'uploadDir' => $_SERVER['DOCUMENT_ROOT']."/assets/js/plugin/kcfinder/upload",
     'theme' => "default",
 
     'types' => array(
@@ -113,10 +113,10 @@ $_CONFIG = array(
     //'_tinyMCEPath' => "/tiny_mce",
 
     '_sessionVar' => "KCFINDER",
-    //'_sessionLifetime' => 30,
-    //'_sessionDir' => "/full/directory/path",
-    //'_sessionDomain' => ".mysite.com",
-    //'_sessionPath' => "/my/path",
+    '_sessionLifetime' => 30,
+    // '_sessionDir' => "session_save_path",
+    '_sessionDomain' => ".heyg.pw",
+    '_sessionPath' => session_save_path(),
 
     //'_cssMinCmd' => "java -jar /path/to/yuicompressor.jar --type css {file}",
     //'_jsMinCmd' => "java -jar /path/to/yuicompressor.jar --type js {file}",
