@@ -1,12 +1,13 @@
 <?php
-class Model_Bbsthread extends \Orm\Model
+class Model_Bbscomment extends \Orm\Model
 {
   // テーブル情報を設定
-  protected static $_table_name = 'bbs_thread';
+  protected static $_table_name = 'bbs_comment';
   protected static $_properties = array(
-    'id',
+  	'id',
+    'thread_id',
     'user_id',
-    'title',
+    'comment',
     'date',
   );
   protected static $_primary_key = array('id');
