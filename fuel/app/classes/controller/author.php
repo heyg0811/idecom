@@ -56,13 +56,17 @@ class Controller_Author extends Controller_Template {
     $this->template->subtitle = '詳細';
     $this->template->content = View::forge('author/detail');
 
+    //user_id取得
     $user_id = 1;
 
+    //developer情報取得
     $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
+    //developerのtechnology取得
     $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
-    
-    $timeline=Controller_Author::timeline($user_id);
-    
+
+    //タイムラインの取得
+    $timeline = Controller_Author::timeline($user_id);
+
     $this->template->content->developer = $dev[1];
     $this->template->content->timeline = $timeline;
   }
@@ -76,10 +80,8 @@ class Controller_Author extends Controller_Template {
     $this->template->subtitle = '編集';
     $this->template->content = View::forge('author/edit');
 
+    //user_id取得
     $user_id = 1;
-
-
-
 
     // 初期表示時
     if (!Security::check_token()) {
@@ -116,31 +118,44 @@ class Controller_Author extends Controller_Template {
         'major' => $input_data["major"],
         'technology' => Model_Developer::technology_encode($input_data['skil']),
     );
-
+    //developerデータ取得
     $user = $developer_model->find('all', array('where' => array('user_id' => $user_id)));
     //updata
     if (!$user[1]->set($data)->save()) {
       //失敗
     }
+    //developerデータ再取得
     $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
+
+    //texhnologyをdecode
     $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
+
     $this->template->content->developer = $dev[1];
   }
 
+  /**
+   * @brif    タイムライン
+   * @access  public
+   * @return  timeline
+   */
   public static function timeline($user_id) {
 
     $timeline = array();
 
-    $data=Model_Timeline::find('all', array('where' => array('user_id' => $user_id)));
-    
-    foreach ($data as $key => $value) {
-      $temp['title']=$value['title'];
-      $temp['icon']=$value['icon'];
-      $temp['text']=$value['text'];
-      $temp['date']=$value['date'];
-      
-      array_push($timeline,$temp);
+    //timelineデータ取得
+    $data = Model_Timeline::find('all', array('where' => array('user_id' => $user_id)));
+
+    //データ整形
+    foreach ($data as $value) {
+      $temp['title'] = $value['title'];
+      $temp['icon'] = $value['icon'];
+      $temp['text'] = $value['text'];
+      $temp['date'] = $value['date'];
+
+      array_push($timeline, $temp);
     }
+
     return $timeline;
   }
+
 }

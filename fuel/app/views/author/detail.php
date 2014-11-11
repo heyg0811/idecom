@@ -49,7 +49,7 @@
           <div class="timeline-item box box-solid timeline-box collapsed-box">
             <div class="box-header">
               <h3 class="box-title"><?php echo $value['title']; ?></h3>
-              
+
               <div class="box-tools pull-right">
                 <button class="btn btn-danger btn-sm" data-widget="collapse"><i class="fa fa-plus"></i></button>
               </div>
@@ -57,7 +57,7 @@
             </div>
             <div class="box-body" style="display: none">
               <?php echo $value['text']; ?>
-              
+
             </div>
           </div>
         </li>
