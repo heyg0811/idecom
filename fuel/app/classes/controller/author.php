@@ -60,7 +60,11 @@ class Controller_Author extends Controller_Template {
 
     $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
     $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
+    
+    $timeline=Controller_Author::timeline($user_id);
+    
     $this->template->content->developer = $dev[1];
+    $this->template->content->timeline = $timeline;
   }
 
   /**
@@ -123,4 +127,20 @@ class Controller_Author extends Controller_Template {
     $this->template->content->developer = $dev[1];
   }
 
+  public static function timeline($user_id) {
+
+    $timeline = array();
+
+    $data=Model_Timeline::find('all', array('where' => array('user_id' => $user_id)));
+    
+    foreach ($data as $key => $value) {
+      $temp['title']=$value['title'];
+      $temp['icon']=$value['icon'];
+      $temp['text']=$value['text'];
+      $temp['date']=$value['date'];
+      
+      array_push($timeline,$temp);
+    }
+    return $timeline;
+  }
 }
