@@ -35,21 +35,28 @@ return array(
   /**
   * Google ClientID ClientSercret
   */
+
   // idecom.heyg.pw
   'GOOGLE' => array(
-    'CLIENTID'     => '386559768393-0ti6je0jakp2fq2bfcqbuul9bk72sdia.apps.googleusercontent.com',
-    'CLIENTSECRET' => 'HUeacADWZ48oFyv0ZiekL8fz',
+    'CLIENTID' => '659226090229-v9gvnai3n3gm5qsefoh1e186jfj0em0n.apps.googleusercontent.com',
+    'CLIENTSECRET' => 'e_3cxYRoIS5P0_yHFTKXB0U2',
   ),
 
   // localhost
   // 'GOOGLE' => array(
-  //   'CLIENTID'     => '386559768393-2bse7a980tfr48qb67b5js219hho1bt9.apps.googleusercontent.com',
-  //   'CLIENTSECRET' => 'rxA_L23kIUnWQqCIZC5U0f6p',
+  //   'CLIENTID' => '659226090229-v67usoibjvhigp7i6uugb4vso0fmvunf.apps.googleusercontent.com',
+  //   'CLIENTSECRET' => '218i4jzZstmafrKms_4GWD2F',
   // ),
 
-  // ubkkcff6d3d3.b1225.koding.io
+  // heyg0811 CloudIDE
   // 'GOOGLE' => array(
-  //   'CLIENTID'     => '386559768393-hkvhqv133bro43lmv3j7jq77kjcttgef.apps.googleusercontent.com',
-  //   'CLIENTSECRET' => 'XyOMpOR7vC8XyhdClbNDvt6l',
+  //   'CLIENTID' => '659226090229-vv1u3ink69c3ovuqd84sv3bo1bn2dlil.apps.googleusercontent.com',
+  //   'CLIENTSECRET' => 'b5l4lGWK8QiZrNyBfd94RIvH',
+  // ),
+
+  // b1225 CloudIDE
+  // 'GOOGLE' => array(
+  //   'CLIENTID' => '659226090229-imtdu5irndlqtvm7tprm6defh7lc546b.apps.googleusercontent.com',
+  //   'CLIENTSECRET' => 'TL-cWOrVFINIFLJMwAOBIrAt',
   // ),
 );
