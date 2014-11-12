@@ -16,7 +16,7 @@
           <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
             <?php echo $comment['date']; ?>
           </small>
-          "<?php echo $comment['comment']; ?>"
+          <?php echo $comment['comment']; ?>
         </p>
       </div><!-- /.item -->
     <?php endforeach;?>

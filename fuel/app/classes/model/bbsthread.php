@@ -21,6 +21,10 @@ class Model_Bbsthread extends \Orm\Model
 		->add_rule('required')
 		->add_rule('min_length', 1)
 		->add_rule('max_length', 500);
+		$validation->add('title', 'タイトル')
+		->add_rule('required')
+		->add_rule('min_length', 1)
+		->add_rule('max_length', 100);
 
 		$validation->run();
 		return $validation;
