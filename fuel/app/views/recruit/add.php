@@ -5,6 +5,9 @@
     <div class="box-title">
       <p>簡易編集</p>
     </div>
+    <div class="box-tools pull-right">
+      <button class="btn btn-danger btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+    </div>
   </div>
   <!-- form start -->
   <form role="form">
@@ -37,6 +40,9 @@
     <div class="box-title">
       <p>詳細編集</p>
     </div>
+    <div class="box-tools pull-right">
+      <button class="btn btn-danger btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+    </div>
   </div>
   <!-- form start -->
   <form role="form">
@@ -62,4 +68,4 @@
       <button type="submit" class="btn btn-danger">更新</button>
     </div>
   </form>
-</div><!-- /.box -->1
+</div><!-- /.box -->
