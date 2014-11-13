@@ -3,10 +3,10 @@
     opacity:0.5;
   }
 </style>
-<?php foreach ($comments as $comment ): ?>
+<?php foreach ($threads as $thread ): ?>
   <div class="row" style="margin:10px;">
     <div class="col-sm-12">
-      <a href="/bbs/thread">
+      <a href="/bbs/comment">
       <div class="panel box box-info thread">
         <div class="row">
           <div class="col-sm-4">
@@ -15,15 +15,16 @@
           <div class="col-sm-7 bbs-box">
             <div class="box-header">
               <div class="box-title">
-                <i class="fa fa-fw fa-comment-o"></i><?php echo $comment['user_id'];  echo $i ?>
+               <h1> <i class="fa fa-fw fa-comment-o"></i> <?php echo $thread['title']; ?></h1>
+                <br>
               </div>
             </div>
             <div class="panel-collapse collapse in">
               <div class="body">
-                <p <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
-                   <?php echo $comment['date']; ?>
-                   </small>class="text-black">
-                   <?php echo $comment['comment']; ?>
+                <p class="text-black"> <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+                   <?php echo $thread['date']; ?>
+                   </small>
+                   <?php echo $thread['comment']; ?>
                </p>
               </div>
             </div>
@@ -40,15 +41,16 @@
       <p>スレッド投稿</p>
     </div>
   </div>
-  <form role="form">
+  <form action="thread" role="form" method="POST">
+    <?php echo \Form::csrf(); ?>
     <div class="box-body">
       <div class="form-group">
-        <label for="">タイトル</label>
+        <label for="">スレッドタイトル</label>
         <input class="form-control" type="text" name="title">
       </div>
       <div class="form-group">
-        <label for="">スレッド</label>
-        <textarea class="form-control" rows="10" ></textarea>
+        <label for="">ファーストコメント</label>
+        <textarea name="comment" class="form-control" rows="10" ></textarea>
       </div>
     </div>
     <div class="box-footer">

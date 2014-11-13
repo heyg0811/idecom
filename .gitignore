@@ -11,6 +11,7 @@ build
 nbproject/
 *_self.php
 phpmyadmin
+p
 
 # hidden files created by Windows
 Thumbs.db
@@ -21,7 +22,6 @@ desktop.ini
 /fuel/vendor
 
 # any of the fuel packages installed by default
-/docs/
 /fuel/core/
 /fuel/packages/auth/
 /fuel/packages/email/
