@@ -35,4 +35,10 @@ return array(
         'Ruby on Rails',
         
     ),
+    
+    'TIMELINE' => array(
+        'RECRUITMENT' => 'fa-comments-o bg-yellow',
+        'UPLOAD' => 'fa-cloud-upload bg-green',
+        'RANK' => 'fa-thumbs-o-up bg-red',
+      )
 );
