@@ -72,10 +72,10 @@ class Controller_Bbs extends Controller_Template {
 
     $bbscomment_model = new Model_Bbscomment();
     $bbscomment_model->set(array(
-                          'thread_id'  => 11/*今いるスレッドのthread_idの値を取ってくる*/,
-                          'user_id'  => 'B1123547',/*user_idを取得する*/
+                          // 'thread_id'  => 11/*今いるスレッドのthread_idの値を取ってくる*/,
+                          // 'user_id'  => 'B1123547',/*user_idを取得する*/
                           'comment' => $thread_data['comment'],
-                          'date' => date("Y/m/d H:i:s"),
+                          // 'date' => date("Y/m/d H:i:s"),
                           ));
     $bbscomment_model->save();
 

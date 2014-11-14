@@ -346,7 +346,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/bbs/list">
+                    <a href="/bbs/thread">
                       <i class="fa fa-comments-o"></i> <span>掲示板　BBS</span>
                     </a>
                   </li>
