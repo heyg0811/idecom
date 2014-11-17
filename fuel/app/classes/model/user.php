@@ -10,9 +10,10 @@ class Model_User extends \Orm\Model
     'password',
     'group',
     'email',
-    'lastlogin',
+    'last_login',
     'login_hash',
     'profile_fields',
+    'thumbnail',
     'created_at',
     'updated_at'
   );
@@ -20,7 +21,7 @@ class Model_User extends \Orm\Model
 
   /**
    * @brif    ログイン入力チェック
-   * @access  private
+   * @access  public
    * @return
    */
   public static function loginValidate(){
@@ -42,7 +43,7 @@ class Model_User extends \Orm\Model
 
     /**
    * @brif    パスワード設定入力チェック
-   * @access  private
+   * @access  public
    * @return
    */
   public static function passwordValidate(){
@@ -60,5 +61,41 @@ class Model_User extends \Orm\Model
 
     $validation->run();
     return $validation;
+  }
+
+  public static function getUser($id) {
+    return DB::select()
+    ->from(static::$_table_name)
+    ->execute()
+    ->as_array();
+  }
+
+  /**
+   * @brif    ニックネーム取得
+   * @access  public
+   * @return
+   */
+  public static function getName($id) {
+    $user_data = DB::select('profile_fields')
+    ->from(static::$_table_name)
+    ->execute()
+    ->as_array();
+
+    $profile_data = @unserialize($user_data[0]['profile_fields']);
+    return $profile_data['nickname'];
+  }
+
+  /**
+   * @brif    サムネイル取得
+   * @access  public
+   * @return
+   */
+  public static function getThumbnail($id) {
+    $user_data = DB::select('thumbnail')
+    ->from(static::$_table_name)
+    ->execute()
+    ->as_array();
+
+    return $user_data[0]['thumbnail'];
   }
 }

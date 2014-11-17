@@ -156,6 +156,10 @@ class Auth_Opauth extends Auth\Auth_Opauth
    */
   protected function create_user(array $user)
   {
+    $nickname = isset($user['name']) ? $user['name'] : (
+      isset($user['full_name']) ? $user['full_name'] : (
+        isset($user['first_name'], $user['last_name']) ? $user['first_name'].' '.$user['last_name'] : null
+    ));
     $user_id = \Auth::create_user(
 
       // username
@@ -170,14 +174,11 @@ class Auth_Opauth extends Auth\Auth_Opauth
       // which group are they in?
       \Config::get('opauth.default_group', -1),
 
+
       // extra information
       array(
         // got their name? full name? or first and last to make up a full name?
-        'fullname' => isset($user['name']) ? $user['name'] : (
-          isset($user['full_name']) ? $user['full_name'] : (
-            isset($user['first_name'], $user['last_name']) ? $user['first_name'].' '.$user['last_name'] : null
-          )
-        ),
+        'nickname' => empty($nickname) ? $user['nickname'] : $nickname,
         'password_change' => false,
       )
     );

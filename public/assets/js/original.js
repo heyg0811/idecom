@@ -65,37 +65,3 @@ if ( typeof define === 'function' && define.amd ) {
   // browser global
   window.classie = classie;
 }// --- classie - class helper ---
-
-
-/**
-  *
-  *  sidemenu effect js
-  *
-  **/
-function hasParentClass( e, classname ) {
-		if(e === document) return false;
-		if( classie.has( e, classname ) ) {
-			return true;
-		}
-		return e.parentNode && hasParentClass( e.parentNode, classname );
-}
-
-$(document).ready(function(){
-	var sidemenu = document.getElementById('sidemenu');
-	var container = document.getElementById('container');
-	resetMenu = function() {
-				classie.remove(container, 'menu-open');
-			},
-	bodyClickFn = function(evt) {
-		if( !hasParentClass( evt.target, 'sidemenu' ) && evt.target.id != 'trigger') {
-			resetMenu();
-			document.removeEventListener( 'click', bodyClickFn );
-		}
-	}
-	$('#trigger').click(function(){
-		classie.add(container, 'scalein');
-		classie.add(container, 'menu-open' );
-		document.addEventListener( 'click', bodyClickFn );
-	});
-});
-// --- sidemenu effect js ---

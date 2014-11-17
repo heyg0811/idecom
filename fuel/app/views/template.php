@@ -253,17 +253,17 @@
                   <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                       <i class="glyphicon glyphicon-user"></i>
-                      <span><?php echo Auth::get('fullname')?> <i class="caret"></i></span>
+                      <span><?php echo Auth::get('nickname')?> <i class="caret"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                       <!-- User image -->
                       <li class="user-header bg-light-blue">
-                        <?php echo Asset::img('user.png',array('class'=>'img-circle')); ?>
+                        <img src='<?php echo Config::get("THUMBNAIL_PATH"),Auth::get("thumbnail"); ?>' class='img-circle'>
                         <p>
-                          <?php echo Auth::get('fullname')?>
+                          <?php echo Auth::get('nickname')?>
                           <small>Member since <?php echo date('Y-m-d',Auth::get('created_at'));?></small>
                         </p>
-                      </li>
+                      </li
                       <!-- Menu Body -->
                       <li class="user-body">
                         <div class="col-xs-4 text-center">
@@ -299,10 +299,10 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                   <div class="pull-left image">
-                    <?php echo Asset::img('user.png',array('class'=>'img-circle')); ?>
+                    <img src='<?php echo Config::get("THUMBNAIL_PATH"),Auth::get("thumbnail"); ?>' class='img-circle'>
                   </div>
                   <div class="pull-left info">
-                    <p><?php echo Auth::get('fullname')?></p>
+                    <p><?php echo Auth::get('nickname')?></p>
 
                     <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
                   </div>

@@ -43,34 +43,8 @@ class Controller_Admin extends Controller_Template {
    * @return
    */
   public function action_dashboard() {
-    $this->template->subtitle          = '一覧';
-    $this->template->content           = View::forge('admin/dashboard');
-    $messages = Model_Message::find('all', array(
-      'where'    => array(array('host_id','=',Auth::get('id'))),
-      'order_by' => array('id'=>'desc'),
-    ));
-    $this->template->content->messages = $messages;
-    $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
-  }
-
-  /**
-   * @brif    作品管理
-   * @access  public
-   * @return
-   */
-  public function action_product() {
-    $this->template->subtitle = '作品';
-    $this->template->content = View::forge('admin/product');
-  }
-
-  /**
-   * @brif    募集管理
-   * @access  public
-   * @return
-   */
-  public function action_recruit() {
-    $this->template->subtitle = '募集';
-    $this->template->content = View::forge('admin/recruit');
+    $this->template->subtitle = '一覧';
+    $this->template->content = View::forge('admin/dashboard');
   }
 
 }

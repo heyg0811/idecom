@@ -104,70 +104,36 @@
       <div class="box-header">
         <i class="fa fa-comments-o"></i>
         <h3 class="box-title">Chat</h3>
-        <div class="box-tools pull-right" data-toggle="tooltip" title="Status">
-          <div class="btn-group" data-toggle="btn-toggle" >
-            <button type="button" class="btn btn-default btn-sm active"><i class="fa fa-square text-green"></i></button>
-            <button type="button" class="btn btn-default btn-sm"><i class="fa fa-square text-red"></i></button>
-          </div>
+        <div class="box-tools pull-right">
+          <button id="message_refresh" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
         </div>
       </div>
       <div class="box-body chat" id="chat-box">
-        <!-- chat item -->
-        <div class="item">
-          <img src="img/avatar.png" alt="user image" class="online"/>
-          <p class="message">
-            <a href="#" class="name">
-              <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
-              Mike Doe
-            </a>
-            I would like to meet you to discuss the latest news about
-            the arrival of the new theme. They say it is going to be one the
-            best themes on the market
-          </p>
-          <div class="attachment">
-            <h4>Attachments:</h4>
-            <p class="filename">
-              Theme-thumbnail-image.jpg
+        <?php foreach ($messages as $message): ?>
+          <!-- chat item -->
+          <div class="item">
+            <img src='<?php echo Config::get("THUMBNAIL_PATH"), Auth::get("thumbnail"); ?>' class='online'>
+            <p class="message">
+              <a href="/author/detail?id=<?php echo $message['user_id']?>" class="name">
+                <small class="text-muted pull-right">
+                  <i class="fa fa-clock-o"></i> <?php echo date('Y-m-d H:i:s',$message['created_at']);?>
+                </small>
+                <?php echo Model_User::getName($message['user_id']); ?>
+              </a>
+              <?php echo $message['body']; ?>
             </p>
-            <div class="pull-right">
-              <button class="btn btn-primary btn-sm btn-flat">Open</button>
-            </div>
-          </div><!-- /.attachment -->
-        </div><!-- /.item -->
-        <!-- chat item -->
-        <div class="item">
-          <img src="img/avatar2.png" alt="user image" class="offline"/>
-          <p class="message">
-            <a href="#" class="name">
-              <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
-              Jane Doe
-            </a>
-            I would like to meet you to discuss the latest news about
-            the arrival of the new theme. They say it is going to be one the
-            best themes on the market
-          </p>
-        </div><!-- /.item -->
-        <!-- chat item -->
-        <div class="item">
-          <img src="img/avatar3.png" alt="user image" class="offline"/>
-          <p class="message">
-            <a href="#" class="name">
-              <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
-              Susan Doe
-            </a>
-            I would like to meet you to discuss the latest news about
-            the arrival of the new theme. They say it is going to be one the
-            best themes on the market
-          </p>
-        </div><!-- /.item -->
+          </div><!-- /.item -->
+        <?php endforeach?>
       </div><!-- /.chat -->
       <div class="box-footer">
-        <div class="input-group">
-          <input class="form-control" placeholder="Type message..."/>
-          <div class="input-group-btn">
-            <button class="btn btn-success"><i class="fa fa-plus"></i></button>
+        <form id="message_form">
+          <div class="input-group">
+            <input id="message_body" class="form-control" placeholder="Type message..."/>
+            <div class="input-group-btn">
+              <button class="btn btn-success"><i class="fa fa-plus"></i></button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </div><!-- /.box (chat box) -->
 
@@ -445,3 +411,48 @@
 
   </section><!-- right col -->
 </div><!-- /.row (main row) -->
+<script type="text/javascript">
+  $(function(){
+    var newest_id = <?php echo $newest_id;?>;
+    // メッセージ投稿
+    $('#message_form').on('click',function(){
+      // HTMLでの送信をキャンセル
+      event.preventDefault();
+      // 未入力時
+      if ($('#message_body').val() == '') {
+        return ;
+      }
+      $.ajax({
+        url: '/ajax/message/transmit',
+        type: 'POST',
+        data: {
+          "body":$('#message_body').val(),
+          "newest_id":newest_id,
+        },
+      }).done(function(message_diffs){
+        prependChatItem(message_diffs);
+        $('#message_body').val('');
+      }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+        alert('投稿時にエラーが発生しました');
+      });
+    });
+    $('#message_refresh').on('click',function(){
+      $.ajax({
+        url: '/ajax/message/refresh',
+        type: 'POST',
+        data: {"newest_id":newest_id},
+      }).done(function(message_diffs){
+        prependChatItem(message_diffs);
+      }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+        alert('更新時にエラーが発生しました');
+      });
+    });
+    function prependChatItem(messages){
+      for (var i=0;i<messages.length;i++){
+        var chat_item = '<div class="item"><img src="<?php echo Config::get("THUMBNAIL_PATH");?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
+        $('#chat-box').prepend(chat_item);
+        newest_id = messages[i]['id'];
+      }
+    }
+  });
+</script>
