@@ -1,5 +1,5 @@
 <?php
-class Model_Bbscomment extends \Orm\Model
+class Model_Bbscomment extends \Model_Crud
 {
   // テーブル情報を設定
   protected static $_table_name = 'bbs_comment';
@@ -10,7 +10,7 @@ class Model_Bbscomment extends \Orm\Model
     'comment',
     'date',
   );
-  protected static $_primary_key = array('id');
+  protected static $primary_key = array('id');
 	/**
 	 * @brif    入力チェック
 	 * @access  private
@@ -26,5 +26,6 @@ class Model_Bbscomment extends \Orm\Model
 		$validation->run();
 		return $validation;
 	}
+
 }
 ?>

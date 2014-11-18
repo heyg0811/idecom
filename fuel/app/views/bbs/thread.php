@@ -6,7 +6,7 @@
 <?php foreach ($threads as $thread ): ?>
   <div class="row" style="margin:10px;">
     <div class="col-sm-12">
-      <a href="/bbs/comment">
+      <a href="/bbs/comment?id=<?php echo $thread['id'];?>">
       <div class="panel box box-info thread">
         <div class="row">
           <div class="col-sm-4">
@@ -15,7 +15,9 @@
           <div class="col-sm-7 bbs-box">
             <div class="box-header">
               <div class="box-title">
-               <h1> <i class="fa fa-fw fa-comment-o"></i> <?php echo $thread['title']; ?></h1>
+               <h1> <?php echo $thread['id'];?>
+                <i class="fa fa-fw fa-comment-o"></i>
+                 <?php echo $thread['title']; ?></h1>
                 <br>
               </div>
             </div>

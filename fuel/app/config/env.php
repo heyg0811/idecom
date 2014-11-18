@@ -33,7 +33,7 @@ return array(
   ),
 
   /**
-  * Google ClientID ClientSercret
+  * Google ClientID ClientSecret
   */
 
   /*

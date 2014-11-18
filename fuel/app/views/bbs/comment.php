@@ -5,21 +5,25 @@
   </div>
 
   <div class="box-body chat" id="chat-box">
-    <?php foreach ($comments as $comment ): ?>
+    <?php $i=1; foreach ($comments as $comment ): ?>
       <hr />
       <div class="item">
+
         <img src="img/avatar.png" alt="user image" class="online"/>
         <p class="message">
           <a href="/author/detail" class="name">
-            <?php echo $comment['user_id']; ?>
+            <?php echo Model_User::getName($comment['user_id']); ?>
           </a>
           <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
-            <?php echo $comment['date']; ?>
+            <?php echo date($comment['date']);?>
+          </small>
+          <small style="margin-top:2px;" class="text-muted pull-left">
+            <?php echo $i." : "; ?>
           </small>
           <?php echo $comment['comment']; ?>
         </p>
       </div><!-- /.item -->
-    <?php endforeach;?>
+    <?php $i++; endforeach;?>
   </div><!-- /.chat -->
 
   <form action="comment" method="post">
@@ -27,11 +31,12 @@
     <div class="box-footer">
       <div class="form-group">
         <label for="">レス</label>
+        <input type=hidden name="thread_id" value=<?php $_GET['id'];?>/>
         <textarea name="comment" class="form-control" rows="5" ></textarea>
       </div>
     </div>
     <div class="box-footer">
-      <input type="submit" value="投稿" class="btn btn-success btn-lg">
+      <input type="submit" value="投稿" class="btn btn-success btn-lg"/>
     </div>
   </form>
 </div><!-- /.box (chat box) -->
