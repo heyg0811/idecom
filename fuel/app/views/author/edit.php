@@ -12,7 +12,7 @@
     <div class="box-body">
       <div class="form-group">
         <label for="inputName">名前</label>
-        <input type="text" class="form-control" id="inputName" name="nickname" placeholder="名前" value="<?php echo $developer['nickname']; ?>">
+        <input type="text" class="form-control" id="inputName" name="nickname" placeholder="名前" value="<?php echo $developer['name']; ?>">
       </div>
       <div class="form-group row">
         <div class="col-xs-3">
@@ -45,7 +45,7 @@
           </div>
           <div class="col-xs-1 ">
             <input type="hidden" name="skil_name[]" value="<?php echo $val; ?>">
-            <input type="text" name="skil[]" size="5" maxlength="3" value="<?php echo $developer["technology"][$key]; ?>">
+            <input type="text" name="skil[]" size="5" maxlength="3" value="<?php if(!empty($developer["technology"]))echo $developer["technology"][$key];?>">
           </div>
           <?php if (($key % 6) === 5): ?>
           </div>
@@ -56,7 +56,6 @@
       <button type="submit" class="btn btn-success">更新</button>
     </div>
 </div>
-
 </form>
 </div><!-- /.box -->
 <style>

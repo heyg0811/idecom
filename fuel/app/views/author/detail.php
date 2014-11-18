@@ -2,7 +2,7 @@
 <div class="col-sm-4">
   <div class="box box-solid bg-green-gradient">
     <div class="box-header">
-      <h3 class="box-title "><?php echo $developer['nickname']; ?></h3>
+      <h3 class="box-title "><?php echo $developer['name']; ?></h3>
     </div>
     <div class="box-body">
       <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
@@ -23,6 +23,7 @@
       <div class="row">
         <div class="col-sm-12">
           <?php $i = 0; ?>
+          <?php if(!empty($developer['technology'])):?>
           <?php foreach ($developer['technology'] as $tec): ?>
             <?php if (!empty($tec)): ?>
               <div class="clearfix">
@@ -35,6 +36,7 @@
             <?php endif; ?>
             <?php $i++; ?>
           <?php endforeach; ?>
+          <?php endif;?>
         </div>
       </div>
     </div>

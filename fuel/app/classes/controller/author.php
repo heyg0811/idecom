@@ -56,19 +56,16 @@ class Controller_Author extends Controller_Template {
     $this->template->subtitle = '詳細';
     $this->template->content = View::forge('author/detail');
 
-    //user_id取得
-    $user_id = 1;
-
-    //developer情報取得
-    $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
-    //developerのtechnology取得
-    $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
-
+    //表示するuser_id取得
+    //$user_id = '1';
+    $user_id = Input::post('user_id');
+    $dev = Controller_Author::developer_get($user_id);
+      
     //タイムラインの取得
-    $timeline = Controller_Author::timeline($user_id);
+    $timeline = Controller_Author::timeline_get($user_id);
 
-    $this->template->content->developer = $dev[1];
     $this->template->content->timeline = $timeline;
+    $this->template->content->developer = $dev;
   }
 
   /**
@@ -81,13 +78,12 @@ class Controller_Author extends Controller_Template {
     $this->template->content = View::forge('author/edit');
 
     //user_id取得
-    $user_id = 1;
+    $user_id = Auth::get_user_id()[1];;
 
+    $dev = Controller_Author::developer_get($user_id);
     // 初期表示時
     if (!Security::check_token()) {
-      $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
-      $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
-      $this->template->content->developer = $dev[1];
+      $this->template->content->developer = $dev;
       return;
     }
 
@@ -101,9 +97,7 @@ class Controller_Author extends Controller_Template {
       // エラーの設定
       $result_validate = $validation->show_errors();
       $this->template->content->set_safe('errmsg', $result_validate);
-      $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
-      $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
-      $this->template->content->developer = $dev[1];
+      $this->template->content->developer = $dev;
       return;
     }
 
@@ -111,26 +105,28 @@ class Controller_Author extends Controller_Template {
     //インスタンス生成
     $developer_model = Model_Developer::forge();
 
-    //値設定
-    $data = array(
-        'nickname' => $input_data["nickname"],
-        'grade' => $input_data["grade"],
-        'major' => $input_data["major"],
-        'technology' => Model_Developer::technology_encode($input_data['skil']),
-    );
+    
+    
     //developerデータ取得
     $user = $developer_model->find('all', array('where' => array('user_id' => $user_id)));
+    
+    //値設定
+    $data = array(
+      'user_id' => $user_id,
+      'grade' => $input_data["grade"],
+      'major' => $input_data["major"],
+      'technology' => Model_Developer::technology_encode($input_data['skil']),
+    );
     //updata
-    if (!$user[1]->set($data)->save()) {
-      //失敗
+    foreach($user as $val)
+    {
+      $val->set($data)->save();
     }
     //developerデータ再取得
-    $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
+    $dev = Controller_Author::developer_get($user_id);
 
-    //texhnologyをdecode
-    $dev[1]['technology'] = Model_Developer::technology_decode($dev[1]['technology']);
 
-    $this->template->content->developer = $dev[1];
+    $this->template->content->developer = $dev;
   }
 
   /**
@@ -138,7 +134,7 @@ class Controller_Author extends Controller_Template {
    * @access  public
    * @return  timeline
    */
-  public static function timeline($user_id) {
+  public static function timeline_get($user_id) {
 
     $timeline = array();
 
@@ -148,7 +144,7 @@ class Controller_Author extends Controller_Template {
     //データ整形
     foreach ($data as $value) {
       $temp['title'] = $value['title'];
-      $temp['icon'] = $value['icon'];
+      $temp['icon'] = Config::get('TIMELINE.'.$value['icon']);
       $temp['text'] = $value['text'];
       $temp['date'] = $value['date'];
 
@@ -158,4 +154,28 @@ class Controller_Author extends Controller_Template {
     return $timeline;
   }
 
+  /**
+   * @brif    developer情報取得 
+   * @access  public
+   * @return  temp
+   */
+  public static function developer_get($user_id) {
+    
+    $temp = array();
+    //developer情報取得 
+    $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
+    //username取得
+    $user = Model_User::find('all', array('where' => array('id' => $user_id)));
+    //整形
+    foreach($user as $val){
+      $temp['name'] = $val['username'];  
+    }
+    foreach($dev as $val){
+      $temp['user_id'] = $val['user_id'];  
+      $temp['grade'] = $val['grade'];  
+      $temp['major'] = $val['major'];
+      $temp['technology'] = Model_Developer::technology_decode($val['technology']);
+    }
+    return $temp;
+  }
 }

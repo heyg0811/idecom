@@ -1,24 +1,20 @@
 <?php
-
 /**
  * Description of developer
  *
  * @author b1225
  */
 class Model_Developer extends \Orm\Model {
-
   // テーブル情報を設定
   protected static $_table_name = 'developer';
   protected static $_properties = array(
       'id',
       'user_id',
-      'nickname',
       'grade',
       'major',
       'technology',
   );
   protected static $_primary_key = array('id');
-
   /**
    * @brif    入力チェック
    * @access  private
@@ -28,17 +24,12 @@ class Model_Developer extends \Orm\Model {
   public static function technology_encode($technology) {
     return json_encode($technology);
   }
-
 //technologyをjson形式からdecode
   public static function technology_decode($technology) {
     return json_decode($technology);
   }
-
   public static function validate() {
     $validation = Validation::forge();
-    $validation->add('nickname', '名前')
-            ->add_rule('min_length', 2)
-            ->add_rule('max_length', 50);
     $validation->add('grade', '学年')
             ->add_rule('exact_length', 1)
             ->add_rule('numeric_min', 1)
@@ -59,5 +50,4 @@ class Model_Developer extends \Orm\Model {
     $validation->run();
     return $validation;
   }
-
 }
