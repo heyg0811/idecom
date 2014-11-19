@@ -40,46 +40,30 @@ class Controller_Bbs extends Controller_Template {
 
   public function action_thread() {
     $this->template->subtitle = 'スレッド一覧';
-    $this->template->content = View::forge('bbs/thread');
-
+    $this->template->content  = View::forge('bbs/thread');
+    // 初期表示時
 
     //threadテーブルからデータ取得
-   $threads = DB::select('bbs_thread.id','title',array('bbs_comment.id','comment_id'),'bbs_comment.comment','bbs_thread.date')
-      ->from('bbs_thread')
-      ->join(DB::expr('(select id, comment, thread_id from
-        bbs_comment group by thread_id) as bbs_comment'),'inner')
-      ->on('bbs_thread.id', '=', 'bbs_comment.thread_id')
-      ->order_by('bbs_thread.id','desc')
-      ->execute()
-      ->as_array();
-
-
+    $threads = Model_Bbsthread::get_thread();
     $this->template->content->threads = $threads;
 
-    // 初期表示時
     if (!Security::check_token())
     {
       return ;
     }
-
-    $validation = Model_Bbsthread::validate();
-    $thread_data = $validation->validated();
-    $bbsthread_model = new Model_Bbsthread();
-    $bbsthread_model ->set(array(
-      'user_id' => Auth::get('id'),
-      'title'   => $thread_data['title'],
-      'date'    => date("Y/m/d H:i:s"),
-    ));
-    $bbsthread_model->save();
-
-    $bbscomment_model = new Model_Bbscomment();
-    $bbscomment_model ->set(array(
-                          // 'thread_id'  => 11/*今いるスレッドのthread_idの値を取ってくる*/,
-                          // 'user_id'  => 'B1123547',/*user_idを取得する*/
-                          'comment' => $thread_data['comment'],
-                          // 'date' => date("Y/m/d H:i:s"),
-                          ));
-    $bbscomment_model->save();
+    //threadテーブルにデータ挿入
+    $validation    = Model_Bbsthread::validate();
+    $thread_data   = $validation->validated();
+    $thread_data  += array('user_id'=>Auth::get('id'),'date'=>date('Y-m-d H:i:s'));
+    $comment       = $thread_data['comment'];
+    unset($thread_data['comment']);
+    $insert_id     = Model_Bbsthread::insert($thread_data);
+    //コメントはcommentテーブルに
+    $comment_data  = array('comment'=>$comment, 'thread_id'=>$insert_id);
+    if (!$insert_id || !Model_Bbscomment::insert($comment_data)) {
+      echo '投稿時にエラーが発生しました';
+      return;
+    }
     Response::redirect('bbs/thread');
 
   }
@@ -90,18 +74,11 @@ class Controller_Bbs extends Controller_Template {
     $this->template->content  = View::forge('bbs/comment');
     // 初期表示時
 
-    //thread_idを取得
+    //GETでthread_idを取得
     $thread_id = Input::get('id',null);
-
-    //取得したthread_idと同じthrea_idのものをcommentsに格納
-    $comments = Model_Bbscomment::find_by('thread_id',$thread_id);
-
-    // ('all', array(
-    //   'select' => array('date', 'user_id','comment'),
-    //   'where' => array(array('thread_id', $get_thread),),
-    //   'order_by' => array('date' => 'desc'),
-    //  ));
-
+    //DBからコメントデータを取得
+    $comments = Model_Bbscomment::find_by('thread_id', $thread_id);
+    //var_dump($comments);exit(); NULLが入るWarning無視すれば普通に動く
     $this->template->content->comments = $comments;
 
     if (!Security::check_token())
@@ -109,21 +86,13 @@ class Controller_Bbs extends Controller_Template {
       return ;
     }
 
-
-
     //コメントデータをDBに格納
-    $validation       = Model_Bbscomment::validate();
-    $comment_data     = $validation->validated();
-    $bbscomment_model = new Model_Bbscomment();
-    $bbscomment_model ->set(array(
-      'thread_id' => $comment_data['thread_id'],
-      'user_id'  => Auth::get('user_id'),
-      'comment'   => $comment_data['comment'],
-      'date'      => date("Y/m/d H:i:s"),
-    ));
-    $bbscomment_model->save();
-    Response::redirect('bbs/comment');
+    $validation    = Model_Bbscomment::validate();
+    $comment_data  = $validation->validated();
+    $comment_data += array('user_id'=>Auth::get('id'),'date'=>date('Y-m-d H:i:s'));
+    $insert_id     = Model_Bbscomment::insert($comment_data);
 
+    Response::redirect('bbs/comment');
   }
 
 

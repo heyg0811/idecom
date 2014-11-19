@@ -15,19 +15,25 @@
           <div class="col-sm-7 bbs-box">
             <div class="box-header">
               <div class="box-title">
-               <h1> <?php echo $thread['id'];?>
+               <h1>
+                <?php echo $thread['id'];?>
                 <i class="fa fa-fw fa-comment-o"></i>
-                 <?php echo $thread['title']; ?></h1>
+                <?php echo $thread['title']; ?>
+               </h1>
                 <br>
               </div>
             </div>
             <div class="panel-collapse collapse in">
               <div class="body">
-                <p class="text-black"> <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
-                   <?php echo $thread['date']; ?>
+               <h4>
+                <p class="text-black">
+                   <small class="text-muted pull-right">
+                    <i class="fa fa-clock-o"></i>
+                    <?php echo $thread['date']; ?>
                    </small>
                    <?php echo $thread['comment']; ?>
-               </p>
+                </p>
+               </h4>
               </div>
             </div>
           </div>

@@ -22,10 +22,31 @@ class Model_Bbscomment extends \Model_Crud
 		->add_rule('required')
 		->add_rule('min_length', 1)
 		->add_rule('max_length', 500);
+		$validation->add('thread_id', 'thread_id')
+		->add_rule('required')
+		->add_rule('min_length', 1)
+		->add_rule('max_length', 10);
 
 		$validation->run();
 		return $validation;
 	}
 
+	public static function insert($data){
+    list($insert_id,$row) = DB::insert(static::$_table_name)
+    ->set($data)
+    ->execute();
+
+    return $insert_id;
+	}
+
+	// public static  function get_comment(){
+	// 	 $comennt = DB::select('thread_id','user_id','comment','date')
+ //      ->from('bbs_comment')
+ //      ->where('thread_id', '=', 32)
+ //      ->order_by('date','asc')
+ //      ->execute()
+ //      ->as_array();
+ //      return $comennt;
+	// }
+
 }
-?>

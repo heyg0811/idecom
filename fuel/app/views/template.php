@@ -327,7 +327,7 @@
                     <ul class="treeview-menu">
                       <li><a href="/admin/dashboard"><i class="fa fa-angle-double-right"></i> ダッシュボード</a></li>
                       <li><a href="/admin/product"><i class="fa fa-angle-double-right"></i> 作品管理</a></li>
-                      <li><a href="/admin/recruit"><i class="fa fa-angle-double-right"></i> 応募管理</a></li>
+                      <li><a href="/admin/recruit"><i class="fa fa-angle-double-right"></i> 募集管理</a></li>
                     </ul>
                   </li>
                   <li>
