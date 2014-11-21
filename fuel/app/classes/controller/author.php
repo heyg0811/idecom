@@ -55,12 +55,11 @@ class Controller_Author extends Controller_Template {
   public function action_detail() {
     $this->template->subtitle = '詳細';
     $this->template->content = View::forge('author/detail');
-
     //表示するuser_id取得
     //$user_id = '1';
     $user_id = Input::post('user_id');
     $dev = Controller_Author::developer_get($user_id);
-      
+    
     //タイムラインの取得
     $timeline = Controller_Author::timeline_get($user_id);
 
@@ -164,12 +163,9 @@ class Controller_Author extends Controller_Template {
     $temp = array();
     //developer情報取得 
     $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
-    //username取得
-    $user = Model_User::find('all', array('where' => array('id' => $user_id)));
-    //整形
-    foreach($user as $val){
-      $temp['name'] = $val['username'];  
-    }
+      
+    $temp['name'] = Auth::get('username');
+    
     foreach($dev as $val){
       $temp['user_id'] = $val['user_id'];  
       $temp['grade'] = $val['grade'];  
@@ -177,5 +173,28 @@ class Controller_Author extends Controller_Template {
       $temp['technology'] = Model_Developer::technology_decode($val['technology']);
     }
     return $temp;
+  }
+  
+  public static function timeline_insert($user_id,$title,$icon,$text)
+  {
+    $timeline = Model_Timeline::forge();
+    
+    $data = array(
+      'user_id' => $user_id,
+      'title' => $title,
+      'icon' => $icon,
+      'text' => $text,
+    );
+    
+    if(!$timeline->set($data)->save())
+    {
+      //失敗
+      return FALSE;
+    }else{
+      //成功
+      return TRUE;
+    }
+    
+    
   }
 }
