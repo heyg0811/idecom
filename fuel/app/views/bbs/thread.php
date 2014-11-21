@@ -31,7 +31,7 @@
                     <i class="fa fa-clock-o"></i>
                     <?php echo $thread['date']; ?>
                    </small>
-                   <?php echo $thread['comment']; ?>
+                   <?php echo nl2br($thread['comment']); ?>
                 </p>
                </h4>
               </div>

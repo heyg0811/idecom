@@ -20,7 +20,7 @@
           <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
             <?php echo date($comment['date']);?>
           </small>
-          <?php echo $comment['comment']; ?>
+          <br><?php echo nl2br($comment['comment']); ?>
         </p>
       </div><!-- /.item -->
     <?php $i++; endforeach; ?>
