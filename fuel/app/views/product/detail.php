@@ -2,15 +2,15 @@
   <div class="col-xs-12" id="product">
     <div class="col-xs-12">
       <div class="small-box bg-blue">
-        <?php echo Asset::img('noimage.jpg'); ?>
+        <img src="<?php echo Config::get('USER_IMG_URL') . $product['thumbnail']; ?>" class="img-responsive">
         <div class="inner">
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus in eius blanditiis doloribus
+            <?php echo $product['detail']?>
           </p>
         </div>
-        <a href="/author/detail" class="small-box-footer">
+        <a href="/author/detail?id=<?php echo $product['user_id']?>" class="small-box-footer">
           <h4>
-            <i class="fa fa-desktop" style="margin-right:4px;"></i>作者名
+            <i class="fa fa-desktop" style="margin-right:4px;"></i> <?php echo Model_User::getName($product['user_id']); ?>
           </h4>
         </a>
       </div>

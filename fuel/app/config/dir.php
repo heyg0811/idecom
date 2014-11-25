@@ -8,6 +8,8 @@
  */
 
 return array(
-  'THUMBNAIL_PATH' => '/assets/img/user/',
-  'THUMBNAIL_DIR'  => DOCROOT . '/assets/img/user/',
+  'THUMBNAIL_URL' => '/assets/img/user/',
+  'THUMBNAIL_DIR' => DOCROOT . 'assets/img/user/',
+  'USER_IMG_DIR'  => DOCROOT . 'assets/img/user/',
+  'USER_IMG_URL'  => '/assets/img/user/',
 );
