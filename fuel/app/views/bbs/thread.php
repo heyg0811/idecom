@@ -31,7 +31,7 @@
                     <i class="fa fa-clock-o"></i>
                     <?php echo $thread['date']; ?>
                    </small>
-                   <?php echo nl2br($thread['comment']); ?>
+                   <?php echo wordwrap(nl2br($thread['comment']),100, "\n", true); ?>
                 </p>
                </h4>
               </div>

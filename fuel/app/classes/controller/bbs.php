@@ -74,10 +74,9 @@ class Controller_Bbs extends Controller_Template {
     $this->template->content  = View::forge('bbs/comment');
     // 初期表示時
 
-    //GETでthread_idを取得
+    //GETでthread_idを取得, DBからコメントデータを取得
     $thread_id = Input::get('id',null);
-    //DBからコメントデータを取得
-    $comments = Model_Bbscomment::find_by('thread_id', $thread_id);
+    $comments  = Model_Bbscomment::find_by('thread_id', $thread_id);
     //var_dump($comments);exit(); NULLが入るWarning無視すれば普通に動く
     $this->template->content->comments = $comments;
 
