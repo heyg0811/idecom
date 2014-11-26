@@ -1,5 +1,5 @@
 <?php
-class Model_Bbscomment extends \Model_Crud
+class Model_Bbscomment extends \Orm\Model
 {
   // テーブル情報を設定
   protected static $_table_name = 'bbs_comment';

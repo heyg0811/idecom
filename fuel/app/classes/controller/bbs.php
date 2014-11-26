@@ -41,6 +41,7 @@ class Controller_Bbs extends Controller_Template {
   public function action_thread() {
     $this->template->subtitle = 'スレッド一覧';
     $this->template->content  = View::forge('bbs/thread');
+
     // 初期表示時
 
     //threadテーブルからデータ取得
@@ -76,7 +77,8 @@ class Controller_Bbs extends Controller_Template {
 
     //GETでthread_idを取得, DBからコメントデータを取得
     $thread_id = Input::get('id',null);
-    $comments  = Model_Bbscomment::find_by('thread_id', $thread_id);
+    $options   = array('where' => array('thread_id' => $thread_id), );
+    $comments  = Model_Bbscomment::find('all', $options);
     //var_dump($comments);exit(); NULLが入るWarning無視すれば普通に動く
     $this->template->content->comments = $comments;
 
