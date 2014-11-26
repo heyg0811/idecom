@@ -2,31 +2,34 @@
   <a href="/product/add" class="btn btn-primary pull-right">新規登録</a>
 </div>
 <div class="col-xs-12" style="margin-top:15px">
-  <?php for ($i = 0; $i < 10; $i++): ?>
+
+  <?php foreach ($products as $product): ?>
     <div class="panel box box-primary">
       <div class="row">
         <div class="col-sm-4">
-          <?php echo Asset::img('noimage.jpg', array('class' => 'img-responsive thread-img')); ?>
+          <img src="<?php echo Config::get('USER_IMG_URL') . $product['thumbnail']; ?>" class="img-responsive">
         </div>
         <div class="col-sm-7 bbs-box">
           <div class="box-header">
             <div class="box-title">
-              <i class="fa fa-fw fa-comment-o"></i>さくひん<?php echo $i+1 ?>
+              <i class="fa fa-fw fa-comment-o"></i> <?php echo $product['title']; ?>
             </div>
           </div>
           <div class="panel-collapse collapse in">
             <div class="body">
-              <p class="text-black">本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん本文ほんぶん</p>
+              <p class="text-black">
+                <?php echo $product['outline']; ?>
+              </p>
             </div>
           </div>
           <div class="pull-right">
-            <a href="/product/edit" class="btn btn-success">編集</a>
-            <a href="" class="btn btn-danger">削除</a>
+            <a href="/product/edit?id=<?php echo $product['id']; ?>" class="btn btn-success">編集</a>
+            <a href="/product/delete?id=<?php echo $product['id']; ?>" class="btn btn-danger" onclick="return confirm('削除すると復元出来ません、よろしいですか？')">削除</a>
           </div>
         </div>
       </div>
     </div>
-  <?php endfor; ?>
+  <?php endforeach; ?>
 </div>
 <style>
   .bbs-box

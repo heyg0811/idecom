@@ -5,10 +5,11 @@ require COREPATH.'bootstrap.php';
 Autoloader::add_classes(array(
 // Add classes you want to override here
 	// Example: 'View' => APPPATH.'classes/view.php',
-	'Config'      => APPPATH . 'classes/config.php',
-	'Validation'  => APPPATH . 'classes/validation.php',
-  'Auth_Opauth' => APPPATH . 'classes/auth/opauth.php',
-  'Controller_Template' => APPPATH . 'classes/template.php',
+	'Config'      => APPPATH . 'classes/extension/config.php',
+	'Validation'  => APPPATH . 'classes/extension/validation.php',
+  'Auth_Opauth' => APPPATH . 'classes/extension/opauth.php',
+  'Controller_Template' => APPPATH . 'classes/extension/template.php',
+  'Fieldset_Field' => APPPATH . 'classes/extension/field.php',
 ));
 
 // Register the autoloader

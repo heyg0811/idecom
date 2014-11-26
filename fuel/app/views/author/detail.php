@@ -1,5 +1,5 @@
 
-<div class="col-sm-4">
+<div class="col-sm-4" id="user-box">
   <div class="box box-solid bg-green-gradient">
     <div class="box-header">
       <h3 class="box-title "><?php echo $developer['name']; ?></h3>
@@ -43,7 +43,7 @@
   </div>
 </div>
 <div class="col-sm-8">
-  <div class="row author-timeline">
+  <div class="row author-timeline" id="right-box">
     <ul class="timeline">
       <?php foreach ($timeline as $value): ?>
         <li>
@@ -55,7 +55,7 @@
               <div class="box-tools pull-right">
                 <button class="btn btn-danger btn-sm" data-widget="collapse"><i class="fa fa-plus"></i></button>
               </div>
-              <span class="time pull-right"><i class="fa fa-clock-o"></i>2014-11-11 16:20:43</span>
+              <span class="time pull-right"><i class="fa fa-clock-o"></i><?php echo $value['date']; ?></span>
             </div>
             <div class="box-body" style="display: none">
               <?php echo $value['text']; ?>
@@ -66,8 +66,48 @@
       <?php endforeach; ?>
     </ul>
   </div>
+  <hr>
+  <div class="box box-success" id="message-box">
+      <div class="box-header">
+        <i class="fa fa-comments-o"></i>
+        <h3 class="box-title">Chat</h3>
+        <div class="box-tools pull-right">
+          <button id="message_refresh" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+        </div>
+      </div>
+      <div class="box-body chat" id="chat-box">
+          <!-- chat item -->
+          <div class="item">
+            <img src='<?php echo Config::get("THUMBNAIL_PATH"), Auth::get("thumbnail"); ?>' class='online'>
+            <p class="message">
+              <a href="/author/detail?id=" class="name">
+                <small class="text-muted pull-right">
+                  <i class="fa fa-clock-o"></i> 
+                </small>
+              </a>
+            </p>
+          </div><!-- /.item -->
+      </div><!-- /.chat -->
+      <div class="box-footer">
+        <form id="message_form">
+          <div class="input-group">
+            <input id="message_body" class="form-control" placeholder="Type message..."/>
+            <div class="input-group-btn">
+              <button class="btn btn-success"><i class="fa fa-plus"></i></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div><!-- /.box (chat box) -->
 </div>
 
+<script>
+$(window).load(function () {
+  Height = ($('#user-box').height()/2)-61;
+  $('div#right-box').css('height',Height+'px'); 
+  $('div#message-box').css('height',Height+'px'); 
+});
+</script>
 
 <style>
   .author-thumbnail
@@ -86,5 +126,8 @@
   {
     padding-top: 20px;
   }
-
+  #right-box
+  {
+    overflow-y: scroll;
+  }
 </style>

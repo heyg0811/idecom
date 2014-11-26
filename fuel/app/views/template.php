@@ -3,7 +3,7 @@
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:svg="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  lang="en">
+  lang="en" style="overflow:scroll;">
   <head>
     <meta charset="UTF-8">
       <title>IDECOM</title>
@@ -374,7 +374,7 @@
                 </ol>
               </section>
               <!-- Main content -->
-              <section class="content">
+              <section class="content" style="overflow:hidden;">
                 <?php echo $content; ?>
               </section><!-- /.content -->
             </aside><!-- /.right-side -->

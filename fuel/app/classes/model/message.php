@@ -29,13 +29,13 @@ class Model_Message extends \Orm\Model
   }
 
   public static function insert($host_id, $body){
-    $result = DB::insert('message')->set(array(
+    list($insert_id, $rows_affected) = DB::insert('message')->set(array(
       'host_id'    => $host_id,
       'user_id'    => Auth::get('id'),
       'body'       => $body,
       'created_at' => time(),
     ))->execute();
-    return $result[0];
+    return $insert_id;
   }
 
   public static function getDiff($host_id, $newest_id){
