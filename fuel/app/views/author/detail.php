@@ -68,6 +68,8 @@
   </div>
   <hr>
   <div class="box box-success" id="message-box">
+    <!-- Chat box -->
+    <div class="box box-success">
       <div class="box-header">
         <i class="fa fa-comments-o"></i>
         <h3 class="box-title">Chat</h3>
@@ -76,20 +78,25 @@
         </div>
       </div>
       <div class="box-body chat" id="chat-box">
+        <?php foreach ($messages as $message): ?>
           <!-- chat item -->
           <div class="item">
-            <img src='<?php echo Config::get("THUMBNAIL_PATH"), Auth::get("thumbnail"); ?>' class='online'>
+            <img src='<?php echo Config::get("THUMBNAIL_URL"), Auth::get("thumbnail"); ?>' class='online'>
             <p class="message">
-              <a href="/author/detail?id=" class="name">
+              <a href="/author/detail?id=<?php echo $message['user_id'];?>" class="name">
                 <small class="text-muted pull-right">
-                  <i class="fa fa-clock-o"></i> 
+                  <i class="fa fa-clock-o"></i> <?php echo date('Y-m-d H:i:s',$message['created_at']);?>
                 </small>
+                <?php echo Model_User::getName($message['user_id']); ?>
               </a>
+              <?php echo $message['body']; ?>
             </p>
           </div><!-- /.item -->
+        <?php endforeach; ?>
       </div><!-- /.chat -->
       <div class="box-footer">
         <form id="message_form">
+          <input type="hidden" name="id" value="<?php echo $developer["user_id"];?>">
           <div class="input-group">
             <input id="message_body" class="form-control" placeholder="Type message..."/>
             <div class="input-group-btn">
@@ -99,6 +106,7 @@
         </form>
       </div>
     </div><!-- /.box (chat box) -->
+  </div>
 </div>
 
 <script>
@@ -107,6 +115,51 @@ $(window).load(function () {
   $('div#right-box').css('height',Height+'px'); 
   $('div#message-box').css('height',Height+'px'); 
 });
+
+$(function(){
+    var newest_id = <?php echo $newest_id;?>;
+    // メッセージ投稿
+    $('#message_form').on('click',function(){
+      // HTMLでの送信をキャンセル
+      event.preventDefault();
+      // 未入力時
+      if ($('#message_body').val() == '') {
+        return ;
+      }
+      $.ajax({
+        url: '/ajax/message/transmit',
+        type: 'POST',
+        data: {
+          "body":$('#message_body').val(),
+          "newest_id":newest_id,
+          "host_id":<?php echo $developer["user_id"];?>
+        },
+      }).done(function(message_diffs){
+        prependChatItem(message_diffs);
+        $('#message_body').val('');
+      }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+        alert('投稿時にエラーが発生しました');
+      });
+    });
+    $('#message_refresh').on('click',function(){
+      $.ajax({
+        url: '/ajax/message/refresh',
+        type: 'POST',
+        data: {"newest_id":newest_id},
+      }).done(function(message_diffs){
+        prependChatItem(message_diffs);
+      }).fail(function(XMLHttpRequest, textStatus, errorThrown){
+        alert('更新時にエラーが発生しました');
+      });
+    });
+    function prependChatItem(messages){
+      for (var i=0;i<messages.length;i++){
+        var chat_item = '<div class="item"><img src="<?php echo Config::get("THUMBNAIL_URL");?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
+        $('#chat-box').prepend(chat_item);
+        newest_id = messages[i]['id'];
+      }
+    }
+  });
 </script>
 
 <style>

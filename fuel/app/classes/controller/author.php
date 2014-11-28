@@ -54,17 +54,26 @@ class Controller_Author extends Controller_Template {
    */
   public function action_detail() {
     $this->template->subtitle = '詳細';
+    
     $this->template->content = View::forge('author/detail');
     //表示するuser_id取得
     //$user_id = '1';
-    $user_id = Input::post('user_id');
-    $dev = Controller_Author::developer_get($user_id);
+    $dev_id = Input::param('id');
+    $dev = Controller_Author::developer_get($dev_id);
+    
     
     //タイムラインの取得
-    $timeline = Controller_Author::timeline_get($user_id);
+    $timeline = Controller_Author::timeline_get($dev_id);
 
+    $messages = Model_Message::find('all', array(
+      'where'    => array(array('host_id','=',$dev_id)),
+      'order_by' => array('id'=>'desc'),
+    ));
+    $this->template->content->messages = $messages;
+    $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
     $this->template->content->timeline = $timeline;
     $this->template->content->developer = $dev;
+    
   }
 
   /**
@@ -137,8 +146,9 @@ class Controller_Author extends Controller_Template {
 
     $timeline = array();
 
+    $timeline_model = Model_Timeline::forge();
     //timelineデータ取得
-    $data = Model_Timeline::find('all', array('where' => array('user_id' => $user_id)));
+    $data = $timeline_model::find('all',array('where' => array(array('user_id', $user_id))));
 
     //データ整形
     foreach ($data as $value) {
@@ -161,10 +171,13 @@ class Controller_Author extends Controller_Template {
   public static function developer_get($user_id) {
     
     $temp = array();
+    
+    $developer_model = Model_Developer::forge();
     //developer情報取得 
-    $dev = Model_Developer::find('all', array('where' => array('user_id' => $user_id)));
-      
+    $dev = $developer_model->find('all',array('where' => array(array('user_id', 1))));
+
     $temp['name'] = Auth::get('username');
+    
     
     foreach($dev as $val){
       $temp['user_id'] = $val['user_id'];  

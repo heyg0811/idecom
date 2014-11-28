@@ -26,11 +26,10 @@ class Controller_Ajax_Message extends Controller_Rest {
       echo json_encode(false);
     }
     $request_path  = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
-    $host_id       = Auth::get('id');
-    $newest_id     = Input::post('newest_id', null);
-    if ($request_path != '/' && $request_path != '/admin/dashboard') {
-      $host_id = Input::post('host_id');
+    if (!$host_id = Input::post('host_id')) {
+      $host_id = Auth::get('id');
     }
+    $newest_id     = Input::post('newest_id', null);
     Model_Message::insert($host_id,Input::post('body', null));
     $message_diffs = Model_Message::getDiff($host_id, $newest_id);
     header('Content-Type: application/json; charset=utf-8');

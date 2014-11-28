@@ -20,15 +20,15 @@
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus in eius blanditiis doloribus
           </p>
         </div>
-        <a href="#" onClick="document.form1.user_id.value = '1'; document.form1.submit();" class="small-box-footer">
+        <a href="#" onClick="document.form1.id.value = '1'; document.form1.submit();" class="small-box-footer">
           More info <i class="fa fa-arrow-circle-right"></i>
         </a>
       </div>
     </div>
   <?php endfor; ?>
 </div>
-<form name="form1" method="post" action="detail">
-  <input type="hidden" name="user_id">
+<form name="form1" method="get" action="detail">
+  <input type="hidden" name="id">
 </form>
 <div class="hidden-sm hidden-xs col-md-2" id="filter-side">
   <h2 class="text-center">Filter</h2>
