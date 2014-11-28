@@ -175,6 +175,11 @@ class Controller_Author extends Controller_Template {
     return $temp;
   }
   
+  /**
+   * @brif    timeline挿入
+   * @access  public
+   * @return  TRUE or FALSE
+   */
   public static function timeline_insert($user_id,$title,$icon,$text)
   {
     $timeline = Model_Timeline::forge();
