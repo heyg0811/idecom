@@ -1,4 +1,4 @@
-
+<?php var_dump($developer);exit;?>
 <div class="col-sm-4" id="user-box">
   <div class="box box-solid bg-green-gradient">
     <div class="box-header">
