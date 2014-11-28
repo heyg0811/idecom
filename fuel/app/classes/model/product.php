@@ -15,9 +15,9 @@ class Model_Product extends \Orm\Model
       'label'     => '題名',
       'validation' => array(
         'required',
-        'min_length' => array(3), 
+        'min_length' => array(3),
       ),
-      'form' => array(
+    'form' => array(
         'type' => 'text',
         'class' => 'form-control',
       ),
@@ -64,10 +64,16 @@ class Model_Product extends \Orm\Model
       'label' => 'サムネイル',
       'form' => array('type' => 'file'),
     ),
-    'count' => array(
+    'nice' => array(
       'skip' => true,
     ),
     'status' => array(
+      'skip' => true,
+    ),
+    'count' => array(
+      'skip' => true,
+    ),
+    'source' => array(
       'skip' => true,
     ),
     'created_at' => array(
@@ -75,7 +81,7 @@ class Model_Product extends \Orm\Model
     ),
   );
   protected static $primary_key = array('id');
-  
+
     /**
    * @brif    フォーム用データ取得
    * @access  public
@@ -86,7 +92,7 @@ class Model_Product extends \Orm\Model
       'order_by' => array('created_at' => 'desc'),
     ));
   }
-  
+
   /**
    * @brif    作品チェック
    * @access  public
@@ -106,7 +112,7 @@ class Model_Product extends \Orm\Model
     $form->field('detail')
     ->add_rule('required');
   }
-  
+
   /**
    * @brif    ログイン入力チェック
    * @access  public
@@ -119,7 +125,7 @@ class Model_Product extends \Orm\Model
     ->add_rule('required')
     ->add_rule('min_length', 4)
     ->add_rule('max_length', 15);
-    
+
     $validation->add('category', 'カテゴリ')
     ->add_rule('required')
     ->add_rule('numeric_min', 0)
@@ -143,7 +149,7 @@ class Model_Product extends \Orm\Model
     $validation->run();
     return $validation;
   }
-  
+
   /**
    * @brif    インサート
    * @access  public
@@ -153,10 +159,10 @@ class Model_Product extends \Orm\Model
     list($insert_id, $rows_affected) = DB::insert(static::$_table_name)
     ->set($insert_data)
     ->execute();
-    
+
     return $insert_id;
   }
-  
+
   /**
    * @brif    アクセスカウント
    * @access  public
@@ -164,5 +170,8 @@ class Model_Product extends \Orm\Model
    */
   public static function updateCount($id) {
     DB::query('UPDATE product SET count = count + 1 WHERE id = '. $id)->execute();
+  }
+  public static function updateNice($id) {
+    DB::query('UPDATE product SET nice = nice + 1 WHERE id = '. $id)->execute();
   }
 }

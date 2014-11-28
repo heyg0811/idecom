@@ -39,14 +39,5 @@ class Model_Bbscomment extends \Orm\Model
     return $insert_id;
 	}
 
-	// public static  function get_comment(){
-	// 	 $comennt = DB::select('thread_id','user_id','comment','date')
- //      ->from('bbs_comment')
- //      ->where('thread_id', '=', 32)
- //      ->order_by('date','asc')
- //      ->execute()
- //      ->as_array();
- //      return $comennt;
-	// }
 
 }
