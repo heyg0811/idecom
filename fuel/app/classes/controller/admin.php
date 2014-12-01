@@ -73,4 +73,46 @@ class Controller_Admin extends Controller_Template {
     $this->template->content = View::forge('admin/recruit');
   }
 
+  /**
+   * @brif    募集管理
+   * @access  public
+   * @return
+   */
+  public function action_view() {
+    $this->template->subtitle = 'アクセスカウンタ';
+    $this->template->content = View::forge('admin/view');
+  }
+
+  /**
+   * @brif    募集管理
+   * @access  public
+   * @return
+   */
+  public function action_subscription() {
+    $this->template->subtitle = 'プロジェクト応募数';
+    $this->template->content = View::forge('admin/subscription');
+  }
+
+  /**
+   * @brif    募集管理
+   * @access  public
+   * @return
+   */
+  public function action_comment() {
+    $this->template->subtitle = '自分へのコメント';
+    $this->template->content = View::forge('admin/comment');
+  }
+
+  /**
+   * @brif    募集管理
+   * @access  public
+   * @return
+   */
+  public function action_nice() {
+    $this->template->subtitle = 'イイネ!!';
+    $this->template->content = View::forge('admin/nice');
+    $this->template->content->products = Model_Product::find('all');
+
+  }
+
 }
