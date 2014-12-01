@@ -20,7 +20,7 @@ class Fieldset_Field extends Fuel\Core\Fieldset_Field
 	public function build()
 	{
 		$form = $this->fieldset()->form();
-
+		
 		// Add IDs when auto-id is on
 		if ($form->get_config('auto_id', false) === true and $this->get_attribute('id') == '')
 		{
