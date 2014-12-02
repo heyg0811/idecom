@@ -8,6 +8,12 @@ class Model_Developer extends \Orm\Model {
   // テーブル情報を設定
   protected static $_table_name = 'developer';
   protected static $_properties = array(
+    'id',
+    'user_id',
+    'grade',
+    'major',
+    'technology',
+    /*
       'id' => array(
           'skip' =>true,
       ),
@@ -32,6 +38,7 @@ class Model_Developer extends \Orm\Model {
             'class'=> 'form-collatol',
           ),
       ),
+      */
       
   );
   protected static $_primary_key = array('id');

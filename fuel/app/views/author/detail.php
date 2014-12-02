@@ -43,28 +43,36 @@
   </div>
 </div>
 <div class="col-sm-8">
-  <div class="row author-timeline" id="right-box">
-    <ul class="timeline">
-      <?php foreach ($timeline as $value): ?>
-        <li>
-          <i class="fa <?php echo $value['icon']; ?>"></i>
-          <div class="timeline-item box box-solid timeline-box collapsed-box">
-            <div class="box-header">
-              <h3 class="box-title"><?php echo $value['title']; ?></h3>
-
-              <div class="box-tools pull-right">
-                <button class="btn btn-danger btn-sm" data-widget="collapse"><i class="fa fa-plus"></i></button>
+  <div class="box box-success">
+    <div class="box-header">
+      <i class="fa fa-comment-o"></i>
+      <h3 class="box-title">TimeLine</h3>
+      <div class="box-tools pull-right">
+        <button id="message_refresh" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+      </div>
+    </div>
+    <div class=" author-timeline" id="right-box">
+      <ul class="timeline">
+        <?php foreach ($timeline as $value): ?>
+          <li>
+            <i class="fa <?php echo $value['icon']; ?>"></i>
+            <div class="timeline-item box box-solid timeline-box collapsed-box">
+              <div class="box-header">
+                <h3 class="box-title"><?php echo $value['title']; ?></h3>
+  
+                <div class="box-tools pull-right">
+                  <button class="btn btn-danger btn-sm" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                </div>
+                <span class="time pull-right"><i class="fa fa-clock-o"></i><?php echo $value['date']; ?></span>
               </div>
-              <span class="time pull-right"><i class="fa fa-clock-o"></i><?php echo $value['date']; ?></span>
+              <div class="box-body" style="display: none">
+                <?php echo $value['text']; ?>
+              </div>
             </div>
-            <div class="box-body" style="display: none">
-              <?php echo $value['text']; ?>
-
-            </div>
-          </div>
-        </li>
-      <?php endforeach; ?>
-    </ul>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
   </div>
   <hr>
   <div class="box box-success" id="message-box">
@@ -113,7 +121,7 @@
 $(window).load(function () {
   Height = ($('#user-box').height()/2)-61;
   $('div#right-box').css('height',Height+'px'); 
-  $('div#message-box').css('height',Height+'px'); 
+  
 });
 
 $(function(){
