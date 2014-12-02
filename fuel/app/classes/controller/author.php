@@ -82,11 +82,12 @@ class Controller_Author extends Controller_Template {
    * @return
    */
   public function action_edit() {
+    
     $this->template->subtitle = '編集';
     $this->template->content = View::forge('author/edit');
 
     //user_id取得
-    $user_id = Auth::get_user_id()[1];;
+    $user_id = Auth::get('id');
 
     $dev = Controller_Author::developer_get($user_id);
     // 初期表示時
