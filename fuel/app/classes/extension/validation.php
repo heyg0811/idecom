@@ -58,7 +58,7 @@ class Validation extends Fuel\Core\Validation
 	 */
 	public function run($input = null, $name = null, $allow_partial = false, $temp_callables = array())
 	{
-	  Session::set_flash($name,$_POST[$name]);
+	  // Session::set_flash($name,$_POST[$name]);
 		if (is_null($input) and \Input::method() != 'POST')
 		{
 			return false;

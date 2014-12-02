@@ -129,7 +129,7 @@ class Controller_Auth extends Controller_Template {
     // bail out if we don't have an OAuth provider to call
     if ($provider === null)
     {
-        \Messages::error(__('login-no-provider-specified'));
+        // \Messages::error(__('login-no-provider-specified'));
         \Response::redirect_back();
     }
     // load Opauth, it will load the provider strategy and redirect to the provider

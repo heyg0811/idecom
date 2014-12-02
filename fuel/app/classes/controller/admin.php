@@ -50,7 +50,10 @@ class Controller_Admin extends Controller_Template {
       'order_by' => array('id'=>'desc'),
     ));
     $this->template->content->messages = $messages;
-    $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
+    if (empty($key = $key($messages))) {
+      $key = 0;
+    }
+    $this->template->content->newest_id = $key;
   }
 
   /**
@@ -61,6 +64,7 @@ class Controller_Admin extends Controller_Template {
   public function action_product() {
     $this->template->subtitle = '作品';
     $this->template->content = View::forge('admin/product');
+    $this->template->content->products = Model_Product::getAll();
   }
 
   /**

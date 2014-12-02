@@ -64,15 +64,15 @@ return array(
    *  b1225 CloudIDE
    */
   // 'GOOGLE' => array(
-  //   'CLIENTID' => '659226090229-imtdu5irndlqtvm7tprm6defh7lc546b.apps.googleusercontent.com',
-  //   'CLIENTSECRET' => 'TL-cWOrVFINIFLJMwAOBIrAt',
+  //   'CLIENTID' => '659226090229-mrupss6fat7o3daga9jr25riiemr4dsh.apps.googleusercontent.com',
+  //   'CLIENTSECRET' => 'KduL9UVcGgPzoYKUPX9oyU5M',
   // ),
 
   /*
    *  b1039 CloudIDE
    */
   // 'GOOGLE' => array(
-  //   'CLIENTID' => '659226090229-iq9h2f2pfblcmbvl7rf3kjlp70mlkerf.apps.googleusercontent.com',
-  //   'CLIENTSECRET' => 'ZfVT9u8kdOU8pqaL48yapY9t',
+  //   'CLIENTID' => '659226090229-fqf0kmesiuihqintja6jfvq6llqb4sdu.apps.googleusercontent.com',
+  //   'CLIENTSECRET' => '8BH6wmN2z7pQiae8mIxtpjer',
   // ),
 );
