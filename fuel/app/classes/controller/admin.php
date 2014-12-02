@@ -85,6 +85,7 @@ class Controller_Admin extends Controller_Template {
   public function action_view() {
     $this->template->subtitle = 'アクセスカウンタ';
     $this->template->content = View::forge('admin/view');
+    $this->template->content->products = Model_Product::find('all');
   }
 
   /**
