@@ -1,5 +1,4 @@
 <!-- general form elements -->
-
 <div class="box box-success">
   <?php if (!empty($errmsg)): ?>
   <hr>
@@ -10,28 +9,30 @@
   <form action="edit" method="post">
     <?php echo \Form::csrf(); ?>
     <div class="box-body">
-      <div class="form-group">
-        <label for="inputName">名前</label>
-        <input type="text" class="form-control" id="inputName" name="nickname" placeholder="名前" value="<?php echo $developer['name']; ?>">
+      <div class="form-group row">
+        <div class="col-xs-12">
+          <h3>
+            <?php echo Form::label($developer['nickname'], 'nickname'); ?>
+          </h3>
+        </div>
       </div>
       <div class="form-group row">
         <div class="col-xs-3">
-          <label for="inputGrade">学年</label>
+          <?php echo Form::label('学年', 'grade'); ?>
         </div>
         <div class="col-xs-3">
-          <input type="text" class="form-control" id="inputGrade" name="grade" placeholder="学年" value="<?php echo $developer['grade']; ?>">
+          <?php echo Form::input('developer[grade]',$developer['grade'],array('class'=>'form-control')); ?>
         </div>
         <div class="col-xs-3">
-          <label for="inputMajor">専攻</label>
+          <?php echo Form::label('専攻', 'major'); ?>
         </div>
         <div class="col-xs-3">
-          <input type="text" class="form-control" id="inputMajor" name="major" placeholder="専攻" value="<?php echo $developer['major']; ?>">
+          <?php echo Form::input('developer[major]',$developer['major'],array('class'=>'form-control')); ?>
         </div>
       </div>
-
       <div class="form-group">
-        <label for="exampleInputFile">サムネイル</label>
-        <input type="file" id="exampleInputFile">
+        <?php echo Form::label('サムネイル', 'thumbnail'); ?>
+        <?php echo Form::file('thumbnail'); ?>
       </div>
     </div><!-- /.box-body -->
     <hr>
@@ -41,11 +42,11 @@
           <div class="row margin-bottom15">
           <?php endif; ?>
           <div class="col-xs-1 text-center ">
-            <label><?php echo $val; ?></label>
+            <?php echo Form::label($val, 'skill_label'); ?>
           </div>
           <div class="col-xs-1 ">
-            <input type="hidden" name="skil_name[]" value="<?php echo $val; ?>">
-            <input type="text" name="skil[]" size="5" maxlength="3" value="<?php if(!empty($developer["technology"]))echo $developer["technology"][$key];?>">
+            <input type="hidden" name="skill_name[]" value="<?php echo $val; ?>">
+            <input type="text" name="developer[skill][]" size="5" maxlength="3" value="<?php echo $developer['skill'][$key]?>">
           </div>
           <?php if (($key % 6) === 5): ?>
           </div>

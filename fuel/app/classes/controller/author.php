@@ -96,7 +96,8 @@ class Controller_Author extends Controller_Template {
     }
 
     //editデータ取得
-    $input_data = Input::post();
+    $input_data = Input::post('developer');
+    $input_data['nickname'] = Auth::get('username');
     //更新時
     $validation = Model_Developer::validate();
     $errors = $validation->error();
@@ -104,7 +105,7 @@ class Controller_Author extends Controller_Template {
       // エラーの設定
       $result_validate = $validation->show_errors();
       $this->template->content->set_safe('errmsg', $result_validate);
-      $this->template->content->developer = $dev;
+      $this->template->content->developer = $input_data;
       return;
     }
 
@@ -119,7 +120,7 @@ class Controller_Author extends Controller_Template {
       'user_id' => $user_id,
       'grade' => $input_data["grade"],
       'major' => $input_data["major"],
-      'technology' => Model_Developer::technology_encode($input_data['skil']),
+      'skill' => Model_Developer::technology_encode($input_data['skill']),
     );
     //Developer更新
     foreach($user as $val)
@@ -172,12 +173,12 @@ class Controller_Author extends Controller_Template {
     $dev = $developer_model->find('all',array('where' => array(array('user_id', $user_id))));
     
     //データ整形
-    $temp['name'] = Auth::get('username');
+    $temp['nickname'] = Auth::get('username');
     foreach($dev as $val){
       $temp['user_id'] = $val['user_id'];  
       $temp['grade'] = $val['grade'];  
       $temp['major'] = $val['major'];
-      $temp['technology'] = Model_Developer::technology_decode($val['technology']);
+      $temp['skill'] = Model_Developer::technology_decode($val['skill']);
     }
     return $temp;
   }

@@ -12,7 +12,7 @@ class Model_Developer extends \Orm\Model {
     'user_id',
     'grade',
     'major',
-    'technology',
+    'skill',
     /*
       'id' => array(
           'skip' =>true,
@@ -60,22 +60,24 @@ class Model_Developer extends \Orm\Model {
     
     $validation = Validation::forge();
     $validation->add('grade', '学年')
-            ->add_rule('exact_length', 1)
             ->add_rule('numeric_min', 1)
             ->add_rule('numeric_max', 4);
     $validation->add('major', '専攻')
             ->add_rule('max_length', 50);
-    if (Input::post('skil')) {
-      $skil = Input::post('skil');
-      foreach ($skil as $key => $val) {
-        $validation->add('skil.' . $key, '技術')
-                ->add_rule('min_length', 1)
-                ->add_rule('max_length', 3)
-                ->add_rule('numeric_min', 0)
-                ->add_rule('numeric_max', 100)
-                ->add_rule('match_pattern',"/^[0-9]{1,3}$/");
-      }
+    
+    $form_data = Input::post(static::$_table_name, null);
+    
+    foreach ($form_data['skill'] as $key => $val) {
+      $validation->add('skill.' . $key, '技術')
+        ->add_rule('min_length', 1)
+        ->add_rule('max_length', 3)
+        ->add_rule('numeric_min', 0)
+        ->add_rule('numeric_max', 100)
+        ->add_rule('match_pattern',"/^[0-9]{1,3}$/");
     }
+
+    $validation->run($form_data , static::$_table_name);
+    return $validation;
     $validation->run();
     return $validation;
   }
