@@ -8,11 +8,31 @@ class Model_Developer extends \Orm\Model {
   // テーブル情報を設定
   protected static $_table_name = 'developer';
   protected static $_properties = array(
-      'id',
-      'user_id',
-      'grade',
-      'major',
-      'technology',
+      'id' => array(
+          'skip' =>true,
+      ),
+      'user_id' => array(
+          'skip' =>true,
+      ),
+      'grade' => array(
+          'data_type' => 'int',
+          'label'     => '学年',
+          'validation'=> array('exact_length' => array(1),'numeric_min' => array(1),'numeric_max' => array(4)),
+          'form'      => array(
+            'type' => 'text',
+            'class'=> 'form-collatol',
+          ),
+      ),
+      'major' => array(
+          'data_type' => 'varchar',
+          'label'     => '学科',
+          'validation'=> array('max_length' => array(30)),
+          'form'      => array(
+            'type' => 'text',
+            'class'=> 'form-collatol',
+          ),
+      ),
+      
   );
   protected static $_primary_key = array('id');
   /**
@@ -29,6 +49,7 @@ class Model_Developer extends \Orm\Model {
     return json_decode($technology);
   }
   public static function validate() {
+    
     $validation = Validation::forge();
     $validation->add('grade', '学年')
             ->add_rule('exact_length', 1)
@@ -37,9 +58,9 @@ class Model_Developer extends \Orm\Model {
     $validation->add('major', '専攻')
             ->add_rule('max_length', 50);
     if (Input::post('skil')) {
-      $form_options = Input::post('skil');
-      foreach ($form_options as $form_id => $option) {
-        $validation->add('skil.' . $form_id, '技術')
+      $skil = Input::post('skil');
+      foreach ($skil as $key => $val) {
+        $validation->add('skil.' . $key, '技術')
                 ->add_rule('min_length', 1)
                 ->add_rule('max_length', 3)
                 ->add_rule('numeric_min', 0)
