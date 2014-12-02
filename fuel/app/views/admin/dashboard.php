@@ -8,13 +8,13 @@
           <?php echo 150; ?>
         </h3>
         <p>
-          アクセスカウンタ
+          作品閲覧数
         </p>
       </div>
       <div class="icon">
         <i class="ion ion-ios7-speedometer-outline"></i>
       </div>
-      <a href="" class="small-box-footer">
+      <a href="view" class="small-box-footer">
         詳細 <i class="fa fa-arrow-circle-right"></i>
       </a>
     </div>
@@ -88,9 +88,10 @@
     <div class="nav-tabs-custom">
       <!-- Tabs within a box -->
       <ul class="nav nav-tabs pull-right">
-        <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
-        <li><a href="#sales-chart" data-toggle="tab">Donut</a></li>
-        <li class="pull-left header"><i class="fa fa-inbox"></i> Sales</li>
+        <li class="active"><a href="#revenue-chart" data-toggle="tab">Total</a></li>
+        <li><a href="#revenue-chart" data-toggle="tab">Page</a></li>
+        <li><a href="#revenue-chart" data-toggle="tab">Products</a></li>
+        <li class="pull-left header"><i class="fa fa-inbox"></i> Access Counter</li>
       </ul>
       <div class="tab-content no-padding">
         <!-- Morris chart - Sales -->
