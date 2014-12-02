@@ -42,11 +42,7 @@ class Model_Developer extends \Orm\Model {
       
   );
   protected static $_primary_key = array('id');
-  /**
-   * @brif    入力チェック
-   * @access  private
-   * @return
-   */
+  
 //technologyをjson形式にencode
   public static function technology_encode($technology) {
     return json_encode($technology);
@@ -55,6 +51,11 @@ class Model_Developer extends \Orm\Model {
   public static function technology_decode($technology) {
     return json_decode($technology);
   }
+  /**
+   * @brif    入力チェック
+   * @access  private
+   * @return
+   */
   public static function validate() {
     
     $validation = Validation::forge();
