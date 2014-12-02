@@ -50,7 +50,7 @@ class Controller_Admin extends Controller_Template {
       'order_by' => array('id'=>'desc'),
     ));
     $this->template->content->messages = $messages;
-    if (empty($key = $key($messages))) {
+    if (empty($key = key($messages))) {
       $key = 0;
     }
     $this->template->content->newest_id = $key;
