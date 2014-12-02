@@ -14,7 +14,7 @@
       <div class="icon">
         <i class="ion ion-ios7-speedometer-outline"></i>
       </div>
-      <a href="view" class="small-box-footer">
+      <a href="" class="small-box-footer">
         詳細 <i class="fa fa-arrow-circle-right"></i>
       </a>
     </div>
