@@ -1,7 +1,7 @@
 <?php echo Asset::js('plugin/isotope/isotope.pkgd.min.js'); ?>
 <div class="visible-sm visible-xs col-sm-12 text-center" id="filter-top">
-  <div class="container-fluid">
-    <ul class="list-inline" id='filters'>
+  <div class="container-fluid" style="cursor: pointer;">
+    <ul class="list-inline" id='filters' >
     <li><a data-filter='*'>Web</a></li>
     <li><a data-filter='.System'>Movie</a></li>
     <li><a data-filter='.Image'>Image</a></li>

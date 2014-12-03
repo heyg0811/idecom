@@ -52,4 +52,3 @@ class Model_Bbsthread extends \Model_Crud
 	}
 
 }
-?>
