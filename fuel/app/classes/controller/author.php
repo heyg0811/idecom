@@ -52,39 +52,7 @@ class Controller_Author extends Controller_Template {
     
     $this->template->content->user_list = $view_list;
   }
-
-  /**
-   * @brif    developer情報取得 
-   * @access  public
-   * @return  view_list
-   */
-  public static function developer_list_get($filter = null) {
-    //表示用
-    $view_list = array();
-    //インスタンス生成
-    $dev_model = Model_Developer::forge();
-    $user_model = Model_User::forge();
-    if(!empty($filter)){
-      //developerデータ取得
-      $dev_list = $dev_model->find('all',array('where' => array(array('genre', $filter))));
-    }else{
-      //developerデータ取得
-      $dev_list = $dev_model->find('all');
-    }
-    //userデータ取得
-    $user_list = $user_model->find('all');
-    
-    $temp = array();
-    foreach($dev_list as $dev){
-      $temp['id'] = $dev['user_id'];
-      $temp['nickname'] = $user_model::getName($dev['user_id']);
-      $temp['genre'] = $dev['genre'];
-      
-      array_push($view_list,$temp);
-    }
-      
-    return $view_list;
-  }
+  
   /**
    * @brif    作者詳細
    * @access  public
@@ -195,6 +163,39 @@ class Controller_Author extends Controller_Template {
       array_push($timeline, $temp);
     }
     return $timeline;
+  }
+  
+   /**
+   * @brif    developer情報取得 
+   * @access  public
+   * @return  view_list
+   */
+  public static function developer_list_get($filter = null) {
+    //表示用
+    $view_list = array();
+    //インスタンス生成
+    $dev_model = Model_Developer::forge();
+    $user_model = Model_User::forge();
+    if(!empty($filter)){
+      //developerデータ取得
+      $dev_list = $dev_model->find('all',array('where' => array(array('genre', $filter))));
+    }else{
+      //developerデータ取得
+      $dev_list = $dev_model->find('all');
+    }
+    //userデータ取得
+    $user_list = $user_model->find('all');
+    
+    $temp = array();
+    foreach($dev_list as $dev){
+      $temp['id'] = $dev['user_id'];
+      $temp['nickname'] = $user_model::getName($dev['user_id']);
+      $temp['genre'] = $dev['genre'];
+      
+      array_push($view_list,$temp);
+    }
+      
+    return $view_list;
   }
   
   /**
