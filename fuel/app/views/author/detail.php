@@ -119,7 +119,7 @@
 <script type="text/javascript">
   $(window).load(function () {
     Height = ($('#user-box').height()/2)-61;
-    $('div#right-box').css('height',Height+'px');
+    $('div#timeline-box').css('height',Height+'px');
   });
 
   $(function(){
