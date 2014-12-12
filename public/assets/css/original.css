@@ -1,0 +1,26 @@
+  /* ------author css------ */
+  .author-thumbnail{
+    display: inline-block;
+    width: 100%;
+    max-width: 100%;
+    height: 250px;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    -webkit-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    transition: all .2s ease-in-out;
+  }
+  .author-list-box{
+    border-radius: 5px;
+  }
+  .timeline-body{
+    width: 90%
+  }
+  #timeline-box{
+    overflow-y: scroll;
+  }
+  /* ------author css------ */
+  

@@ -78,10 +78,13 @@ class Model_User extends \Orm\Model
   public static function getName($id) {
     $user_data = DB::select('profile_fields')
     ->from(static::$_table_name)
+    ->where('id', $id)
     ->execute()
     ->as_array();
-
+    
+    
     $profile_data = @unserialize($user_data[0]['profile_fields']);
+    
     return $profile_data['nickname'];
   }
 
@@ -93,6 +96,7 @@ class Model_User extends \Orm\Model
   public static function getThumbnail($id) {
     $user_data = DB::select('thumbnail')
     ->from(static::$_table_name)
+    ->where('id', $id)
     ->execute()
     ->as_array();
 

@@ -5,7 +5,7 @@
       <h3 class="box-title "><?php echo $developer['nickname']; ?></h3>
     </div>
     <div class="box-body">
-      <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
+      <img src="<?php echo $developer['thumbnail']; ?>" class="author-thumbnail">
       <div>
         <hr>
         <div class="row">
@@ -49,15 +49,14 @@
         <i class="fa fa-envelope"></i>
         <h3 class="box-title">TimeLine</h3>
       </div>
-      <div id="right-box">
+      <div id="timeline-box">
         <ul class="timeline">
           <?php foreach ($timeline as $value): ?>
             <li>
               <i class="fa <?php echo $value['icon']; ?>"></i>
-              <div class="timeline-item box box-solid timeline-box collapsed-box">
+              <div class="timeline-item box box-solid timeline-body collapsed-box">
                 <div class="box-header">
                   <h3 class="box-title"><?php echo $value['title']; ?></h3>
-    
                   <div class="box-tools pull-right">
                     <button class="btn btn-danger btn-sm" data-widget="collapse"><i class="fa fa-plus"></i></button>
                   </div>
@@ -89,7 +88,7 @@
         <?php foreach ($messages as $message): ?>
           <!-- chat item -->
           <div class="item">
-            <img src='<?php echo Config::get("THUMBNAIL_URL"), Auth::get("thumbnail"); ?>' class='online'>
+            <img src='<?php echo $message['thumbnail'];?>' class='online'>
             <p class="message">
               <a href="/author/detail?id=<?php echo $message['user_id'];?>" class="name">
                 <small class="text-muted pull-right">
@@ -170,22 +169,6 @@
 </script>
 
 <style>
-  .author-thumbnail
-  {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 100%;
-    width: 100%;
-  }
-  .timeline-box
-  {
-    width: 90%
-  }
-  #right-box
-  {
-    overflow-y: scroll;
-  }
   /* 応急処置 */
   @media screen and (max-width: 575px){
 	  .content{

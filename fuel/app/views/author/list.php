@@ -10,8 +10,8 @@
 <div class="col-md-10" id="list">
   <?php foreach($user_list as $user): ?>
     <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="small-box bg-green">
-        <?php echo Asset::img('noimage.jpg'); ?>
+      <div class="small-box bg-green author-list-box">
+        <img src="<?php echo $user['thumbnail']; ?>" class="author-thumbnail">
         <div class="inner">
           <h4>
             <i class="fa fa-user" style="margin-right:4px;"></i><?php echo $user['nickname'];?>
