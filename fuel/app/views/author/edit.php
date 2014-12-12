@@ -29,10 +29,10 @@
         <div class="col-xs-3">
           <?php echo Form::input('developer[major]',$developer['major'],array('class'=>'form-control')); ?>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-3" style="margin-top:15px;">
           <?php echo Form::label('ジャンル', 'genre'); ?>
         </div>
-        <div class="col-xs-3">
+        <div class="col-xs-3"style="margin-top:15px;">
                     <?php echo Form::select('developer[genre]', $developer['genre'], 
                     array(
                       'System' => 'System',
@@ -50,21 +50,20 @@
     </div><!-- /.box-body -->
     <hr>
     <div class="box-body">
-      <?php foreach (Config::get('TECHNOLOGY') as $key => $val): ?>
-        <?php if ($key % 6 == 0): ?>
-          <div class="row margin-bottom15">
-          <?php endif; ?>
-          <div class="col-xs-1 text-center ">
-            <?php echo Form::label($val, 'skill_label'); ?>
+      <?php echo Form::label('技術', 'skill'); ?>
+      <div class="row">
+        <?php foreach (Config::get('TECHNOLOGY') as $key => $val): ?>
+          <div class="col-xs-6 col-sm-4 col-md-3" style="margin-bottom:10px;">
+            <div class="col-xs-6 text-center ">
+              <?php echo Form::label($val, 'skill_label'); ?>
+            </div>
+            <div class="col-xs-6 ">
+              <input type="hidden" name="skill_name[]" value="<?php echo $val; ?>">
+              <input type="text" name="developer[skill][]" size="5" maxlength="3" value="<?php echo $developer['skill'][$key]?>">
+            </div>
           </div>
-          <div class="col-xs-1 ">
-            <input type="hidden" name="skill_name[]" value="<?php echo $val; ?>">
-            <input type="text" name="developer[skill][]" size="5" maxlength="3" value="<?php echo $developer['skill'][$key]?>">
-          </div>
-          <?php if (($key % 6) === 5): ?>
-          </div>
-        <?php endif; ?>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
+      </div>
     </div>
     <div class="box-footer">
       <button type="submit" class="btn btn-success">更新</button>
