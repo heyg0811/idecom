@@ -15,8 +15,9 @@ class Form_Instance extends Fuel\Core\Form_Instance
 	public function restration($field, &$value) 
 	{
 		$model = explode('[', $field);
-		if ($temp = Session::get_flash($model[0])){
-			$value = $temp[str_replace(']', '', $model[1])];
+		if (isset($model[1])
+		&& $temp = Session::get_flash(str_replace(']', '', $model[1]))){
+			$value = $temp;
 		}
 	}
 }

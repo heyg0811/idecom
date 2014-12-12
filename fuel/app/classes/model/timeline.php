@@ -24,5 +24,22 @@ class Model_Timeline extends \Orm\Model {
    * @access  private
    * @return
    */
-   
+   public static function validate($user_id,$title,$icon,$text) {
+    
+    $validation = Validation::forge();
+    $validation->add('user_id.' . $user_id, 'ユーザーid')
+            ->add_rule('required');
+    $validation->add('title.' . $title, 'タイトル')
+            ->add_rule('required')
+            ->add_rule('min_length', 1)
+            ->add_rule('max_length', 20);
+    $validation->add('icon.' . $icon, 'アイコン')
+            ->add_rule('required');
+    $validation->add('text.' . $text, 'テキスト')
+            ->add_rule('required')
+            ->add_rule('min_length', 1)
+            ->add_rule('max_length', 255);
+    $validation->run();
+    return $validation;
+  }
 }

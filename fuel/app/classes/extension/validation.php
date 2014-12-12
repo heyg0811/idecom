@@ -23,10 +23,10 @@ class Validation extends Fuel\Core\Validation
   public function show_errors($options = array())
   {
     $default = array(
-      'open_list'    => \Config::get('validation.open_list', ''),
-      'close_list'   => \Config::get('validation.close_list', ''),
-      'open_error'   => \Config::get('validation.open_error', ''),
-      'close_error'  => \Config::get('validation.close_error', '<br>'),
+      'open_list'    => \Config::get('validation.open_list', '<li style="list-style:none;" class="text-danger">'),
+      'close_list'   => \Config::get('validation.close_list', '</li>'),
+      'open_error'   => \Config::get('validation.open_error', '<ul>'),
+      'close_error'  => \Config::get('validation.close_error', '</ul>'),
       'no_errors'    => \Config::get('validation.no_errors', '')
     );
     $options = array_merge($default, $options);
@@ -58,7 +58,14 @@ class Validation extends Fuel\Core\Validation
 	 */
 	public function run($input = null, $name = null, $allow_partial = false, $temp_callables = array())
 	{
-	  // Session::set_flash($name,$_POST[$name]);
+		foreach($input as $row) {
+			if (is_array($row)) {
+				foreach ($row as $key => $val) {
+					$input += array('skill.'.$key => $val);
+				}
+				unset($input['skill']);
+			}
+		}
 		if (is_null($input) and \Input::method() != 'POST')
 		{
 			return false;
@@ -87,6 +94,7 @@ class Validation extends Fuel\Core\Validation
 			$name = str_replace(array('[',']'), array('.', ''), $field->name);
 
 			$value = $this->input($name);
+			Session::set_flash($name,$value);
 			if (($allow_partial === true and $value === null)
 				or (is_array($allow_partial) and ! in_array($field->name, $allow_partial)))
 			{

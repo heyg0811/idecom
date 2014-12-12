@@ -121,20 +121,15 @@ class Model_Product extends \Orm\Model
   public static function validate() {
     $validation = Validation::forge();
 
-    $validation->add('title', 'タイトル')
+    $validation->add('title', '題目')
     ->add_rule('required')
     ->add_rule('min_length', 4)
     ->add_rule('max_length', 15);
 
-    $validation->add('category', 'カテゴリ')
+    $validation->add('category', '分類')
     ->add_rule('required')
     ->add_rule('numeric_min', 0)
     ->add_rule('numeric_max', 10);
-
-    $validation->add('skill', 'スキル')
-    ->add_rule('required')
-    ->add_rule('min_length', 6)
-    ->add_rule('max_length', 20);
 
     $validation->add('outline', '概要')
     ->add_rule('required')
@@ -146,7 +141,14 @@ class Model_Product extends \Orm\Model
     ->add_rule('min_length', 0)
     ->add_rule('max_length', 65535);
 
-    $validation->run();
+    $form_data = Input::post(static::$_table_name, null);
+    
+    foreach ($form_data['skill'] as $key => $val) {
+      $validation->add('skill.' . $key, '技術')
+      ->add_rule('max_length', 20);
+    }
+
+    $validation->run($form_data , static::$_table_name);
     return $validation;
   }
 

@@ -1,8 +1,8 @@
 
-<div class="col-sm-4" id="user-box">
+<div class="col-xs-12 col-sm-4 col-md-4" id="user-box">
   <div class="box box-solid bg-green-gradient">
     <div class="box-header">
-      <h3 class="box-title "><?php echo $developer['name']; ?></h3>
+      <h3 class="box-title "><?php echo $developer['nickname']; ?></h3>
     </div>
     <div class="box-body">
       <?php echo Asset::img('noimage.jpg', array('class' => 'author-thumbnail')); ?>
@@ -23,8 +23,8 @@
       <div class="row">
         <div class="col-sm-12">
           <?php $i = 0; ?>
-          <?php if(!empty($developer['technology'])):?>
-          <?php foreach ($developer['technology'] as $tec): ?>
+          <?php if(!empty($developer['skill'])):?>
+          <?php foreach ($developer['skill'] as $tec): ?>
             <?php if (!empty($tec)): ?>
               <div class="clearfix">
                 <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.' . $i); ?></p></span>
@@ -42,29 +42,37 @@
     </div>
   </div>
 </div>
-<div class="col-sm-8">
-  <div class="row author-timeline" id="right-box">
-    <ul class="timeline">
-      <?php foreach ($timeline as $value): ?>
-        <li>
-          <i class="fa <?php echo $value['icon']; ?>"></i>
-          <div class="timeline-item box box-solid timeline-box collapsed-box">
-            <div class="box-header">
-              <h3 class="box-title"><?php echo $value['title']; ?></h3>
-
-              <div class="box-tools pull-right">
-                <button class="btn btn-danger btn-sm" data-widget="collapse"><i class="fa fa-plus"></i></button>
+<div class="col-xs-12 col-sm-8 col-md-8">
+  <div class="box box-success">
+    <div class="author-timeline">
+      <div class="box-header">
+        <i class="fa fa-comment-o"></i>
+        <h3 class="box-title">TimeLine</h3>
+      </div>
+      <div id="right-box">
+        <ul class="timeline">
+          <?php foreach ($timeline as $value): ?>
+            <li>
+              <i class="fa <?php echo $value['icon']; ?>"></i>
+              <div class="timeline-item box box-solid timeline-box collapsed-box">
+                <div class="box-header">
+                  <h3 class="box-title"><?php echo $value['title']; ?></h3>
+    
+                  <div class="box-tools pull-right">
+                    <button class="btn btn-danger btn-sm" data-widget="collapse"><i class="fa fa-plus"></i></button>
+                  </div>
+                  <span class="time pull-right"><i class="fa fa-clock-o"></i><?php echo $value['date']; ?></span>
+                </div>
+                <div class="box-body" style="display: none">
+                  <?php echo $value['text']; ?>
+    
+                </div>
               </div>
-              <span class="time pull-right"><i class="fa fa-clock-o"></i><?php echo $value['date']; ?></span>
-            </div>
-            <div class="box-body" style="display: none">
-              <?php echo $value['text']; ?>
-
-            </div>
-          </div>
-        </li>
-      <?php endforeach; ?>
-    </ul>
+            </li>
+          <?php endforeach; ?>
+        </ul> 
+      </div>
+    </div>
   </div>
   <hr>
   <div class="box box-success" id="message-box">
@@ -77,7 +85,7 @@
           <button id="message_refresh" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
         </div>
       </div>
-      <div class="box-body chat" id="chat-box">
+      <div class="chat" id="chat-box">
         <?php foreach ($messages as $message): ?>
           <!-- chat item -->
           <div class="item">
@@ -109,14 +117,13 @@
   </div>
 </div>
 
-<script>
-$(window).load(function () {
-  Height = ($('#user-box').height()/2)-61;
-  $('div#right-box').css('height',Height+'px'); 
-  $('div#message-box').css('height',Height+'px'); 
-});
+<script type="text/javascript">
+  $(window).load(function () {
+    Height = ($('#user-box').height()/2)-61;
+    $('div#right-box').css('height',Height+'px');
+  });
 
-$(function(){
+  $(function(){
     var newest_id = <?php echo $newest_id;?>;
     // メッセージ投稿
     $('#message_form').on('click',function(){
@@ -175,12 +182,14 @@ $(function(){
   {
     width: 90%
   }
-  .time
-  {
-    padding-top: 20px;
-  }
   #right-box
   {
     overflow-y: scroll;
+  }
+  /* 応急処置 */
+  @media screen and (max-width: 575px){
+	  .content{
+	    width: 100%;
+	  }
   }
 </style>
