@@ -68,6 +68,7 @@ class Controller_Author extends Controller_Template {
       'where'    => array(array('host_id','=',$dev_id)),
       'order_by' => array('id'=>'desc'),
     ));
+    
     $this->template->content->messages = $messages;
     $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
     $this->template->content->timeline = $timeline;

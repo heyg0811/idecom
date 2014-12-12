@@ -1,5 +1,5 @@
 
-<div class="col-sm-4" id="user-box">
+<div class="col-xs-12 col-sm-4 col-md-4" id="user-box">
   <div class="box box-solid bg-green-gradient">
     <div class="box-header">
       <h3 class="box-title "><?php echo $developer['nickname']; ?></h3>
@@ -23,8 +23,8 @@
       <div class="row">
         <div class="col-sm-12">
           <?php $i = 0; ?>
-          <?php if(!empty($developer['technology'])):?>
-          <?php foreach ($developer['technology'] as $tec): ?>
+          <?php if(!empty($developer['skill'])):?>
+          <?php foreach ($developer['skill'] as $tec): ?>
             <?php if (!empty($tec)): ?>
               <div class="clearfix">
                 <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.' . $i); ?></p></span>
@@ -42,7 +42,7 @@
     </div>
   </div>
 </div>
-<div class="col-sm-8">
+<div class="col-xs-12 col-sm-8 col-md-8">
   <div class="box box-success">
     <div class="author-timeline">
       <div class="box-header">
@@ -120,8 +120,7 @@
 <script type="text/javascript">
   $(window).load(function () {
     Height = ($('#user-box').height()/2)-61;
-    $('div#right-box').css('height',Height+'px'); 
-    $('div#message-box').css('height',Height+'px'); 
+    $('div#right-box').css('height',Height+'px');
   });
 
   $(function(){
@@ -186,5 +185,11 @@
   #right-box
   {
     overflow-y: scroll;
+  }
+  /* 応急処置 */
+  @media screen and (max-width: 575px){
+	  .content{
+	    width: 100%;
+	  }
   }
 </style>

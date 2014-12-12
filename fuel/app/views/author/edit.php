@@ -65,4 +65,10 @@
   {
     margin-bottom: 15px;
   }
+  /* 応急処置 */
+  @media screen and (max-width: 575px){
+	  .content{
+	    width: 100%;
+	  }
+  }
 </style>
