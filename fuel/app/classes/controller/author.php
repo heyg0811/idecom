@@ -45,8 +45,46 @@ class Controller_Author extends Controller_Template {
   public function action_list() {
     $this->template->subtitle = '一覧';
     $this->template->content = View::forge('author/list');
+    
+    $filter = Input::get('Filter');
+    
+    $view_list = Controller_Author::developer_list_get($filter);
+    
+    $this->template->content->user_list = $view_list;
   }
 
+  /**
+   * @brif    developer情報取得 
+   * @access  public
+   * @return  view_list
+   */
+  public static function developer_list_get($filter = null) {
+    //表示用
+    $view_list = array();
+    //インスタンス生成
+    $dev_model = Model_Developer::forge();
+    $user_model = Model_User::forge();
+    if(!empty($filter)){
+      //developerデータ取得
+      $dev_list = $dev_model->find('all',array('where' => array(array('genre', $filter))));
+    }else{
+      //developerデータ取得
+      $dev_list = $dev_model->find('all');
+    }
+    //userデータ取得
+    $user_list = $user_model->find('all');
+    
+    $temp = array();
+    foreach($dev_list as $dev){
+      $temp['id'] = $dev['user_id'];
+      $temp['nickname'] = $user_model::getName($dev['user_id']);
+      $temp['genre'] = $dev['genre'];
+      
+      array_push($view_list,$temp);
+    }
+      
+    return $view_list;
+  }
   /**
    * @brif    作者詳細
    * @access  public
@@ -68,7 +106,6 @@ class Controller_Author extends Controller_Template {
       'where'    => array(array('host_id','=',$dev_id)),
       'order_by' => array('id'=>'desc'),
     ));
-    
     $this->template->content->messages = $messages;
     $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
     $this->template->content->timeline = $timeline;
@@ -121,6 +158,7 @@ class Controller_Author extends Controller_Template {
       'user_id' => $user_id,
       'grade' => $input_data["grade"],
       'major' => $input_data["major"],
+      'genre' => $input_data["genre"],
       'skill' => Model_Developer::technology_encode($input_data['skill']),
     );
     //Developer更新
@@ -158,7 +196,7 @@ class Controller_Author extends Controller_Template {
     }
     return $timeline;
   }
-
+  
   /**
    * @brif    developer情報取得 
    * @access  public
@@ -173,12 +211,19 @@ class Controller_Author extends Controller_Template {
     //developer情報取得 
     $dev = $developer_model->find('all',array('where' => array(array('user_id', $user_id))));
     
+    //username取得
+    $user_model = Model_User::forge();
+    
+    $user = $user_model->find('all',array('where' => array(array('id', $user_id))));
+    foreach($user as $val){
+      $temp['nickname'] = $val['username'];  
+    }
     //データ整形
-    $temp['nickname'] = Auth::get('username');
     foreach($dev as $val){
       $temp['user_id'] = $val['user_id'];  
       $temp['grade'] = $val['grade'];  
       $temp['major'] = $val['major'];
+      $temp['genre'] = $val['genre'];
       $temp['skill'] = Model_Developer::technology_decode($val['skill']);
     }
     return $temp;

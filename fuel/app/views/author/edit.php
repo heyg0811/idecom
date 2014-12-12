@@ -29,6 +29,19 @@
         <div class="col-xs-3">
           <?php echo Form::input('developer[major]',$developer['major'],array('class'=>'form-control')); ?>
         </div>
+        <div class="col-xs-3">
+          <?php echo Form::label('ジャンル', 'genre'); ?>
+        </div>
+        <div class="col-xs-3">
+                    <?php echo Form::select('developer[genre]', $developer['genre'], 
+                    array(
+                      'System' => 'System',
+                      'Web' => 'Web',
+                      'Movie' => 'Movie',
+                      'Image' => 'Image',
+                      'Illust' => 'Illust',
+                    ));?>
+        </div>
       </div>
       <div class="form-group">
         <?php echo Form::label('サムネイル', 'thumbnail'); ?>
