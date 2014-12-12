@@ -46,7 +46,7 @@
   <div class="box box-success">
     <div class="author-timeline">
       <div class="box-header">
-        <i class="fa fa-comment-o"></i>
+        <i class="fa fa-envelope"></i>
         <h3 class="box-title">TimeLine</h3>
       </div>
       <div id="right-box">

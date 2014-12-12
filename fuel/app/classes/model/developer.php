@@ -12,6 +12,7 @@ class Model_Developer extends \Orm\Model {
     'user_id',
     'grade',
     'major',
+    'genre',
     'skill',
     /*
       'id' => array(
@@ -64,9 +65,9 @@ class Model_Developer extends \Orm\Model {
             ->add_rule('numeric_max', 4);
     $validation->add('major', '専攻')
             ->add_rule('max_length', 50);
-    
+    $validation->add('genre', 'ジャンル')
+            ->add_rule('max_length', 50);
     $form_data = Input::post(static::$_table_name, null);
-    
     foreach ($form_data['skill'] as $key => $val) {
       $validation->add('skill.' . $key, '技術')
         ->add_rule('min_length', 1)
@@ -77,8 +78,6 @@ class Model_Developer extends \Orm\Model {
     }
 
     $validation->run($form_data , static::$_table_name);
-    return $validation;
-    $validation->run();
     return $validation;
   }
 }

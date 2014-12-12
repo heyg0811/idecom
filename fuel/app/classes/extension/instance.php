@@ -14,10 +14,17 @@ class Form_Instance extends Fuel\Core\Form_Instance
 {
 	public function restration($field, &$value) 
 	{
-		$model = explode('[', $field);
-		if (isset($model[1])
-		&& $temp = Session::get_flash(str_replace(']', '', $model[1]))){
+		$model = explode('[', str_replace(']', '', $field));
+		if (count($model) == 2
+		&& $temp = Session::get_flash($model[1])) {
 			$value = $temp;
+			return ;
+		}
+		
+		if (count($model) == 3
+		&& $temp = Session::get_flash($model[1].'.'.$model[2])){
+			$value = $temp;
+			return ;
 		}
 	}
 }

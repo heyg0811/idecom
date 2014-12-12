@@ -22,10 +22,7 @@ class Form extends Fuel\Core\Form
 	 */
 	public static function input($field, $value = null, array $attributes = array())
 	{
-		if ($field != 'product[skill][]'){
-			static::$instance->restration($field, $value);
-		}
-		
+		static::$instance->restration($field, $value);
 		return static::$instance->input($field, $value, $attributes);
 	}
 

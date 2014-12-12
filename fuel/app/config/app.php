@@ -9,6 +9,12 @@
  */
 
 return array(
+  'PRODUCT' => array(
+    'STATUS' => array(
+      'DISABLE' => 0,
+      'ENABLE'  => 1,
+    ),
+  ),
   'TECHNOLOGY' => array(
     'C',
     'C++',
@@ -20,7 +26,6 @@ return array(
     'Perl', 'PHP',
     'Python',
     'Ruby',
-    'Ruby on Rails',
     'Ruby on Rails',
     'Ruby on Rails',
     'Ruby on Rails',

@@ -58,14 +58,15 @@ class Validation extends Fuel\Core\Validation
 	 */
 	public function run($input = null, $name = null, $allow_partial = false, $temp_callables = array())
 	{
-		foreach($input as $row) {
-			if (is_array($row)) {
-				foreach ($row as $key => $val) {
-					$input += array('skill.'.$key => $val);
+		foreach($input as $input_key => $input_row) {
+			if (is_array($input_row)) {
+				foreach ($input_row as $key => $val) {
+					$input += array($input_key . '.' . $key => $val);
 				}
-				unset($input['skill']);
+				unset($input[$input_key]);
 			}
 		}
+
 		if (is_null($input) and \Input::method() != 'POST')
 		{
 			return false;
@@ -95,6 +96,7 @@ class Validation extends Fuel\Core\Validation
 
 			$value = $this->input($name);
 			Session::set_flash($name,$value);
+			
 			if (($allow_partial === true and $value === null)
 				or (is_array($allow_partial) and ! in_array($field->name, $allow_partial)))
 			{

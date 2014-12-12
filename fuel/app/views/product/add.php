@@ -16,7 +16,7 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
         <b>警告!</b> <?php echo $errmsg; ?>
       </div>
-      <?php echo $errors; ?>
+      <?php if (isset($errors)) {echo $errors;} ?>
     </div>
   <?php endif;?>
   <form action="" method="post" enctype="multipart/form-data">
@@ -30,20 +30,19 @@
         <?php echo Form::label('分類', 'category'); ?>
         <?php echo Form::select('product[category]','', Config::get('CATEGORY'),array('class'=>'form-control')); ?>
       </div>
-       <?php foreach (Config::get('TECHNOLOGY') as $key => $val): ?>
-        <?php if ($key % 6 == 0): ?>
-          <div class="row margin-bottom15">
-          <?php endif; ?>
-          <div class="col-xs-1 text-center ">
-            <label><?php echo $val; ?></label>
+      <?php echo Form::label('技術', 'skill'); ?>
+      <div class="row">
+        <?php foreach (Config::get('TECHNOLOGY') as $key => $val): ?>
+          <div class="col-xs-6 col-sm-4 col-md-3" style="margin-bottom:10px;">
+            <div class="col-xs-6 text-center ">
+              <?php echo Form::label($val, 'skill'); ?>
+            </div>
+            <div class="col-xs-6 ">
+              <?php echo Form::input('product[skill]['.$key.']','',array('class'=>'form-control')); ?>
+            </div>
           </div>
-          <div class="col-xs-1 ">
-            <input type="text" name="product[skill][]" size="5" maxlength="3" value="">
-          </div>
-          <?php if (($key % 6) === 5): ?>
-          </div>
-        <?php endif; ?>
-      <?php endforeach; ?>
+        <?php endforeach; ?>
+      </div>
       <div class="form-group">
         <?php echo Form::label('概要', 'outline'); ?>
         <?php echo Form::input('product[outline]','',array('class'=>'form-control')); ?>
@@ -55,6 +54,10 @@
       <div class="form-group">
         <?php echo Form::label('サムネイル', 'thumbnail'); ?>
         <?php echo Form::file('thumbnail'); ?>
+      </div>
+      <div class="form-group">
+        <?php echo Form::label('その他画像', 'other'); ?>
+        <?php echo html_tag('iframe',array('width'=>'100%', 'height'=>'300px', 'src'=>'http://idecom-heyg0811.c9.io/assets/js/plugin/kcfinder/browse.php?CKEditor=form_product%5Bdetail%5D&CKEditorFuncNum=1&langCode=ja')); ?>
       </div>
     </div>
     <div class="box-footer">

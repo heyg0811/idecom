@@ -64,7 +64,12 @@ class Controller_Admin extends Controller_Template {
   public function action_product() {
     $this->template->subtitle = '作品';
     $this->template->content = View::forge('admin/product');
-    $this->template->content->products = Model_Product::getAll();
+    
+    $options = array(
+      'where'    => array('status' => Config::get('PRODUCT.STATUS.ENABLE')),
+      'order_by' => array('created_at' => 'desc'),
+    );
+    $this->template->content->products = Model_Product::find('all',$options);
   }
 
   /**
