@@ -45,7 +45,13 @@ class Controller_Product extends Controller_Template {
   public function action_list() {
     $this->template->subtitle = '一覧';
     $this->template->content = View::forge('product/list');
-    $this->template->content->products = Model_Product::find('all');
+    
+    $options = array(
+      'where'    => array('status' => Config::get('PRODUCT.STATUS.ENABLE')),
+      'order_by' => array('created_at' => 'desc'),
+    );
+    
+    $this->template->content->products = Model_Product::find('all',$options);
   }
 
   /**
@@ -72,6 +78,21 @@ class Controller_Product extends Controller_Template {
   public function action_add() {
     $this->template->subtitle = '追加';
     $this->template->content = View::forge('product/add');
+
+    $product_model = new Model_Product();
+    $project_type = Session::get('project.type');
+    $product_id   = Session::get('project.product.id');
+    $status       = Session::get('project.product.status');
+    if ($project_type !== 'product' || $status !== 'add') {
+      $product_id = $product_model->insertEmpty();
+      Session::set('project', array(
+        'product' => array(
+          'id' => $product_id,
+          'status' => 'add',
+        ),
+        'type'      => 'product',
+      ));
+    }
     
     // 初期表示時
     if (!Security::check_token()){
@@ -80,7 +101,7 @@ class Controller_Product extends Controller_Template {
     
     // バリデーション
     $user_id    = Auth::get('id');
-    $validation = Model_Product::validate();
+    $validation = $product_model->validate();
     $errors = $validation->error();
     if (!empty($errors)) {
       // エラー設定
@@ -89,19 +110,15 @@ class Controller_Product extends Controller_Template {
       return ;
     }
     $product_data = $validation->validated();
-    var_dump($product_data);exit;
-    // データの追加
-    if (!$insert_id = Model_Product::insert($product_data)) {
-      // エラー設定
-      $this->template->content->set_safe('errmsg', '投稿時にエラーが発生しました');
-      return ;
-    }
+    $product_data['skill'] = json_encode($product_data['skill']);
+    $product_data['status'] = Config::get('PRODUCT.STATUS.ENABLE');
+    $product_data['created_at'] = time();
     
     // パスを設定
-    $product_path = Config::get('USER_IMG_DIR') . $user_id . '/product/' . $insert_id;
+    $product_path = Config::get('UPLOAD_DIR') . $user_id . '/product/' . $product_id;
     
     // フォルダ確認
-    if (!file_exists(Config::get('USER_IMG_DIR') . $user_id) && !file_exists($product_path)) {
+    if (!file_exists($product_path)) {
       // フォルダ作成
       $structure = $product_path . '/other';
       mkdir($structure, 0755, true);
@@ -109,7 +126,6 @@ class Controller_Product extends Controller_Template {
     
     // アップロード
     $temp_file  = Input::file('thumbnail');
-    $product_model = Model_Product::find($insert_id);
     if ($temp_file['size'] !== 0) {
     	$config = array(
     		'path' => $product_path,
@@ -118,22 +134,26 @@ class Controller_Product extends Controller_Template {
     	);
     	Upload::process($config);
     	if (!Upload::is_valid()) {
-    		Session::set_flash('errmsg', "ファイルアップロードに失敗しました");
-    		return Response::redirect('product/edit?id='.$insert_id);
+    	  $this->template->content->set_safe('errmsg', "ファイルアップロードに失敗しました");
+    		return ;
     	}
     	Upload::save();
     	if($file = Upload::get_files(0)){
-    		$product_model->set(array(
-    			'thumbnail'   => $user_id. '/product/' . $insert_id . '/' .$file['saved_as'],
-    		));
-    		$product_model->save();
+    	  $product_data += array('thumbnail'   => $user_id. '/product/' . $product_id . '/' .$file['saved_as']);
     	}
-    	
-    	// 成功時
-    	Session::delete_flash();
-    	return Response::redirect('admin/product');
     }
     
+    // データの追加
+    if ($product_model->updateById($product_id, $product_data) !== true) {
+      // エラー設定
+      $this->template->content->set_safe('errmsg', '投稿時にエラーが発生しました');
+      return ;
+    }
+    
+    // 不要セッションを削除し一覧へ
+    Session::delete('project.type');
+    Session::delete('project.product');
+    Session::set_flash('infomsg','作品を投稿しました');
     Response::redirect('admin/product');
   }
 
@@ -145,40 +165,86 @@ class Controller_Product extends Controller_Template {
   public function action_edit() {
     // 他ユーザーの作品は開かせない
     $user_id = Auth::get('id');
-    if (!$id = Input::get('id', null)) {
+    if (!$product_id = Input::get('id', null)) {
       Response::redirect('admin/product');
     }
-    $product = Model_Product::find($id);
-    if ($product['user_id'] != $user_id) {
+    $product_model = new Model_Product();
+    $product = $product_model->find($product_id);
+    if ($product['user_id'] != $user_id || $product['status'] == '0') {
       Response::redirect('admin/product');
     }
     
     $this->template->subtitle = '編集';
     $this->template->content = View::forge('product/edit');
     
-    // フォーム設定
-    $product_form = Fieldset::forge('product_edit');
-    $product_form->add_model('Model_Product',$product);
-    $product_form->add('other','その他画像',array(
-      'type'=>'other',
-      'value'=>'<iframe src="/assets/js/plugin/kcfinder/browse.php?type=images&CKEditor=inputIntro&CKEditorFuncNum=1&langCode=en" width="99%" height="250px"></iframe>')
-    );
-    $product_form->add(Config::get('security.csrf_token_key'),'',array('type'=>'hidden', 'value'=>Security::fetch_token()));
-    $product_form->add('submit', '', array('type'=>'submit','class'=>'btn btn-danger','value'=>'更新'));
-    $this->product_form = $product_form;
+    Session::set('project', array(
+      'product' => array(
+        'id'     => $product_id,
+        'status' => 'edit',
+      ),
+      'type'      => 'product',
+    ));
     
     // 初期表示時
-    if (!Security::check_token()){
+    if (!Security::check_token()) {
+      $product_model->setFormData($product_id,array('skill'));
       return ;
     }
     
     // バリデーション
     $user_id    = Auth::get('id');
-    $validation = $product_form->validation();
-    if (!$validation->run()) {
-      // エラーの設定
-      $this->template->content->errmsg = '入力エラーがあります';
+    $validation = $product_model->validate();
+    $errors = $validation->error();
+    if (!empty($errors)) {
+      // エラー設定
+      $this->template->content->set_safe('errmsg', '入力エラーがあります');
+      $this->template->content->set_safe('errors', $validation->show_errors());
       return ;
     }
+    
+    $product_data = $validation->validated();
+    $product_data['skill'] = json_encode($product_data['skill']);
+    
+    // パスを設定
+    $product_path = Config::get('UPLOAD_DIR') . $user_id . '/product/' . $product_id;
+    
+    // フォルダ確認
+    if (!file_exists($product_path)) {
+      // フォルダ作成
+      $structure = $product_path . '/other';
+      mkdir($structure, 0755, true);
+    }
+    
+    // アップロード
+    $temp_file  = Input::file('thumbnail');
+    if ($temp_file['size'] !== 0) {
+    	$config = array(
+    		'path' => $product_path,
+    		'auto_rename' => true,
+    		'ext_whitelist' => Config::get('FILE.EXT'),
+    	);
+    	Upload::process($config);
+    	if (!Upload::is_valid()) {
+    		$this->template->content->set_safe('errmsg', "ファイルアップロードに失敗しました");
+    		return Response::redirect('product/edit?id='.$product_id);
+    	}
+    	Upload::save();
+    	if($file = Upload::get_files(0)){
+    	  $product_data += array('thumbnail'   => $user_id. '/product/' . $product_id . '/' .$file['saved_as']);
+    	}
+    }
+
+    // データの追加
+    if ($product_model->updateById($product_id, $product_data) !== true) {
+      // エラー設定
+      $this->template->content->set_safe('errmsg', '投稿時にエラーが発生しました');
+      return ;
+    }
+    
+    // 不要セッションを削除し一覧へ
+    Session::delete('project.type');
+    Session::delete('project.product');
+    Session::set_flash('infomsg','作品を更新しました');
+    Response::redirect('admin/product');
   }
 }

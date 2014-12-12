@@ -404,7 +404,7 @@ class uploader {
     }
 
     protected function checkFilePath($file) {
-        $rPath = realpath($file);
+        $rPath = $file;
         if (strtoupper(substr(PHP_OS, 0, 3)) == "WIN")
             $rPath = str_replace("\\", "/", $rPath);
         return (substr($rPath, 0, strlen($this->typeDir)) === $this->typeDir);

@@ -16,27 +16,52 @@
    even if you are using session configuration.
    See http://kcfinder.sunhater.com/install for setting descriptions */
 
+error_reporting(-1);
+ini_set('display_errors', 1);
+
+/**
+ * Website document root
+ */
+define('DOCROOT', $_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR);
+
+/**
+ * Path to the application directory.
+ */
+define('APPPATH', realpath($_SERVER['DOCUMENT_ROOT'].'/../fuel/app/').DIRECTORY_SEPARATOR);
+
+/**
+ * Path to the default packages directory.
+ */
+define('PKGPATH', realpath($_SERVER['DOCUMENT_ROOT'].'/../fuel/packages/').DIRECTORY_SEPARATOR);
+
+/**
+ * The path to the framework core.
+ */
+define('COREPATH', realpath($_SERVER['DOCUMENT_ROOT'].'/../fuel/core/').DIRECTORY_SEPARATOR);
+
+// Get the start time and memory for use later
+defined('FUEL_START_TIME') or define('FUEL_START_TIME', microtime(true));
+defined('FUEL_START_MEM') or define('FUEL_START_MEM', memory_get_usage());
+
+// Load in the Fuel autoloader
+require COREPATH.'classes'.DIRECTORY_SEPARATOR.'autoloader.php';
+class_alias('Fuel\\Core\\Autoloader', 'Autoloader');
+
+// Boot the app
+require APPPATH.'bootstrap.php';
+
 $_CONFIG = array(
 
 
 // GENERAL SETTINGS
 
     'disabled' => false,
-    'uploadURL' => "/assets/js/plugin/kcfinder/upload",
-    'uploadDir' => $_SERVER['DOCUMENT_ROOT']."/assets/js/plugin/kcfinder/upload",
+    'uploadURL' => Config::get('UPLOAD_URL'),
+    'uploadDir' => Config::get('UPLOAD_DIR'),
     'theme' => "default",
 
     'types' => array(
-
-    // (F)CKEditor types
-        'files'   =>  "",
-        'flash'   =>  "swf",
-        'images'  =>  "*img",
-
-    // TinyMCE types
-        'file'    =>  "",
-        'media'   =>  "swf flv avi mpg mpeg qt mov wmv asf rm",
-        'image'   =>  "*img",
+        '' => "",
     ),
 
 
@@ -101,7 +126,7 @@ $_CONFIG = array(
 
     'mime_magic' => "",
 
-    'cookieDomain' => "",
+    'cookieDomain' => "idecom-heyg0811.c9.io",
     'cookiePath' => "",
     'cookiePrefix' => 'KCFINDER_',
 
@@ -115,12 +140,36 @@ $_CONFIG = array(
     '_sessionVar' => "KCFINDER",
     '_sessionLifetime' => 30,
     // '_sessionDir' => "session_save_path",
-    '_sessionDomain' => ".heyg.pw",
+    '_sessionDomain' => "idecom-heyg0811.c9.io",
     '_sessionPath' => session_save_path(),
 
     //'_cssMinCmd' => "java -jar /path/to/yuicompressor.jar --type css {file}",
     //'_jsMinCmd' => "java -jar /path/to/yuicompressor.jar --type js {file}",
 
 );
+
+    // 
+    if (Auth::check()){
+        // 閲覧制限を解除
+        $_CONFIG['disabled'] = false;
+        
+        // データ取得
+        $user_id      = Auth::get('id');
+        $project_type = Session::get('project.type');
+        $project_id   = Session::get('project.' . $project_type . '.id');
+        
+        // パス設定
+        $project_path = "/" . $project_type . "/" . $project_id ."/";
+        $file_path    = $_CONFIG['uploadDir'] . $user_id . $project_path;
+        
+        // ディレクトリ作成
+        if (!file_exists($file_path)) {
+            mkdir($file_path, 0755, true);
+        }
+        
+        // Finderのパスを更新
+        $_CONFIG['uploadURL']  = $_CONFIG['uploadURL'] . $user_id . $project_path;
+        $_CONFIG['uploadDir']  = $file_path;
+    }
 
 ?>
