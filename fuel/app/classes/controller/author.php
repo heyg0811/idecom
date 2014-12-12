@@ -119,7 +119,7 @@ class Controller_Author extends Controller_Template {
     $developer_model = Model_Developer::forge();
     
     //developerデータ取得
-    $user = $developer_model->find('all', array('where' => array('user_id' => $user_id)));
+    $developer = $developer_model->find('all', array('where' => array('user_id' => $user_id)));
 
     //値設定
     $data = array(
@@ -130,13 +130,29 @@ class Controller_Author extends Controller_Template {
       'skill' => Model_Developer::technology_encode($input_data['skill']),
     );
     //Developer更新
-    foreach($user as $val)
+    foreach($developer as $val)
     {
       $val->set($data)->save();
     }
     //developerデータ再取得
     $dev = Controller_Author::developer_get($user_id);
 
+
+    //-------thumbnail更新-------
+    /*//インスタンス生成
+    $user_model = Model_User::forge();
+    //userデータ取得
+    $user = $user_model->find('all', array('where' => array('id' => $user_id)));
+    $thumbnail = array(
+      'thumbnail' => $thumbnail_path,
+    );
+    //thumbnail更新
+    foreach($user as $val)
+    {
+      $val->set($thumbnail)->save();
+    }*/
+    //-------thumbnail更新-------
+    
     $this->template->content->developer = $dev;
   }
 
@@ -197,7 +213,7 @@ class Controller_Author extends Controller_Template {
       
     return $view_list;
   }
-  
+
   /**
    * @brif    developer情報取得 
    * @access  public
