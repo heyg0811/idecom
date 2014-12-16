@@ -1,6 +1,5 @@
   /* ------author css------ */
   .author-thumbnail{
-    display: inline-block;
     width: 100%;
     max-width: 100%;
     height: 250px;
@@ -19,8 +18,6 @@
   .timeline-body{
     width: 90%
   }
-  #timeline-box{
-    overflow-y: scroll;
-  }
+
   /* ------author css------ */
   

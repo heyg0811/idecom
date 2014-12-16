@@ -50,7 +50,7 @@
         <h3 class="box-title">TimeLine</h3>
       </div>
       <div id="timeline-box">
-        <ul class="timeline">
+        <ul class="timeline" >
           <?php foreach ($timeline as $value): ?>
             <li>
               <i class="fa <?php echo $value['icon']; ?>"></i>
@@ -159,8 +159,9 @@
       });
     });
     function prependChatItem(messages){
+      
       for (var i=0;i<messages.length;i++){
-        var chat_item = '<div class="item"><img src="<?php echo Config::get("THUMBNAIL_URL");?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
+        var chat_item = '<div class="item"><img src="<?php //echo Config::get("THUMBNAIL_URL");?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
         $('#chat-box').prepend(chat_item);
         newest_id = messages[i]['id'];
       }

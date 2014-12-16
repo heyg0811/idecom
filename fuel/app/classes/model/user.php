@@ -66,6 +66,7 @@ class Model_User extends \Orm\Model
   public static function getUser($id) {
     return DB::select()
     ->from(static::$_table_name)
+    ->where('id', $id)
     ->execute()
     ->as_array();
   }
