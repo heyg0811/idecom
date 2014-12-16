@@ -28,11 +28,12 @@
 
   <form action="comment" method="post">
     <?php echo \Form::csrf(); ?>
+    <input type=hidden name="id" value=<?php echo $id;?> />
     <div class="box-footer">
       <div class="form-group">
         <label for="">レス</label>
-        <input type=hidden name="thread_id" value=<?php echo $comment['thread_id'];?> />
-        <textarea name="comment" class="form-control" rows="5" ></textarea>
+        <input type=hidden name="bbs_comment[thread_id]" value=<?php echo $id;?> />
+        <textarea name="bbs_comment[comment]" class="form-control" rows="5" ></textarea>
       </div>
     </div>
     <div class="box-footer">

@@ -54,11 +54,11 @@
     <div class="box-body">
       <div class="form-group">
         <label for="">スレッドタイトル</label>
-        <input class="form-control" type="text" name="title">
+        <input class="form-control" type="text" name="bbs_thread[title]">
       </div>
       <div class="form-group">
         <label for="">ファーストコメント</label>
-        <textarea name="comment" class="form-control" rows="10" ></textarea>
+        <textarea name="bbs_thread[comment]" class="form-control" rows="10" ></textarea>
       </div>
     </div>
     <div class="box-footer">

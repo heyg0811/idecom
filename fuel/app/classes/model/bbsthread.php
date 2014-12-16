@@ -26,7 +26,8 @@ class Model_Bbsthread extends \Model_Crud
 		->add_rule('min_length', 1)
 		->add_rule('max_length', 100);
 
-		$validation->run();
+		$form_data = Input::post(static::$_table_name, null);
+	    $validation->run($form_data , static::$_table_name);
 		return $validation;
 	}
 

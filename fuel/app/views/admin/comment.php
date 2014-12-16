@@ -1,81 +1,42 @@
-<style>
-  .thread:hover{
-    opacity:0.5;
-  }
-</style>
-<?php foreach ($threads as $thread ): ?>
-  <div class="row" style="margin:10px;">
-    <div class="col-sm-12">
-      <a href="/bbs/comment?id=<?php echo $thread['id'];?>">
-      <div class="panel box box-info thread">
-        <div class="row">
-          <div class="col-sm-4">
-            <?php echo Asset::img('noimage.jpg', array('class' => 'img-responsive thread-img')); ?>
-          </div>
-          <div class="col-sm-7 bbs-box">
-            <div class="box-header">
-              <div class="box-title">
-               <h1>
-                <?php echo $thread['id'];?>
-                <i class="fa fa-fw fa-comment-o"></i>
-                <?php echo $thread['title']; ?>
-               </h1>
-                <br>
-              </div>
-            </div>
-            <div class="panel-collapse collapse in">
-              <div class="body">
-               <h4>
-                <p class="text-black">
-                   <small class="text-muted pull-right">
-                    <i class="fa fa-clock-o"></i>
-                    <?php echo $thread['date']; ?>
-                   </small>
-                   <?php echo wordwrap(nl2br($thread['comment']),100, "\n", true); ?>
-                </p>
-               </h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      </a>
-    </div>
-  </div>
-<?php endforeach;?>
-<div class="box">
+<div class="box box-info">
   <div class="box-header">
-    <div class="box-title">
-      <p>スレッド投稿</p>
-    </div>
+    <i class="fa fa-comments-o"></i>
+    <h3 class="box-title">自分へのコメント一覧</h3>
   </div>
-  <form action="thread" role="form" method="POST">
+
+  <div class="box-body chat" id="chat-box">
+    <?php $i=1; foreach ($comments as $comment ): ?>
+      <hr />
+      <div class="item">
+
+        <img src="img/avatar.png" alt="user image" class="online"/>
+        <p class="message">
+          <a href="/author/detail" class="name">
+            <?php echo Model_User::getName($comment['user_id']); ?>
+          </a>
+          <small style="margin-top:2px;" class="text-muted pull-left">
+            <?php echo "No.".$i." : "; ?>
+          </small>
+          <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+            <?php echo date($comment['date']);?>
+          </small>
+          <br><?php echo nl2br($comment['comment']); ?>
+        </p>
+      </div><!-- /.item -->
+    <?php $i++; endforeach; ?>
+  </div><!-- /.chat -->
+
+  <form action="comment" method="post">
     <?php echo \Form::csrf(); ?>
-    <div class="box-body">
+    <div class="box-footer">
       <div class="form-group">
-        <label for="">スレッドタイトル</label>
-        <input class="form-control" type="text" name="title">
-      </div>
-      <div class="form-group">
-        <label for="">ファーストコメント</label>
-        <textarea name="comment" class="form-control" rows="10" ></textarea>
+        <label for="">コメント</label>
+        <input type=hidden name="thread_id" value=<?php echo $comment['thread_id'];?> />
+        <textarea name="comment" class="form-control" rows="5" ></textarea>
       </div>
     </div>
     <div class="box-footer">
-      <button class="btn btn-success btn-lg">投稿</button>
+      <input type="submit" value="投稿" class="btn btn-success btn-lg"/>
     </div>
   </form>
-</div>
-<style>
-  .bbs-box
-  {
-    margin: 10px -10px 10px 10px;
-  }
-  @media screen and (max-width: 991px) {
-    /* 991px以下の場合 */
-    .bbs-box
-    {
-      margin: 10px;
-    }
-  }
-</style>
+</div><!-- /.box (chat box) -->

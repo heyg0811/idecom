@@ -27,7 +27,9 @@ class Model_Bbscomment extends \Orm\Model
 		->add_rule('min_length', 1)
 		->add_rule('max_length', 10);
 
-		$validation->run();
+		$form_data = Input::post(static::$_table_name, null);
+		
+	    $validation->run($form_data , static::$_table_name);
 		return $validation;
 	}
 
