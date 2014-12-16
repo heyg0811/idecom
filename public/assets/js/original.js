@@ -65,3 +65,11 @@ if ( typeof define === 'function' && define.amd ) {
   // browser global
   window.classie = classie;
 }// --- classie - class helper ---
+
+
+//----------  author  ----------
+//----------  timeline  scrollbar  ----------
+$('#timeline-box').slimScroll({
+        height: '350px'
+});
+//----------  author  ----------

@@ -74,6 +74,14 @@ class Controller_Author extends Controller_Template {
       'where'    => array(array('host_id','=',$dev_id)),
       'order_by' => array('id'=>'desc'),
     ));
+    foreach($messages as $message){
+      $thumbnail = Model_User::getThumbnail($message['user_id']);
+      if(!empty($thumbnail)){
+        $message['thumbnail'] = $thumbnail;
+      }else{
+        $message['thumbnail'] = "/assets/img/user/noimage.jpg";
+      }
+    }
     $this->template->content->messages = $messages;
     $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
     $this->template->content->timeline = $timeline;
@@ -137,21 +145,40 @@ class Controller_Author extends Controller_Template {
     //developerデータ再取得
     $dev = Controller_Author::developer_get($user_id);
 
-
-    //-------thumbnail更新-------
-    /*//インスタンス生成
-    $user_model = Model_User::forge();
-    //userデータ取得
-    $user = $user_model->find('all', array('where' => array('id' => $user_id)));
-    $thumbnail = array(
-      'thumbnail' => $thumbnail_path,
-    );
-    //thumbnail更新
-    foreach($user as $val)
-    {
-      $val->set($thumbnail)->save();
-    }*/
-    //-------thumbnail更新-------
+    // アップロードパスを設定
+    $thumbnail_path = Config::get('UPLOAD_DIR') . 'user_thumbnail';
+    // アップロード
+    $temp_file = Input::file('thumbnail');
+    if ($temp_file['size'] !== 0) {
+    	$config = array(
+    		'path' => $thumbnail_path,
+    		'auto_rename' => true,
+    		'ext_whitelist' => Config::get('FILE.EXT'),
+    	);
+    	Upload::process($config);
+    	if (!Upload::is_valid()) {
+    	  $this->template->content->set_safe('errmsg', "ファイルアップロードに失敗しました");
+    		return ;
+    	}
+    	Upload::save();
+    	if($file = Upload::get_files(0)){
+    	  //-------thumbnail更新-------
+        //インスタンス生成
+        $user_model = Model_User::forge();
+        //userデータ取得
+        $user = $user_model->find('all', array('where' => array('id' => $user_id)));
+        $thumbnail = array(
+          'thumbnail' => Config::get('UPLOAD_URL') . 'user_thumbnail/' . $file['saved_as'],
+        );
+        //thumbnail更新
+        foreach($user as $val)
+        {
+          $val->set($thumbnail)->save();
+        }
+        //-------thumbnail更新-------
+    	}
+    }
+    
     
     $this->template->content->developer = $dev;
   }
@@ -206,6 +233,12 @@ class Controller_Author extends Controller_Template {
     foreach($dev_list as $dev){
       $temp['id'] = $dev['user_id'];
       $temp['nickname'] = $user_model::getName($dev['user_id']);
+      $thumbnail = $user_model::getThumbnail($dev['user_id']);
+      if(!empty($thumbnail)){
+        $temp['thumbnail'] = $thumbnail;
+      }else{
+        $temp['thumbnail'] = "/assets/img/user/noimage.jpg";
+      }
       $temp['genre'] = $dev['genre'];
       
       array_push($view_list,$temp);
@@ -230,15 +263,21 @@ class Controller_Author extends Controller_Template {
     
     //username取得
     $user_model = Model_User::forge();
-    
+    //thumbnail取得
+    $thumbnail = $user_model::getThumbnail($user_id);
     $user = $user_model->find('all',array('where' => array(array('id', $user_id))));
     foreach($user as $val){
-      $temp['nickname'] = $val['username'];  
+      $temp['nickname'] = $val['username'];
+    }
+    if(!empty($thumbnail)){
+      $temp['thumbnail'] = $thumbnail;
+    }else{
+      $temp['thumbnail'] = "/assets/img/user/noimage.jpg";
     }
     //データ整形
     foreach($dev as $val){
-      $temp['user_id'] = $val['user_id'];  
-      $temp['grade'] = $val['grade'];  
+      $temp['user_id'] = $val['user_id'];
+      $temp['grade'] = $val['grade'];
       $temp['major'] = $val['major'];
       $temp['genre'] = $val['genre'];
       $temp['skill'] = Model_Developer::technology_decode($val['skill']);
