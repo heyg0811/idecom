@@ -10,7 +10,7 @@
       <div class="panel box box-info thread">
         <div class="row">
           <div class="col-sm-4">
-            <?php echo Asset::img('noimage.jpg', array('class' => 'img-responsive thread-img')); ?>
+            <img src='<?php echo Config::get("CATEGORY_IMG_URL"),Config::get('CATEGORY.IMG.'.$thread['category']); ?>' class='img-responsive'>
           </div>
           <div class="col-sm-7 bbs-box">
             <div class="box-header">
@@ -52,6 +52,10 @@
   <form action="thread" role="form" method="POST">
     <?php echo \Form::csrf(); ?>
     <div class="box-body">
+       <div class="bbs_thread[category]">
+        <label for="">カテゴリ</label>
+        <?php echo Form::select('bbs_thread[category]','', Config::get('CATEGORY'),array('class'=>'form-control')); ?>
+      </div>
       <div class="form-group">
         <label for="">スレッドタイトル</label>
         <input class="form-control" type="text" name="bbs_thread[title]">

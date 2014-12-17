@@ -79,7 +79,7 @@ class Controller_Bbs extends Controller_Template {
     $thread_id = Input::param('id',null);
     $options   = array('where' => array('thread_id' => $thread_id), );
     $comments  = Model_Bbscomment::find('all', $options);
-    //var_dump($comments);exit(); NULLが入るWarning無視すれば普通に動く
+    // var_dump($comments);exit();
     $this->template->content->comments = $comments;
     $this->template->content->id = $thread_id;
     if (!Security::check_token())

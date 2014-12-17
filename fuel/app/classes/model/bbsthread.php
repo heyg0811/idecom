@@ -7,6 +7,7 @@ class Model_Bbsthread extends \Model_Crud
     'id',
     'user_id',
     'title',
+    'category',
     'date',
   );
   protected static $primary_key = array('id');
@@ -25,9 +26,13 @@ class Model_Bbsthread extends \Model_Crud
 		->add_rule('required')
 		->add_rule('min_length', 1)
 		->add_rule('max_length', 100);
+		$validation->add('category', 'カテゴリー')
+		->add_rule('required')
+		->add_rule('min_length', 1)
+		->add_rule('max_length', 10);
 
 		$form_data = Input::post(static::$_table_name, null);
-	    $validation->run($form_data , static::$_table_name);
+	  $validation->run($form_data , static::$_table_name);
 		return $validation;
 	}
 
@@ -41,7 +46,7 @@ class Model_Bbsthread extends \Model_Crud
 
 	public static  function get_thread(){
 		 $threads = DB::select('bbs_thread.id','title',array(
-		 	'bbs_comment.id','comment_id'),'bbs_comment.comment','bbs_thread.date')
+		 	'bbs_comment.id','comment_id'),'bbs_comment.comment','bbs_thread.category','bbs_thread.date')
       ->from('bbs_thread')
       ->join(DB::expr('(select id, comment, thread_id from
         bbs_comment group by thread_id) as bbs_comment'),'inner')

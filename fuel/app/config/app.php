@@ -45,11 +45,20 @@ return array(
     'RANK' => 'fa-thumbs-o-up bg-red',
   ),
   'CATEGORY' => array(
-    'System',
-    'Web',
-    'Movie',
-    'Photo',
-    'Illust',
+    'NAME' => array(
+      1 => 'System',
+      2 => 'Web',
+      3 => 'Movie',
+      4 => 'Photo',
+      5 => 'Illust',
+    ),
+    'IMG' => array(
+      1 => 'system.png',
+      2 => 'web.png',
+      3 => 'movie.png',
+      4 => 'photo.png',
+      5 => 'illust.png',
+    ),
   ),
   'FILE' => array(
     'EXT' => array(

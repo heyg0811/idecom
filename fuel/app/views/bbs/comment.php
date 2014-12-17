@@ -1,26 +1,31 @@
 <div class="box box-info">
   <div class="box-header">
     <i class="fa fa-comments-o"></i>
-    <h3 class="box-title">スレッドタイトル</h3>
+    <h3 class="box-title">スレッドタイトル : <?php echo "スレタイが表示されます" ?></h3>
   </div>
 
   <div class="box-body chat" id="chat-box">
     <?php $i=1; foreach ($comments as $comment ): ?>
-      <hr />
       <div class="item">
-
-        <img src="img/avatar.png" alt="user image" class="online"/>
+        <?php echo Model_User::getThumbnail($comment['user_id']); ?>
         <p class="message">
-          <a href="/author/detail" class="name">
-            <?php echo Model_User::getName($comment['user_id']); ?>
-          </a>
-          <small style="margin-top:2px;" class="text-muted pull-left">
+          <br>
+          <hr />
+          <h4>
+            <small style="margin-top:4px;" class="text-muted pull-left">
             <?php echo "No.".$i." : "; ?>
-          </small>
-          <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
-            <?php echo date($comment['date']);?>
-          </small>
-          <br><?php echo nl2br($comment['comment']); ?>
+            </small>
+            <a href="/author/detail" class="name">
+              <?php echo Model_User::getName($comment['user_id']); ?>
+            </a>
+            <small style="margin-top:5px;" class="text-muted pull-right">
+              <i class="fa fa-clock-o"></i>
+              <?php echo date($comment['date']);?>
+            </small>
+          </h4>
+          <div style="font-size: 120%;" >
+            <?php echo nl2br($comment['comment']); ?>
+          </div>
         </p>
       </div><!-- /.item -->
     <?php $i++; endforeach; ?>
