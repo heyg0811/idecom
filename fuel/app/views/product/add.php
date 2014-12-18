@@ -28,7 +28,7 @@
       </div>
       <div class="form-group">
         <?php echo Form::label('分類', 'category'); ?>
-        <?php echo Form::select('product[category]','', Config::get('CATEGORY'),array('class'=>'form-control')); ?>
+        <?php echo Form::select('product[category]','', Config::get('CATEGORY.NAME'),array('class'=>'form-control')); ?>
       </div>
       <?php echo Form::label('技術', 'skill'); ?>
       <div class="row">

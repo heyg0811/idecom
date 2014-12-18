@@ -24,8 +24,8 @@
           <p>
             <h3>
               <div style="margin-left : 42%;">
-              <?php echo $product['nice'];?>
-            </div>
+                <?php echo $product['nice'];?>
+              </div>
             </h3>
             <br>
               <div style="margin-left : 62%">

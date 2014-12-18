@@ -64,7 +64,7 @@ class Controller_Admin extends Controller_Template {
   public function action_product() {
     $this->template->subtitle = '作品';
     $this->template->content = View::forge('admin/product');
-    
+
     $options = array(
       'where'    => array('status' => Config::get('PRODUCT.STATUS.ENABLE')),
       'order_by' => array('created_at' => 'desc'),
@@ -83,7 +83,7 @@ class Controller_Admin extends Controller_Template {
   }
 
   /**
-   * @brif    募集管理
+   * @brif    作品ごとのアクセス数
    * @access  public
    * @return
    */
@@ -94,17 +94,18 @@ class Controller_Admin extends Controller_Template {
   }
 
   /**
-   * @brif    募集管理
+   * @brif    プロジェクトごとの応募数
    * @access  public
    * @return
    */
   public function action_subscription() {
     $this->template->subtitle = 'プロジェクト応募数';
     $this->template->content = View::forge('admin/subscription');
+    $this->template->content->recruits = Model_Recruit::find('all');
   }
 
   /**
-   * @brif    募集管理
+   * @brif    コメント一覧表示　保留（このページいるかな？）
    * @access  public
    * @return
    */
@@ -114,12 +115,12 @@ class Controller_Admin extends Controller_Template {
   }
 
   /**
-   * @brif    募集管理
+   * @brif    作品ごとの「いいね!!」をカウント
    * @access  public
    * @return
    */
   public function action_nice() {
-    $this->template->subtitle = 'イイネ!!';
+    $this->template->subtitle = 'いいね!!';
     $this->template->content = View::forge('admin/nice');
     $this->template->content->products = Model_Product::find('all');
 
