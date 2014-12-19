@@ -50,6 +50,8 @@ class Controller_Author extends Controller_Template {
     
     $view_list = Controller_Author::developer_list_get($filter);
     
+    
+    
     $this->template->content->user_list = $view_list;
   }
   
@@ -82,6 +84,7 @@ class Controller_Author extends Controller_Template {
         $message['thumbnail'] = "/assets/img/user/noimage.jpg";
       }
     }
+    
     $this->template->content->messages = $messages;
     $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
     $this->template->content->timeline = $timeline;
@@ -142,9 +145,7 @@ class Controller_Author extends Controller_Template {
     {
       $val->set($data)->save();
     }
-    //developerデータ再取得
-    $dev = Controller_Author::developer_get($user_id);
-
+    
     // アップロードパスを設定
     $thumbnail_path = Config::get('UPLOAD_DIR') . 'user_thumbnail';
     // アップロード
@@ -152,7 +153,8 @@ class Controller_Author extends Controller_Template {
     if ($temp_file['size'] !== 0) {
     	$config = array(
     		'path' => $thumbnail_path,
-    		'auto_rename' => true,
+    		'randomize' => true,
+    		'auto_rename'=>true,
     		'ext_whitelist' => Config::get('FILE.EXT'),
     	);
     	Upload::process($config);
@@ -162,14 +164,21 @@ class Controller_Author extends Controller_Template {
     	}
     	Upload::save();
     	if($file = Upload::get_files(0)){
+    	  //リサイズ画像名の作成（重複エラー処理）
+        $new_file=date('ymdhis').$file['saved_as'];
+        //今アップしたばかりの元画像データをロードして処理します
+        $image=Image::load($thumbnail_path.'/'.$file['saved_as']);
+        //画像のリサイズ
+        $image->resize(250, 250, true, true)->save($thumbnail_path.'/'.$new_file);
     	  //-------thumbnail更新-------
         //インスタンス生成
         $user_model = Model_User::forge();
         //userデータ取得
         $user = $user_model->find('all', array('where' => array('id' => $user_id)));
         $thumbnail = array(
-          'thumbnail' => Config::get('UPLOAD_URL') . 'user_thumbnail/' . $file['saved_as'],
+          'thumbnail' => Config::get('UPLOAD_URL') . 'user_thumbnail/' . $new_file,
         );
+        File::delete($thumbnail_path.'/'.$file['saved_as']);
         //thumbnail更新
         foreach($user as $val)
         {
@@ -179,6 +188,8 @@ class Controller_Author extends Controller_Template {
     	}
     }
     
+    //developerデータ再取得
+    $dev = Controller_Author::developer_get($user_id);
     
     $this->template->content->developer = $dev;
   }
@@ -219,12 +230,13 @@ class Controller_Author extends Controller_Template {
     //インスタンス生成
     $dev_model = Model_Developer::forge();
     $user_model = Model_User::forge();
-    if(!empty($filter)){
-      //developerデータ取得
-      $dev_list = $dev_model->find('all',array('where' => array(array('genre', $filter))));
-    }else{
+    if(empty($filter) or $filter === "All"){
       //developerデータ取得
       $dev_list = $dev_model->find('all');
+    }else{
+      //developerデータ取得
+      $dev_list = $dev_model->find('all',array('where' => array(array('genre', $filter))));
+      
     }
     //userデータ取得
     $user_list = $user_model->find('all');
@@ -232,18 +244,22 @@ class Controller_Author extends Controller_Template {
     $temp = array();
     foreach($dev_list as $dev){
       $temp['id'] = $dev['user_id'];
-      $temp['nickname'] = $user_model::getName($dev['user_id']);
+      foreach($user_list as $user){
+        if($dev['user_id'] === $user['id']){
+          $temp['name'] = $user['username'];
+        }
+      }
       $thumbnail = $user_model::getThumbnail($dev['user_id']);
       if(!empty($thumbnail)){
         $temp['thumbnail'] = $thumbnail;
       }else{
-        $temp['thumbnail'] = "/assets/img/user/noimage.jpg";
+        $temp['thumbnail'] = "/assets/img/user/noimage_t.jpg";
       }
       $temp['genre'] = $dev['genre'];
       
       array_push($view_list,$temp);
     }
-      
+    
     return $view_list;
   }
 

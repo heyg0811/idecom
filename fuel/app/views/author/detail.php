@@ -20,7 +20,7 @@
     </div>
     <div class="box-footer no-border text-black">
       <h3 class="box-title text-center">技術</h3>
-      <div class="row">
+      <div class="row" id="timeline-box" >
         <div class="col-sm-12">
           <?php $i = 0; ?>
           <?php if(!empty($developer['skill'])):?>
@@ -117,10 +117,7 @@
 </div>
 
 <script type="text/javascript">
-  $(window).load(function () {
-    Height = ($('#user-box').height()/2)-61;
-    $('div#timeline-box').css('height',Height+'px');
-  });
+  
 
   $(function(){
     var newest_id = <?php echo $newest_id;?>;

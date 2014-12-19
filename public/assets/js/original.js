@@ -68,7 +68,18 @@ if ( typeof define === 'function' && define.amd ) {
 
 
 //----------  author  ----------
+$(window).load(function () {
+  author_height();
+});
+function author_height() {
+  Height = ($('#user-box').height()/2)-61;
+  $('div#timeline-box').css('height',Height+'px');
+  return ;
+}
 //----------  timeline  scrollbar  ----------
+$('#timeline-box').slimScroll({
+        height: '350px'
+});
 $('#timeline-box').slimScroll({
         height: '350px'
 });

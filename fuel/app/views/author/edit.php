@@ -69,7 +69,7 @@
             </div>
             <div class="col-xs-6 ">
               <input type="hidden" name="skill_name[]" value="<?php echo $val; ?>">
-              <input type="text" name="developer[skill][]" size="5" maxlength="3" value="<?php echo $developer['skill'][$key]?>">
+              <input type="text" class="form-control" name="developer[skill][]" size="5" maxlength="3" value="<?php echo $developer['skill'][$key]?>">
             </div>
           </div>
         <?php endforeach; ?>

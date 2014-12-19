@@ -7,14 +7,15 @@
     </ul>
   </div>
 </div>
-<div class="col-md-10" id="list">
-  <?php foreach($user_list as $user): ?>
-    <div class="col-md-4 col-sm-6 col-xs-12">
-      <div class="small-box bg-green author-list-box">
-        <img src="<?php echo $user['thumbnail']; ?>" class="author-thumbnail">
-        <div class="inner">
+<div class="box-body col-md-10">
+  <div class="row">
+    <?php foreach($user_list as $user): ?>
+      <div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom:10px;">
+        <div class="small-box bg-green author-list-radius">
+          <img src="<?php echo $user['thumbnail']; ?>" class="author-list-thumbnail">
+          <div class="inner">
           <h4>
-            <i class="fa fa-user" style="margin-right:4px;"></i><?php echo $user['nickname'];?>
+            <i class="fa fa-user" style="margin-right:4px;"><?php echo $user['name'];?></i>
           </h4>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Possimus in eius blanditiis doloribus
@@ -23,16 +24,19 @@
         <a href="#" onClick="document.form1.id.value = '<?php echo $user['id'];?>'; document.form1.submit();" class="small-box-footer">
           More info <i class="fa fa-arrow-circle-right"></i>
         </a>
+        </div>
       </div>
-    </div>
-  <?php endforeach; ?>
+    <?php endforeach; ?>
+  </div>
 </div>
+
 <form name="form1" method="get" action="detail">
   <input type="hidden" name="id">
 </form>
 <div class="hidden-sm hidden-xs col-md-2" id="filter-side">
   <h2 class="text-center">Filter</h2>
   <ul class="list-unstyled">
+    <li><a href="?Filter=All">All</a></li>
     <li><a href="?Filter=System">System</a></li>
     <li><a href="?Filter=Web">Web</a></li>
     <li><a href="?Filter=Movie">Movie</a></li>
