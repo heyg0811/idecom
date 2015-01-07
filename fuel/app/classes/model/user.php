@@ -37,7 +37,7 @@ class Model_User extends \Orm\Model
     ->add_rule('min_length', 6)
     ->add_rule('max_length', 20);
 
-    $validation->run();
+    $validation->run(Input::post(static::$_table_name, null), static::$_table_name);
     return $validation;
   }
 
@@ -59,7 +59,7 @@ class Model_User extends \Orm\Model
     ->add_rule('min_length', 6)
     ->add_rule('max_length', 20);
 
-    $validation->run();
+    $validation->run(Input::post(static::$_table_name, null), static::$_table_name);
     return $validation;
   }
 

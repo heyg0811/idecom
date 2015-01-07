@@ -9,7 +9,7 @@
  */
 
 return array(
-  'PRODUCT' => array(
+  'PROJECT' => array(
     'STATUS' => array(
       'DISABLE' => 0,
       'ENABLE'  => 1,
@@ -71,5 +71,11 @@ return array(
 			'gif',
 			'png',
     ),
+  ),
+  'ALERT' => array(
+    'info'    => '通知',
+    'danger'  => '警告',
+    'warning' => '注意',
+    'success' => '成功',
   ),
 );

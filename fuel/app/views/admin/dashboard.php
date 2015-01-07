@@ -113,7 +113,7 @@
         <?php foreach ($messages as $message): ?>
           <!-- chat item -->
           <div class="item">
-            <img src='<?php echo Config::get("THUMBNAIL_PATH"), Auth::get("thumbnail"); ?>' class='online'>
+            <img src='<?php echo Config::get("USER_IMG_URL"), Auth::get("thumbnail"); ?>' class='online'>
             <p class="message">
               <a href="/author/detail?id=<?php echo $message['user_id']?>" class="name">
                 <small class="text-muted pull-right">
@@ -177,7 +177,7 @@
     });
     function prependChatItem(messages){
       for (var i=0;i<messages.length;i++){
-        var chat_item = '<div class="item"><img src="<?php echo Config::get("THUMBNAIL_PATH");?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
+        var chat_item = '<div class="item"><img src="<?php echo Config::get("USER_IMG_URL");?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
         $('#chat-box').prepend(chat_item);
         newest_id = messages[i]['id'];
       }

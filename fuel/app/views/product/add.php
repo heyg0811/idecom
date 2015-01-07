@@ -1,6 +1,6 @@
 <?php echo Asset::js('plugin/ckeditor/ckeditor.js'); ?>
 <!-- general form elements -->
-<div class="box box-danger">
+<div class="box box-primary">
   <div class="box-header">
     <div class="box-title">
       <p>詳細編集</p>
@@ -9,16 +9,6 @@
       <button class="btn btn-danger btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
     </div>
   </div>
-  <?php if (isset($errmsg)): ?>
-    <div style="margin:15px;">
-      <div class="alert alert-danger alert-dismissable">
-        <i class="fa fa-ban"></i>
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <b>警告!</b> <?php echo $errmsg; ?>
-      </div>
-      <?php if (isset($errors)) {echo $errors;} ?>
-    </div>
-  <?php endif;?>
   <form action="" method="post" enctype="multipart/form-data">
     <div class="box-body">
       <?php echo Form::csrf(); ?>
@@ -57,11 +47,11 @@
       </div>
       <div class="form-group">
         <?php echo Form::label('その他画像', 'other'); ?>
-        <?php echo html_tag('iframe',array('width'=>'100%', 'height'=>'300px', 'src'=>'http://idecom-heyg0811.c9.io/assets/js/plugin/kcfinder/browse.php?CKEditor=form_product%5Bdetail%5D&CKEditorFuncNum=1&langCode=ja')); ?>
+        <?php echo html_tag('iframe',array('width'=>'100%', 'height'=>'300px', 'src'=>'http://idecom-heyg0811.c9.io/assets/js/plugin/kcfinder/browse.php?type=other&langCode=ja')); ?>
       </div>
     </div>
     <div class="box-footer">
-      <?php echo Form::submit('','投稿',array('class'=>'btn btn-danger')); ?>
+      <?php echo Form::submit('','投稿',array('class'=>'btn btn-primary')); ?>
     </div>
   </form>
 </div><!-- /.box -->

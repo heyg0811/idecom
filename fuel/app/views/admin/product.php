@@ -1,12 +1,3 @@
-<?php if (Session::get_flash('infomsg')): ?>
-  <div style="margin:15px;">
-    <div class="alert alert-info alert-dismissable">
-      <i class="fa fa-check"></i>
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-      <b>警告!</b> <?php echo Session::get_flash('infomsg'); ?>
-    </div>
-  </div>
-<?php endif;?>
 <div class="col-xs-12">
   <a href="/product/add" class="btn btn-primary pull-right">新規登録</a>
 </div>
@@ -15,7 +6,7 @@
     <div class="panel box box-primary">
       <div class="row">
         <div class="col-sm-4">
-          <img src="<?php echo Config::get('USER_IMG_URL') . $product['thumbnail']; ?>" class="img-responsive">
+          <img src="<?php echo Config::get('UPLOAD_URL') . $product['thumbnail']; ?>" class="img-responsive">
         </div>
         <div class="col-sm-7 bbs-box">
           <div class="box-header">

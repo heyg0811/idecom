@@ -258,7 +258,7 @@
                     <ul class="dropdown-menu">
                       <!-- User image -->
                       <li class="user-header bg-light-blue">
-                        <img src='<?php echo Config::get("THUMBNAIL_PATH"),Auth::get("thumbnail"); ?>' class='img-circle'>
+                        <img src='<?php echo Config::get("USER_IMG_URL"),Auth::get("thumbnail"); ?>' class='img-circle'>
                         <p>
                           <?php echo Auth::get('nickname')?>
                           <small>Member since <?php echo date('Y-m-d',Auth::get('created_at'));?></small>
@@ -299,7 +299,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                   <div class="pull-left image">
-                    <img src='<?php echo Config::get("THUMBNAIL_PATH"),Auth::get("thumbnail"); ?>' class='img-circle'>
+                    <img src='<?php echo Config::get("USER_IMG_URL"),Auth::get("thumbnail"); ?>' class='img-circle'>
                   </div>
                   <div class="pull-left info">
                     <p><?php echo Auth::get('nickname')?></p>
@@ -375,6 +375,16 @@
               </section>
               <!-- Main content -->
               <section class="content" style="overflow:hidden;">
+                <?php if($alert = Session::get_flash('alert')): ?>
+                  <div style="margin:15px;">
+                    <div class="alert alert-dismissable alert-<?php echo $alert['type']; ?>">
+                      <i class="fa fa-ban"></i>
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                      <b><?php echo Config::get('ALERT.'.$alert['type']);?>!</b> <?php if(!empty($alert['title'])){echo $alert['title'];} ?>
+                      <?php if(!empty($alert['body'])){echo $alert['body'];} ?>
+                    </div>
+                  </div>
+                <?php endif; ?>
                 <?php echo $content; ?>
               </section><!-- /.content -->
             </aside><!-- /.right-side -->

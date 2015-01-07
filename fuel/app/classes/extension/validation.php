@@ -23,10 +23,10 @@ class Validation extends Fuel\Core\Validation
   public function show_errors($options = array())
   {
     $default = array(
-      'open_list'    => \Config::get('validation.open_list', '<li style="list-style:none;" class="text-danger">'),
-      'close_list'   => \Config::get('validation.close_list', '</li>'),
-      'open_error'   => \Config::get('validation.open_error', '<ul>'),
-      'close_error'  => \Config::get('validation.close_error', '</ul>'),
+      'open_list'    => \Config::get('validation.open_list', '<ul>'),
+      'close_list'   => \Config::get('validation.close_list', '</ul>'),
+      'open_error'   => \Config::get('validation.open_error', '<li style="list-style:none; margin-left:-30px">'),
+      'close_error'  => \Config::get('validation.close_error', '</li>'),
       'no_errors'    => \Config::get('validation.no_errors', '')
     );
     $options = array_merge($default, $options);

@@ -1,33 +1,63 @@
+<?php echo Asset::js('plugin/ckeditor/ckeditor.js'); ?>
 <!-- general form elements -->
 <div class="box box-danger">
-  <!-- form start -->
-  <form role="form">
+  <div class="box-header">
+    <div class="box-title">
+      <p>詳細編集</p>
+    </div>
+    <div class="box-tools pull-right">
+      <button class="btn btn-danger btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
+    </div>
+  </div>
+  <?php if (isset($errmsg)): ?>
+    <div style="margin:15px;">
+      <div class="alert alert-danger alert-dismissable">
+        <i class="fa fa-ban"></i>
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+        <b>警告!</b> <?php echo $errmsg; ?>
+      </div>
+      <?php if (isset($errors)) {echo $errors;} ?>
+    </div>
+  <?php endif;?>
+  <form action="" method="post" enctype="multipart/form-data">
     <div class="box-body">
+      <?php echo Form::csrf(); ?>
       <div class="form-group">
-        <label for="inputEmail">題目</label>
-        <input type="email" class="form-control" id="inputEmail" placeholder="メール">
+        <?php echo Form::label('題目', 'title'); ?>
+        <?php echo Form::input('recruit[title]','',array('class'=>'form-control')); ?>
       </div>
       <div class="form-group">
-        <label for="inputSkill">募集技術</label>
-        <input type="text" name="skill" class="form-control" id="inputSkill">
+        <?php echo Form::label('分類', 'category'); ?>
+        <?php echo Form::select('recruit[category]','', Config::get('CATEGORY.NAME'),array('class'=>'form-control')); ?>
+      </div>
+      <?php echo Form::label('技術', 'skill'); ?>
+      <div class="row">
+        <?php foreach (Config::get('TECHNOLOGY') as $key => $val): ?>
+          <div class="col-xs-6 col-sm-4 col-md-3" style="margin-bottom:10px;">
+            <div class="col-xs-6 text-center ">
+              <?php echo Form::label($val, 'skill'); ?>
+            </div>
+            <div class="col-xs-6 ">
+              <?php echo Form::input('recruit[skill]['.$key.']','',array('class'=>'form-control')); ?>
+            </div>
+          </div>
+        <?php endforeach; ?>
       </div>
       <div class="form-group">
-        <label for="inputIntro">募集内容</label>
-        <textarea name="intro" class="form-control" id="inputIntro" rows="5" placeholder="募集紹介"></textarea>
+        <?php echo Form::label('概要', 'outline'); ?>
+        <?php echo Form::input('recruit[outline]','',array('class'=>'form-control')); ?>
       </div>
       <div class="form-group">
-        <label for="exampleInputFile">サムネイル</label>
-        <input type="file" id="exampleInputFile">
+        <?php echo Form::label('詳細', 'detail'); ?>
+        <?php echo Form::textarea('recruit[detail]','',array('class'=>'form-control ckeditor')); ?>
       </div>
-    </div><!-- /.box-body -->
+      <div class="form-group">
+        <?php echo Form::label('サムネイル', 'thumbnail'); ?>
+        <?php echo Form::file('thumbnail'); ?>
+      </div>
+    </div>
     <div class="box-footer">
-      <button type="submit" class="btn btn-danger">更新</button>
+      <?php echo Form::submit('','投稿',array('class'=>'btn btn-danger')); ?>
     </div>
   </form>
 </div><!-- /.box -->
-<script type="text/javascript">
-  $(function() {
-    /* BOOTSTRAP SLIDER */
-    $('.slider').slider();
-  });
-</script>

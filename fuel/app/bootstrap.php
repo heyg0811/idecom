@@ -11,6 +11,7 @@ Autoloader::add_classes(array(
   'Controller_Template' => APPPATH . 'classes/extension/template.php',
   'Form'                => APPPATH . 'classes/extension/form.php',
   'Form_Instance'       => APPPATH . 'classes/extension/instance.php',
+  'MyModel'             => APPPATH . 'classes/extension/mymodel.php',
 ));
 
 // Register the autoloader

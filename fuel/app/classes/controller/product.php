@@ -47,7 +47,7 @@ class Controller_Product extends Controller_Template {
     $this->template->content = View::forge('product/list');
     
     $options = array(
-      'where'    => array('status' => Config::get('PRODUCT.STATUS.ENABLE')),
+      'where'    => array('status' => Config::get('PROJECT.STATUS.ENABLE')),
       'order_by' => array('created_at' => 'desc'),
     );
     
@@ -67,7 +67,19 @@ class Controller_Product extends Controller_Template {
       Response::redirect('product/list');
     }
     Model_Product::updateCount($id);
-    $this->template->content->product = Model_Product::find($id);
+    $product = Model_Product::find($id);
+    $image_names = array();
+    $dir_path = Config::get('UPLOAD_DIR').$product['user_id'].'/product/'.$id.'/other/';
+    $dir_url  = Config::get('UPLOAD_URL').$product['user_id'].'/product/'.$id.'/other/';
+    $dir = dir($dir_path);
+    while (FALSE !== ($file_name =  $dir->read())) {
+      $path = $dir->path.$file_name;
+      if (@getimagesize($path)) {
+        $image_names[] = $dir_url.$file_name;
+      }
+    }
+    $product['images'] = $image_names;
+    $this->template->content->set_safe('product', $product);
   }
 
   /**
@@ -105,15 +117,14 @@ class Controller_Product extends Controller_Template {
     $errors = $validation->error();
     if (!empty($errors)) {
       // エラー設定
-      $this->template->content->set_safe('errmsg', '入力エラーがあります');
-      $this->template->content->set_safe('errors', $validation->show_errors());
+      MyUtil::set_alert('danger','入力エラーがあります',$validation->show_errors());
       return ;
     }
     $product_data = $validation->validated();
     $product_data['skill'] = json_encode($product_data['skill']);
-    $product_data['status'] = Config::get('PRODUCT.STATUS.ENABLE');
+    $product_data['status'] = Config::get('PROJECT.STATUS.ENABLE');
     $product_data['created_at'] = time();
-    
+
     // パスを設定
     $product_path = Config::get('UPLOAD_DIR') . $user_id . '/product/' . $product_id;
     
@@ -134,7 +145,7 @@ class Controller_Product extends Controller_Template {
     	);
     	Upload::process($config);
     	if (!Upload::is_valid()) {
-    	  $this->template->content->set_safe('errmsg', "ファイルアップロードに失敗しました");
+    	  MyUtil::set_alert('danger','ファイルアップロードに失敗しました');
     		return ;
     	}
     	Upload::save();
@@ -146,14 +157,12 @@ class Controller_Product extends Controller_Template {
     // データの追加
     if ($product_model->updateById($product_id, $product_data) !== true) {
       // エラー設定
-      $this->template->content->set_safe('errmsg', '投稿時にエラーが発生しました');
+      MyUtil::set_alert('danger','投稿時にエラーが発生しました');
       return ;
     }
     
     // 不要セッションを削除し一覧へ
-    Session::delete('project.type');
-    Session::delete('project.product');
-    Session::set_flash('infomsg','作品を投稿しました');
+    MyUtil::set_alert('success','作品を投稿しました');
     Response::redirect('admin/product');
   }
 
@@ -197,8 +206,7 @@ class Controller_Product extends Controller_Template {
     $errors = $validation->error();
     if (!empty($errors)) {
       // エラー設定
-      $this->template->content->set_safe('errmsg', '入力エラーがあります');
-      $this->template->content->set_safe('errors', $validation->show_errors());
+      MyUtil::set_alert('danger','入力エラーがあります',$validation->show_errors());
       return ;
     }
     
@@ -225,7 +233,7 @@ class Controller_Product extends Controller_Template {
     	);
     	Upload::process($config);
     	if (!Upload::is_valid()) {
-    		$this->template->content->set_safe('errmsg', "ファイルアップロードに失敗しました");
+    		MyUtil::set_alert('danger','ファイルアップロードに失敗しました');
     		return Response::redirect('product/edit?id='.$product_id);
     	}
     	Upload::save();
@@ -237,14 +245,12 @@ class Controller_Product extends Controller_Template {
     // データの追加
     if ($product_model->updateById($product_id, $product_data) !== true) {
       // エラー設定
-      $this->template->content->set_safe('errmsg', '投稿時にエラーが発生しました');
+      MyUtil::set_alert('danger','投稿時にエラーが発生しました');
       return ;
     }
     
     // 不要セッションを削除し一覧へ
-    Session::delete('project.type');
-    Session::delete('project.product');
-    Session::set_flash('infomsg','作品を更新しました');
+    MyUtil::set_alert('success','作品を更新しました');
     Response::redirect('admin/product');
   }
 }
