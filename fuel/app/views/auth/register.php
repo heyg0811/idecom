@@ -10,13 +10,13 @@
     <?php echo \Form::csrf(); ?>
     <div class="body bg-gray">
       <div class="form-group">
-        <input disabled="disabled" value="<?php echo Auth::get('username').' か '.Auth::get('email');?>" type="text" name="id" class="form-control" placeholder="UserID or MailAddress"/>
+        <input disabled="disabled" value="<?php echo Auth::get('username').' か '.Auth::get('email');?>" type="text" name="id" class="form-control"/>
       </div>
       <div class="form-group">
-        <input type="password" name="password1" class="form-control" placeholder="Password"/>
+        <?php echo Form::password('user[password1]','',array('class'=>'form-control','placeholder'=>'Password')); ?>
       </div>
       <div class="form-group">
-        <input type="password" name="password2" class="form-control" placeholder="Retype password"/>
+        <?php echo Form::password('user[password2]','',array('class'=>'form-control','placeholder'=>'Retype Password')); ?>
       </div>
       <?php if(isset($errmsg)) echo $errmsg;?>
     </div>

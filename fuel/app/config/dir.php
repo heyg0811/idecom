@@ -7,16 +7,22 @@
  *
  */
 
+$docroot  = substr(DOCROOT, 0, -1);
+$img_path = '/assets/img/';
+
 return array(
-  'THUMBNAIL_URL' => '/assets/img/user/',
-  'THUMBNAIL_DIR' => DOCROOT . 'assets/img/user/',
+  'IMG_URL' => $img_path,
+  'IMG_DIR' => $docroot. $img_path,
+  
+  'THUMBNAIL_URL' => $img_path . 'user/',
+  'THUMBNAIL_DIR' => $docroot . $img_path . 'user/',
 
-  'USER_IMG_URL'  => '/assets/img/user/',
-  'USER_IMG_DIR'  => DOCROOT . 'assets/img/user/',
+  'USER_IMG_URL'  => $img_path . 'user/',
+  'USER_IMG_DIR'  => $docroot . $img_path . 'user/',
 
+  'CATEGORY_IMG_URL'  => $img_path . 'category/',
+  'CATEGORY_IMG_DIR'  => $docroot . $img_path . 'category/',
+  
   'UPLOAD_URL' => '/assets/upload/',
-  'UPLOAD_DIR' => DOCROOT . 'assets/upload/',
-
-  'CATEGORY_IMG_URL'  => '/assets/img/category/',
-  'CATEGORY_IMG_DIR'  => DOCROOT . 'assets/img/category/',
+  'UPLOAD_DIR' => $docroot . '/assets/upload/',
 );

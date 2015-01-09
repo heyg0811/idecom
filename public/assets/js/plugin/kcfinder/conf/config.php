@@ -61,7 +61,8 @@ $_CONFIG = array(
     'theme' => "default",
 
     'types' => array(
-        '' => "",
+        '' => "*img",
+        'other' => "*img",
     ),
 
 
@@ -157,7 +158,6 @@ $_CONFIG = array(
         $user_id      = Auth::get('id');
         $project_type = Session::get('project.type');
         $project_id   = Session::get('project.' . $project_type . '.id');
-        
         // パス設定
         $project_path = "/" . $project_type . "/" . $project_id ."/";
         $file_path    = $_CONFIG['uploadDir'] . $user_id . $project_path;

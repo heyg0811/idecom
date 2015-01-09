@@ -9,10 +9,10 @@
     <?php echo \Form::csrf(); ?>
     <div class="body bg-gray">
       <div class="form-group">
-        <input type="text" name="username" class="form-control" placeholder="UserID or MailAddress"/>
+        <?php echo Form::input('user[username]','',array('class'=>'form-control','placeholder'=>'UserID or MailAddress')); ?>
       </div>
       <div class="form-group">
-        <input type="password" name="password" class="form-control" placeholder="Password"/>
+        <?php echo Form::password('user[password]','',array('class'=>'form-control','placeholder'=>'Password')); ?>
       </div>
       <?php if(isset($errmsg)) echo $errmsg;?>
 

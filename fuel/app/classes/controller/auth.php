@@ -121,7 +121,20 @@ class Controller_Auth extends Controller_Template {
     }
 
     Auth::update_user(array('password_change'=>true));
-
+    
+    //インスタンス生成
+    $developer_model = Model_Developer::forge();
+    
+    //値設定
+    $data = array(
+      'user_id' => Auth::get('id'),
+    );
+    //Developer登録
+    foreach($developer_model as $val)
+    {
+      $val->set($data)->save();
+    }
+    
     Response::redirect('/');
   }
 

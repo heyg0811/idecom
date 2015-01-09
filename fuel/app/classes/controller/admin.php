@@ -66,7 +66,7 @@ class Controller_Admin extends Controller_Template {
     $this->template->content = View::forge('admin/product');
 
     $options = array(
-      'where'    => array('status' => Config::get('PRODUCT.STATUS.ENABLE')),
+      'where'    => array('status' => Config::get('PROJECT.STATUS.ENABLE')),
       'order_by' => array('created_at' => 'desc'),
     );
     $this->template->content->products = Model_Product::find('all',$options);
@@ -80,6 +80,12 @@ class Controller_Admin extends Controller_Template {
   public function action_recruit() {
     $this->template->subtitle = '募集';
     $this->template->content = View::forge('admin/recruit');
+
+    $options = array(
+      'where'    => array('status' => Config::get('PROJECT.STATUS.ENABLE')),
+      'order_by' => array('created_at' => 'desc'),
+    );
+    $this->template->content->recruits = Model_Recruit::find('all',$options);
   }
 
   /**
