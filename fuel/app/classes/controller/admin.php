@@ -21,7 +21,6 @@ class Controller_Admin extends Controller_Template {
   public function before() {
     // 決まり文句
     parent::before();
-
     $this->template->title = '管理';
   }
 
@@ -54,6 +53,8 @@ class Controller_Admin extends Controller_Template {
       $key = 0;
     }
     $this->template->content->newest_id = $key;
+    
+    
   }
 
   /**
@@ -62,6 +63,7 @@ class Controller_Admin extends Controller_Template {
    * @return
    */
   public function action_product() {
+    Model_Developer::check();
     $this->template->subtitle = '作品';
     $this->template->content = View::forge('admin/product');
 
