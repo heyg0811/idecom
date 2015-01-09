@@ -13,8 +13,11 @@
         <div class="form-group">
           <div class="col-xs-12">
             <h3>
-              <?php echo Form::label($developer['nickname'], 'nickname'); ?>
+              <?php echo Form::label('名前', 'nickname'); ?>
             </h3>
+            <div class="col-xs-3">
+            <?php echo Form::input('user[nickname]',$developer['nickname'],array('class'=>'form-control')); ?>
+            </div>
           </div>
         </div>
       </div>
@@ -24,19 +27,19 @@
             <?php echo Form::label('学年', 'grade'); ?>
           </div>
           <div class="col-xs-3">
-            <?php echo Form::input('developer[grade]',$developer['grade'],array('class'=>'form-control')); ?>
+            <?php echo Form::input('user[grade]',$developer['grade'],array('class'=>'form-control')); ?>
           </div>
           <div class="col-xs-3">
             <?php echo Form::label('専攻', 'major'); ?>
           </div>
           <div class="col-xs-3">
-            <?php echo Form::input('developer[major]',$developer['major'],array('class'=>'form-control')); ?>
+            <?php echo Form::input('user[major]',$developer['major'],array('class'=>'form-control')); ?>
           </div>
           <div class="col-xs-3" style="margin-top:15px;">
             <?php echo Form::label('ジャンル', 'genre'); ?>
           </div>
           <div class="col-xs-3" style="margin-top:15px;">
-                      <?php echo Form::select('developer[genre]', $developer['genre'], 
+                      <?php echo Form::select('user[genre]', $developer['genre'], 
                       array(
                         'System' => 'System',
                         'Web' => 'Web',
@@ -69,13 +72,14 @@
             </div>
             <div class="col-xs-6 ">
               <input type="hidden" name="skill_name[]" value="<?php echo $val; ?>">
-              <input type="text" class="form-control" name="developer[skill][]" size="5" maxlength="3" value="<?php echo $developer['skill'][$key]?>">
+              <input type="text" class="form-control" name="user[skill][]" size="5" maxlength="3" value="<?php echo $developer['skill'][$key]?>">
             </div>
           </div>
         <?php endforeach; ?>
       </div>
     </div>
     <div class="box-footer">
+      <button type="submit" class="btn btn-success">プレビュー</button>
       <button type="submit" class="btn btn-success">更新</button>
     </div>
   </form>

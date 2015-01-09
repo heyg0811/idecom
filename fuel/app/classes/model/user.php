@@ -10,10 +10,16 @@ class Model_User extends \Orm\Model
     'password',
     'group',
     'email',
+    'thumbnail',
+    'nickname',
+    'grade',
+    'major',
+    'genre',
+    'skill',
+    'status',
+    'password_change',
     'last_login',
     'login_hash',
-    'profile_fields',
-    'thumbnail',
     'created_at',
     'updated_at'
   );
@@ -58,8 +64,35 @@ class Model_User extends \Orm\Model
     ->add_rule('required')
     ->add_rule('min_length', 6)
     ->add_rule('max_length', 20);
-
     $validation->run(Input::post(static::$_table_name, null), static::$_table_name);
+    return $validation;
+  }
+  
+  public static function profile_validate() {
+    $validation = Validation::forge();
+    
+    $validation->add('nickname', '名前')
+            ->add_rule('required');
+    $validation->add('grade', '学年')
+            ->add_rule('numeric_min', 1)
+            ->add_rule('numeric_max', 4);
+    $validation->add('major', '専攻')
+            ->add_rule('max_length', 50);
+    $validation->add('genre', 'ジャンル')
+            ->add_rule('max_length', 50);
+    $form_data = Input::post(static::$_table_name, null);
+    foreach ($form_data['skill'] as $key => $val) {
+      $validation->add('skill.' . $key, '技術')
+        ->add_rule('min_length', 1)
+        ->add_rule('max_length', 3)
+        ->add_rule('numeric_min', 0)
+        ->add_rule('numeric_max', 100)
+        ->add_rule('match_pattern',"/^[0-9]{1,3}$/");
+    }
+    $validation->add('status', '表示')
+            ->add_rule('required');
+
+    $validation->run($form_data , static::$_table_name);
     return $validation;
   }
 
@@ -77,16 +110,12 @@ class Model_User extends \Orm\Model
    * @return
    */
   public static function getName($id) {
-    $user_data = DB::select('profile_fields')
+    $user_data = DB::select('nickname')
     ->from(static::$_table_name)
     ->where('id', $id)
     ->execute()
     ->as_array();
-    
-    
-    $profile_data = @unserialize($user_data[0]['profile_fields']);
-    
-    return $profile_data['nickname'];
+    return $user_data[0]['nickname'];
   }
 
   /**
@@ -100,7 +129,15 @@ class Model_User extends \Orm\Model
     ->where('id', $id)
     ->execute()
     ->as_array();
-
     return $user_data[0]['thumbnail'];
+  }
+  
+  //technologyをjson形式にencode
+  public static function technology_encode($technology) {
+    return json_encode($technology);
+  }
+  //technologyをjson形式からdecode
+  public static function technology_decode($technology) {
+    return json_decode($technology);
   }
 }

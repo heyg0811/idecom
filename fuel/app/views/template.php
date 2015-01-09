@@ -29,7 +29,10 @@
         <!-- Original style -->
         <?php echo Asset::css('bootstrap-custom.css') ?>
         <?php echo Asset::css('original.css') ?>
-
+        <!-- Slider -->
+        <?php echo Asset::css('slider.css') ?>
+        <?php echo Asset::js('bootstrap-slider.js') ?>
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
@@ -258,7 +261,7 @@
                     <ul class="dropdown-menu">
                       <!-- User image -->
                       <li class="user-header bg-light-blue">
-                        <img src='<?php echo Config::get("USER_IMG_URL"),Auth::get("thumbnail"); ?>' class='img-circle'>
+                        <img src='<?php echo Auth::get("thumbnail"); ?>' class='img-circle'>
                         <p>
                           <?php echo Auth::get('nickname')?>
                           <small>Member since <?php echo date('Y-m-d',Auth::get('created_at'));?></small>
@@ -279,7 +282,7 @@
                       <!-- Menu Footer-->
                       <li class="user-footer">
                         <div class="pull-left">
-                          <a href="#" class="btn btn-default btn-flat">Profile</a>
+                          <a href="/author/edit" class="btn btn-default btn-flat">Profile</a>
                         </div>
                         <div class="pull-right">
                           <a href="/logout" class="btn btn-default btn-flat">Sign out</a>
@@ -299,7 +302,7 @@
                 <!-- Sidebar user panel -->
                 <div class="user-panel">
                   <div class="pull-left image">
-                    <img src='<?php echo Config::get("USER_IMG_URL"),Auth::get("thumbnail"); ?>' class='img-circle'>
+                    <img src='<?php echo Auth::get("thumbnail"); ?>' class='img-circle'>
                   </div>
                   <div class="pull-left info">
                     <p><?php echo Auth::get('nickname')?></p>
@@ -328,6 +331,7 @@
                       <li><a href="/admin/dashboard"><i class="fa fa-angle-double-right"></i> ダッシュボード</a></li>
                       <li><a href="/admin/product"><i class="fa fa-angle-double-right"></i> 作品管理</a></li>
                       <li><a href="/admin/recruit"><i class="fa fa-angle-double-right"></i> 募集管理</a></li>
+                      <li><a href="/author/edit"><i class="fa fa-angle-double-right"></i> プロフィール</a></li>
                     </ul>
                   </li>
                   <li>
