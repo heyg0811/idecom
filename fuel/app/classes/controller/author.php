@@ -104,8 +104,34 @@ class Controller_Author extends Controller_Template {
 
     //user_id取得
     $user_id = Auth::get('id');
+    
     //developer情報取得
     $dev = Controller_Author::developer_get($user_id);
+    
+    //developer_model取得
+    $developer_model = Model_Developer::forge();
+    //developerのデータがあるか
+    $dev_user = $developer_model->find('all',array('where' => array(array('user_id', $user_id))));
+    if(empty($dev_user))
+    {
+      //なければtableに作成
+      //値設定
+      $data = array(
+        'user_id' => Auth::get('id'),
+        'grade' => null,
+        'major' => null,
+        'genre' => null,
+        'skill' => null,
+      );
+      //インスタンス生成
+      $developer_model = Model_Developer::forge($data);
+      
+      //Developer登録
+      $developer_model->save();
+      
+      //developer情報取得
+      $dev = Controller_Author::developer_get($user_id);
+    }
     // 初期表示時
     if (!Security::check_token()) {
       $this->template->content->developer = $dev;
@@ -126,8 +152,6 @@ class Controller_Author extends Controller_Template {
       return;
     }
 
-    //インスタンス生成
-    $developer_model = Model_Developer::forge();
     
     //developerデータ取得
     $developer = $developer_model->find('all', array('where' => array('user_id' => $user_id)));

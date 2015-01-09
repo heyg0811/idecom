@@ -14,33 +14,6 @@ class Model_Developer extends \Orm\Model {
     'major',
     'genre',
     'skill',
-    /*
-      'id' => array(
-          'skip' =>true,
-      ),
-      'user_id' => array(
-          'skip' =>true,
-      ),
-      'grade' => array(
-          'data_type' => 'int',
-          'label'     => '学年',
-          'validation'=> array('exact_length' => array(1),'numeric_min' => array(1),'numeric_max' => array(4)),
-          'form'      => array(
-            'type' => 'text',
-            'class'=> 'form-collatol',
-          ),
-      ),
-      'major' => array(
-          'data_type' => 'varchar',
-          'label'     => '学科',
-          'validation'=> array('max_length' => array(30)),
-          'form'      => array(
-            'type' => 'text',
-            'class'=> 'form-collatol',
-          ),
-      ),
-      */
-      
   );
   protected static $_primary_key = array('id');
   
