@@ -43,10 +43,10 @@ table {
     float: left;
 }
 
-#folders {
-    padding: 5px;
-    overflow: auto;
-}
+/*#folders {*/
+/*    padding: 5px;*/
+/*    overflow: auto;*/
+/*}*/
 
 #toolbar {
     padding: 5px;
