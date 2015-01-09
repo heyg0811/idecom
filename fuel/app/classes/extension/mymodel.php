@@ -33,7 +33,7 @@ class MyModel extends \Orm\Model
    */
   public static function updateById($id, $insert_data)
   {
-    return Model_Product::find($id)->set($insert_data)->save();
+    return static::find($id)->set($insert_data)->save();
   }
   
   /**
