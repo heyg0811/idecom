@@ -56,5 +56,13 @@ class Model_Bbsthread extends \Model_Crud
       ->as_array();
       return $threads;
 	}
+	public static function getTitle($id) {
+    $user_data = DB::select('title')
+    ->from(static::$_table_name)
+    ->where('id', $id)
+    ->execute()
+    ->as_array();
+    return $user_data[0]['title'];
+  }
 
 }
