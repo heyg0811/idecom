@@ -64,7 +64,6 @@
                 </div>
                 <div class="box-body" style="display: none">
                   <?php echo $value['text']; ?>
-    
                 </div>
               </div>
             </li>
@@ -103,7 +102,7 @@
       </div><!-- /.chat -->
       <div class="box-footer">
         <form id="message_form">
-          <input type="hidden" name="id" value="<?php echo $developer["user_id"];?>">
+          <input type="hidden" name="id" value="<?php echo $developer["id"];?>">
           <div class="input-group">
             <input id="message_body" class="form-control" placeholder="Type message..."/>
             <div class="input-group-btn">
@@ -116,9 +115,9 @@
   </div>
 </div>
 
-<script type="text/javascript">
-  
 
+
+<script type="text/javascript">
   $(function(){
     var newest_id = <?php echo $newest_id;?>;
     // メッセージ投稿
@@ -135,7 +134,7 @@
         data: {
           "body":$('#message_body').val(),
           "newest_id":newest_id,
-          "host_id":<?php echo $developer["user_id"];?>
+          "host_id":<?php echo $developer["id"];?>
         },
       }).done(function(message_diffs){
         prependChatItem(message_diffs);

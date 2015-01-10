@@ -78,9 +78,6 @@ function author_height() {
 }
 //----------  timeline  scrollbar  ----------
 $('#timeline-box').slimScroll({
-        height: '350px'
-});
-$('#timeline-box').slimScroll({
-        height: '350px'
+        
 });
 //----------  author  ----------

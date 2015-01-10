@@ -50,9 +50,8 @@ class Model_Message extends \Orm\Model
     // フォーム用に整形
     foreach ($message_diffs as &$message) {
       $user_data = Model_User::getUser($message['user_id']);
-      $profile_data = @unserialize($user_data[0]['profile_fields']);
       $message['date']      = date('Y-m-d H:i:s',$message['created_at']);
-      $message['user_name'] = $profile_data['nickname'];
+      $message['user_name'] = Model_User::getName($message['user_id']);
       $message['thumbnail'] = $user_data[0]['thumbnail'];
     }
     return $message_diffs;

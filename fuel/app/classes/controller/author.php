@@ -68,7 +68,7 @@ class Controller_Author extends Controller_Template {
     $dev_id = Input::param('id');
     //developer情報取得
     $dev = Controller_Author::developer_get($dev_id);
-  
+    
     //タイムラインの取得
     $timeline = Controller_Author::timeline_get($dev_id);
     //メッセージの取得
@@ -84,11 +84,10 @@ class Controller_Author extends Controller_Template {
         $message['thumbnail'] = "/assets/img/user/noimage.jpg";
       }
     }
-    
     $this->template->content->messages = $messages;
     $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
     $this->template->content->timeline = $timeline;
-    $this->template->content->developer = $dev;
+    $this->template->content->developer = $dev[2];
     
   }
 
@@ -106,32 +105,8 @@ class Controller_Author extends Controller_Template {
     $user_id = Auth::get('id');
     
     //developer情報取得
-    $dev = Controller_Author::developer_get($user_id);
-    
-    //developer_model取得
-    $developer_model = Model_Developer::forge();
-    //developerのデータがあるか
-    $dev_user = $developer_model->find('all',array('where' => array(array('user_id', $user_id))));
-    if(empty($dev_user))
-    {
-      //なければtableに作成
-      //値設定
-      $data = array(
-        'user_id' => Auth::get('id'),
-        'grade' => null,
-        'major' => null,
-        'genre' => null,
-        'skill' => null,
-      );
-      //インスタンス生成
-      $developer_model = Model_Developer::forge($data);
-      
-      //Developer登録
-      $developer_model->save();
-      
-      //developer情報取得
-      $dev = Controller_Author::developer_get($user_id);
-    }
+    $dev = Controller_Author::developer_get($user_id)[2];
+
     // 初期表示時
     if (!Security::check_token()) {
       $this->template->content->developer = $dev;
@@ -139,26 +114,25 @@ class Controller_Author extends Controller_Template {
     }
 
     //editデータ取得
-    $input_data = Input::post('developer');
+    $input_data = Input::post('user');
     $input_data['nickname'] = Auth::get('username');
     //更新時
-    $validation = Model_Developer::validate();
+    $validation = Model_User::profile_validate();
     $errors = $validation->error();
     if (!empty($errors)) {
       // エラーの設定
       $result_validate = $validation->show_errors();
-      $this->template->content->set_safe('errmsg', $result_validate);
+      MyUtil::set_alert('danger','入力エラーがあります',$validation->show_errors());
       $this->template->content->developer = $input_data;
       return;
     }
 
     
     //developerデータ取得
-    $developer = $developer_model->find('all', array('where' => array('user_id' => $user_id)));
+    $developer = Model_User::forge()->find('all', array('where' => array('id' => $user_id)));
 
     //値設定
     $data = array(
-      'user_id' => $user_id,
       'grade' => $input_data["grade"],
       'major' => $input_data["major"],
       'genre' => $input_data["genre"],
@@ -170,8 +144,10 @@ class Controller_Author extends Controller_Template {
       $val->set($data)->save();
     }
     
+    //-------------サムネイル-------------
     // アップロードパスを設定
-    $thumbnail_path = Config::get('UPLOAD_DIR') . 'user_thumbnail';
+    $thumbnail_path = Config::get('THUMBNAIL_DIR') . 'user_thumbnail';
+    
     // アップロード
     $temp_file = Input::file('thumbnail');
     if ($temp_file['size'] !== 0) {
@@ -186,6 +162,7 @@ class Controller_Author extends Controller_Template {
     	  $this->template->content->set_safe('errmsg', "ファイルアップロードに失敗しました");
     		return ;
     	}
+    	
     	Upload::save();
     	if($file = Upload::get_files(0)){
     	  //リサイズ画像名の作成（重複エラー処理）
@@ -200,7 +177,7 @@ class Controller_Author extends Controller_Template {
         //userデータ取得
         $user = $user_model->find('all', array('where' => array('id' => $user_id)));
         $thumbnail = array(
-          'thumbnail' => Config::get('UPLOAD_URL') . 'user_thumbnail/' . $new_file,
+          'thumbnail' => Config::get('THUMBNAIL_URL') . 'user_thumbnail/' . $new_file,
         );
         File::delete($thumbnail_path.'/'.$file['saved_as']);
         //thumbnail更新
@@ -211,7 +188,7 @@ class Controller_Author extends Controller_Template {
         //-------thumbnail更新-------
     	}
     }
-    
+    //-------------サムネイル-------------
     //developerデータ再取得
     $dev = Controller_Author::developer_get($user_id);
     
@@ -252,7 +229,7 @@ class Controller_Author extends Controller_Template {
     //表示用
     $view_list = array();
     //インスタンス生成
-    $dev_model = Model_Developer::forge();
+    $dev_model = Model_User::forge();
     $user_model = Model_User::forge();
     if(empty($filter) or $filter === "All"){
       //developerデータ取得
@@ -260,30 +237,27 @@ class Controller_Author extends Controller_Template {
     }else{
       //developerデータ取得
       $dev_list = $dev_model->find('all',array('where' => array(array('genre', $filter))));
-      
     }
     //userデータ取得
     $user_list = $user_model->find('all');
-    
     $temp = array();
     foreach($dev_list as $dev){
-      $temp['id'] = $dev['user_id'];
+      $temp['id'] = $dev['id'];
       foreach($user_list as $user){
-        if($dev['user_id'] === $user['id']){
-          $temp['name'] = $user['username'];
+        if($dev['id'] === $user['id']){
+          $temp['name'] = $user['nickname'];
         }
       }
-      $thumbnail = $user_model::getThumbnail($dev['user_id']);
+      $thumbnail = $user_model::getThumbnail($dev['id']);
       if(!empty($thumbnail)){
         $temp['thumbnail'] = $thumbnail;
       }else{
-        $temp['thumbnail'] = "/assets/img/user/noimage_t.jpg";
+        $temp['thumbnail'] = "/assets/img/user/noimage.png";
       }
       $temp['genre'] = $dev['genre'];
       
       array_push($view_list,$temp);
     }
-    
     return $view_list;
   }
 
@@ -297,67 +271,16 @@ class Controller_Author extends Controller_Template {
     $temp = array();
     $developer = array();
     //developer_model取得
-    $developer_model = Model_Developer::forge();
-    //developer情報取得 
-    $dev = $developer_model->find('all',array('where' => array(array('user_id', $user_id))));
-    
-    //username取得
     $user_model = Model_User::forge();
-    //thumbnail取得
-    $thumbnail = $user_model::getThumbnail($user_id);
-    $user = $user_model->find('all',array('where' => array(array('id', $user_id))));
-    foreach($user as $val){
-      $temp['nickname'] = $val['username'];
-    }
-    if(!empty($thumbnail)){
-      $temp['thumbnail'] = $thumbnail;
-    }else{
-      $temp['thumbnail'] = "/assets/img/user/noimage.jpg";
-    }
+    //developer情報取得 
+    $dev = $user_model->find('all',array('where' => array(array('id', $user_id))));
+
     //データ整形
     foreach($dev as $val){
-      $temp['user_id'] = $val['user_id'];
-      $temp['grade'] = $val['grade'];
-      $temp['major'] = $val['major'];
-      $temp['genre'] = $val['genre'];
-      $temp['skill'] = Model_Developer::technology_decode($val['skill']);
+      $val['skill'] = Model_User::technology_decode($val['skill']);
     }
-    return $temp;
+    return $dev;
   }
   
-  /**
-   * @brif    timeline挿入
-   * @access  public
-   * @return  TRUE or FALSE
-   */
-  public static function timeline_insert($user_id,$title,$icon,$text)
-  {
-    //timeline_model取得
-    $timeline = Model_Timeline::forge();
-    
-    $validation = Model_Timeline::validate($user_id,$title,$icon,$text);
-    $errors = $validation->error();
-    if (!empty($errors)) {
-      // エラーの設定
-      $result_validate = $validation->show_errors();
-      //エラーを返す
-      return $result_validate;
-    }
-    
-    $data = array(
-      'user_id' => $user_id,
-      'title' => $title,
-      'icon' => $icon,
-      'text' => $text,
-    );
-    
-    if(!$timeline->set($data)->save())
-    {
-      //失敗
-      return FALSE;
-    }else{
-      //成功
-      return TRUE;
-    }
-  }
+  
 }

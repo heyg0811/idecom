@@ -14,6 +14,7 @@ class Model_Developer extends \Orm\Model {
     'major',
     'genre',
     'skill',
+      
   );
   protected static $_primary_key = array('id');
   
