@@ -47,3 +47,14 @@
     }
   }
 </style>
+<script type="text/javascript">
+
+$(function(){
+  
+  $('#delete_button').on('click',function(){
+  
+  })
+})
+  
+
+</script>

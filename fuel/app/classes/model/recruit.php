@@ -71,4 +71,12 @@ class Model_Recruit extends MyModel
     );
     return static::insert($insert_data);
   }
+  
+  public static function DeleteEmpty($id)
+  {
+    $query = DB::delete('recruit')
+              ->where('id',$id)
+              ->execute();
+    
+  }
 }

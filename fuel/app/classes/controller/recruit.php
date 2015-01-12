@@ -247,4 +247,39 @@ class Controller_Recruit extends Controller_Template {
     MyUtil::set_alert('success','募集を更新しました');
     Response::redirect('admin/recruit');
   }
+  
+  
+
+  
+  public function action_delete() {
+    //  データの削除
+    $this->template->subtitle = '募集';
+    $this->template->content = View::forge('admin/recruit');
+
+    $options = array(
+      'where'    => array('status' => Config::get('PROJECT.STATUS.ENABLE')),
+      'order_by' => array('created_at' => 'desc'),
+    );
+    $this->template->content->recruits = Model_Recruit::find('all',$options);
+  
+
+       
+      $user_id = Auth::get('id');
+      if (!$recruit_id = Input::get('id', null)) {
+        Response::redirect('admin/recruit');
+        $recruit_model = new Model_Recruit();
+        $recruit = $recruit_model->find($recruit_id);
+        if ($recruit['user_id'] != $user_id || $recruit['status'] == '0') {
+          Response::redirect('admin/recruit');
+        }
+        Model_Recruit::DeleteEmpty($recruit_id);
+        Response::redirect('admin/recruit');
+      }
+       Model_Recruit::DeleteEmpty($recruit_id);
+        // 不要セッションを削除し一覧へ
+        MyUtil::set_alert('success','   削除されました');
+       Response::redirect('admin/recruit');
+    
+    
+  }
 }
