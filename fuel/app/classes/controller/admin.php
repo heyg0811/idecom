@@ -132,6 +132,12 @@ class Controller_Admin extends Controller_Template {
     $this->template->content = View::forge('admin/nice');
     $this->template->content->products = Model_Product::find('all');
 
+// いいね!!クリック時カウントアップ（簡易版）
+    if(isset($_POST['nice'])) {
+      Model_Nice::updateNice();
+    }
+
+
   }
 
 }

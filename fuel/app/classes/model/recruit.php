@@ -7,18 +7,17 @@ class Model_Recruit extends MyModel
     'id',
     'user_id',
     'title',
-    'category',
     'skill',
     'outline',
     'detail',
     'thumbnail',
-    'nice',
-    'status',
+    'category',
     'count',
+    'status',
     'created_at',
   );
   protected static $primary_key = array('id');
-  
+
 	/**
    * @brif    入力チェック
    * @access  public
@@ -49,7 +48,7 @@ class Model_Recruit extends MyModel
     ->add_rule('max_length', 65535);
 
     $form_data = Input::post(static::$_table_name, null);
-    
+
     foreach ($form_data['skill'] as $key => $val) {
       $validation->add('skill.' . $key, '技術')
       ->add_rule('max_length', 20);
@@ -58,7 +57,7 @@ class Model_Recruit extends MyModel
     $validation->run($form_data , static::$_table_name);
     return $validation;
   }
-  
+
   /**
    * @brif    空のインサート
    * @access  public
