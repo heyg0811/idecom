@@ -76,8 +76,24 @@ function author_height() {
   $('div#timeline-box').css('height',Height+'px');
   return ;
 }
+
 //----------  timeline  scrollbar  ----------
 $('#timeline-box').slimScroll({
-        
 });
+//----------  timeline  scrollbar end  ----------
+
+//----------  slider  ----------
+$("[data-slider]")
+.each(function() {
+    var input = $(this);
+    $("<span>")
+    .addClass("output")
+    .insertAfter($(this));
+})
+.bind("slider:ready slider:changed", function( event, data) {
+    $(this)
+    .nextAll(".output:first")
+    .html(data.value.toFixed(0));  // 数値表示の小数点以下数
+}); 
+//----------  slider end  ----------
 //----------  author  ----------

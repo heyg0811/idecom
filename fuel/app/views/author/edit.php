@@ -1,4 +1,3 @@
-<!-- general form elements -->
 <div class="box box-success">
   <?php if (!empty($errmsg)): ?>
   <hr>
@@ -15,12 +14,22 @@
             <h3>
               <?php echo Form::label('名前', 'nickname'); ?>
             </h3>
-            <div class="col-xs-3">
+            <div class="col-xs-6">
             <?php echo Form::input('user[nickname]',$developer['nickname'],array('class'=>'form-control')); ?>
             </div>
           </div>
         </div>
       </div>
+      <hr>
+      <div class="form-group">
+          <label class="btn btn-primary">
+            <input type="radio" name="user[status]" id="option1" value="1" checked> 公開
+          </label>
+          <label class="btn btn-primary">
+            <input type="radio" name="user[status]" id="option2" value="0" <?php if($developer['status']==='0') echo 'checked' ;?>> 非公開
+          </label>
+      </div>
+      <hr>
       <div class="row">
         <div class="form-group">
           <div class="col-xs-3">
@@ -70,9 +79,9 @@
             <div class="col-xs-6 text-center ">
               <?php echo Form::label($val, 'skill_label'); ?>
             </div>
-            <div class="col-xs-6 ">
+            <div class="col-xs-6">
               <input type="hidden" name="skill_name[]" value="<?php echo $val; ?>">
-              <input type="text" class="form-control" name="user[skill][]" size="5" maxlength="3" value="<?php echo $developer['skill'][$key]?>">
+              <input type="text" class="form-control" name="user[skill][]" value="<?php echo $developer['skill'][$key]?>" data-slider-step="1" data-slider-range="0,100" data-slider="true">
             </div>
           </div>
         <?php endforeach; ?>
@@ -85,11 +94,4 @@
   </form>
 </div><!-- /.box -->
 
-<style>
-  /* 応急処置 */
-  @media screen and (max-width: 575px){
-	  .content{
-	    width: 100%;
-	  }
-  }
-</style>
+<?php echo Asset::js('simple-slider.min.js') ?>

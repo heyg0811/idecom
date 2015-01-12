@@ -1,4 +1,3 @@
-
 <div class="col-xs-12 col-sm-4 col-md-4" id="user-box">
   <div class="box box-solid bg-green-gradient">
     <div class="box-header">
@@ -113,6 +112,7 @@
       </div>
     </div><!-- /.box (chat box) -->
   </div>
+
 </div>
 
 
