@@ -17,7 +17,7 @@
           <img src="<?php echo Config::get('UPLOAD_URL') . $recruit['thumbnail']; ?>" class="img-responsive">
           <div class="inner">
             <h4>
-              <i class="fa fa-desktop" style="margin-right:4px;"></i> さくひんたいとる
+              <i class="fa fa-desktop" style="margin-right:4px;"></i><?php echo $recruit['title']; ?>
             </h4>
             <p style="height:100px;">
               <?php echo $recruit['outline'];?>
