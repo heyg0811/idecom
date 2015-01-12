@@ -126,17 +126,18 @@ class Controller_Author extends Controller_Template {
       $this->template->content->developer = $input_data;
       return;
     }
-
     
     //developerデータ取得
     $developer = Model_User::forge()->find('all', array('where' => array('id' => $user_id)));
 
     //値設定
     $data = array(
-      'grade' => $input_data["grade"],
-      'major' => $input_data["major"],
-      'genre' => $input_data["genre"],
-      'skill' => Model_Developer::technology_encode($input_data['skill']),
+      'nickname'  => $input_data["nickname"],
+      'grade'     => $input_data["grade"],
+      'major'     => $input_data["major"],
+      'genre'     => $input_data["genre"],
+      'skill'     => Model_Developer::technology_encode($input_data['skill']),
+      'status'    => $input_data["status"],
     );
     //Developer更新
     foreach($developer as $val)
@@ -191,8 +192,7 @@ class Controller_Author extends Controller_Template {
     //-------------サムネイル-------------
     //developerデータ再取得
     $dev = Controller_Author::developer_get($user_id);
-    
-    $this->template->content->developer = $dev;
+    $this->template->content->developer = $dev[2];
   }
 
   /**
@@ -233,10 +233,12 @@ class Controller_Author extends Controller_Template {
     $user_model = Model_User::forge();
     if(empty($filter) or $filter === "All"){
       //developerデータ取得
-      $dev_list = $dev_model->find('all');
+      $dev_list = $dev_model->find('all',array('where' => array(array('status', '1'))));
     }else{
       //developerデータ取得
-      $dev_list = $dev_model->find('all',array('where' => array(array('genre', $filter))));
+      $dev_list = $dev_model->find('all',array('where' => array(
+          array('genre', $filter),array('status', '1')
+        )));
     }
     //userデータ取得
     $user_list = $user_model->find('all');

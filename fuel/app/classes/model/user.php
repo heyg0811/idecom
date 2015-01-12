@@ -91,7 +91,6 @@ class Model_User extends \Orm\Model
     }
     $validation->add('status', '表示')
             ->add_rule('required');
-
     $validation->run($form_data , static::$_table_name);
     return $validation;
   }

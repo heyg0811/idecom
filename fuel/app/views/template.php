@@ -30,9 +30,7 @@
         <?php echo Asset::css('bootstrap-custom.css') ?>
         <?php echo Asset::css('original.css') ?>
         <!-- Slider -->
-        <?php echo Asset::css('slider.css') ?>
-        <?php echo Asset::js('bootstrap-slider.js') ?>
-        
+        <?php echo Asset::css('simple-slider.css') ?>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="//code.jquery.com/ui/1.11.1/jquery-ui.min.js" type="text/javascript"></script>
