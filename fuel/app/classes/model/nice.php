@@ -1,5 +1,5 @@
 <?php
-class Model_Bbscomment extends \Orm\Model
+class Model_Nice extends \Orm\Model
 {
   // テーブル情報を設定
   protected static $_table_name = 'nice';
@@ -26,6 +26,6 @@ class Model_Bbscomment extends \Orm\Model
 		return $validation;
 	}
 	public static function updateNice($id) {
-    DB::query('UPDATE product SET nice = nice + 1 WHERE id = '. $id)->execute();
+    DB::query('UPDATE $_table_name SET nice = nice + 1 WHERE id = '. $id)->execute();
   }
 }

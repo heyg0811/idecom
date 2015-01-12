@@ -28,7 +28,7 @@ class Model_Bbscomment extends \Orm\Model
 		->add_rule('max_length', 10);
 
 		$form_data = Input::post(static::$_table_name, null);
-		
+
 	    $validation->run($form_data , static::$_table_name);
 		return $validation;
 	}
@@ -37,9 +37,11 @@ class Model_Bbscomment extends \Orm\Model
     list($insert_id,$row) = DB::insert(static::$_table_name)
     ->set($data)
     ->execute();
-
     return $insert_id;
 	}
+
+
+
 
 
 }

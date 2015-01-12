@@ -13,8 +13,7 @@
   <?php foreach ($products as $product): ?>
     <div class="col-md-4 col-sm-6 col-xs-12 item <?php echo Config::get('CATEGORY.'.$product['category']); ?>">
       <div class="small-box bg-blue">
-        <?php echo Asset::img('noimage.jpg'); ?>
-       <!-- <img src="<?php //echo Config::get('USER_IMG_URL') . $product['thumbnail']; ?>" class="img-responsive">-->
+       <img src="<?php echo Config::get('USER_IMG_URL') . $product['thumbnail']; ?>" class="img-responsive">
         <div class="inner">
           <h2>
             <i class="fa fa-desktop" style="margin-right:4px;"></i>
@@ -29,7 +28,7 @@
             </h3>
             <br>
               <div style="margin-left : 62%">
-                <button id= "nice_bt" class="btn btn-success btn-lg">
+                <button id= "btn-nice" name="nice" class="btn btn-success btn-lg">
                   <i class="ion ion-thumbsup"></i>いいね!!
                 </button>
               </div>

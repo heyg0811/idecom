@@ -42,4 +42,38 @@ class Model_Timeline extends \Orm\Model {
     $validation->run();
     return $validation;
   }
+  /**
+   * @brif    timeline挿入
+   * @access  public
+   * @return  TRUE or FALSE
+   */
+  public static function timeline_insert($user_id,$title,$icon,$text)
+  {
+    //timeline_model取得
+    $timeline = Model_Timeline::forge();
+    
+    $validation = Model_Timeline::validate($user_id,$title,$icon,$text);
+    $errors = $validation->error();
+    if (!empty($errors)) {
+      // エラーの設定
+      $result_validate = $validation->show_errors();
+      //エラーを返す
+      return $result_validate;
+    }
+    $data = array(
+      'user_id' => $user_id,
+      'title' => $title,
+      'icon' => $icon,
+      'text' => $text,
+    );
+    
+    if(!$timeline->set($data)->save())
+    {
+      //失敗
+      return FALSE;
+    }else{
+      //成功
+      return TRUE;
+    }
+  }
 }

@@ -30,8 +30,13 @@
     border-radius: 5px;
     
   }
-  .timeline-body{
-    width: 90%
+    .timeline-body{
+    width : 80% ; /* IE8以下とAndroid4.3以下用フォールバック */
+    width: -webkit-calc(100%  - 60px);
+    width : calc(100%  - 60px) ;
   }
+  
+
+
   /* ------author css------ */
   
