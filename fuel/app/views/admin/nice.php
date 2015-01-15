@@ -28,7 +28,7 @@
             </h3>
             <br>
               <div style="margin-left : 62%">
-                <button id= "btn-nice" name="nice" class="btn btn-success btn-lg">
+                <button id= "btn-nice" name="nice" class="btn btn-success btn-lg" onClick="<?php Model_Nice::updateNice(); ?>">
                   <i class="ion ion-thumbsup"></i>いいね!!
                 </button>
               </div>

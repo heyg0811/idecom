@@ -53,8 +53,8 @@ class Controller_Admin extends Controller_Template {
       $key = 0;
     }
     $this->template->content->newest_id = $key;
-    
-    
+
+
   }
 
   /**
@@ -113,13 +113,27 @@ class Controller_Admin extends Controller_Template {
   }
 
   /**
-   * @brif    コメント一覧表示　保留（このページいるかな？）
+   * @brif    コメント一覧表示
    * @access  public
    * @return
    */
   public function action_comment() {
     $this->template->subtitle = '自分へのコメント';
-    $this->template->content = View::forge('admin/comment');
+    $this->template->content  = View::forge('admin/comment');
+    // 初期表示時
+
+    //product,recruitページのコメントを取得
+    $pro_comments = Model_Comment::getComment_pro();
+    $rec_comments = Model_Comment::getComment_rec();
+    // var_dump($comments);exit();
+    $this->template->content->pro_comments = $pro_comments;
+    $this->template->content->rec_comments = $rec_comments;
+    if (!Security::check_token())
+    {
+      return ;
+    }
+
+    Response::redirect('admin/comment');
   }
 
   /**

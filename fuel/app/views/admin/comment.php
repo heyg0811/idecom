@@ -1,42 +1,53 @@
 <div class="box box-info">
   <div class="box-header">
     <i class="fa fa-comments-o"></i>
-    <h3 class="box-title">自分へのコメント一覧</h3>
+    <h2 class="box-title">自分へのコメント一覧</h2>
+  </div>
+
+  <div class="box-header">
+    <i class="fa fa-comments-o"></i>
+    <h3 class="box-title">制作物に対するコメント</h3>
   </div>
 
   <div class="box-body chat" id="chat-box">
-    <?php $i=1; foreach ($comments as $comment ): ?>
-      <hr />
+    <?php $i=1; foreach ($pro_comments as $comment ): ?>
       <div class="item">
-
-        <img src="img/avatar.png" alt="user image" class="online"/>
+        <img src='<?php echo Config::get("USER_IMG_URL"), Auth::get("thumbnail"); ?>' class='online'>
         <p class="message">
-          <a href="/author/detail" class="name">
-            <?php echo Model_User::getName($comment['user_id']); ?>
-          </a>
-          <small style="margin-top:2px;" class="text-muted pull-left">
-            <?php echo "No.".$i." : "; ?>
-          </small>
-          <small class="text-muted pull-right"><i class="fa fa-clock-o"></i>
+          <small style="margin-top:5px;" class="text-muted pull-right">
+            <i class="fa fa-clock-o"></i>
             <?php echo date($comment['date']);?>
           </small>
-          <br><?php echo nl2br($comment['comment']); ?>
+          <a href="/author/detail" class="name">
+            <?php echo "No.".$i++." : ".Model_User::getName($comment['user_id']); ?>
+          </a>
+          <?php echo nl2br($comment['comment']); ?>
         </p>
       </div><!-- /.item -->
-    <?php $i++; endforeach; ?>
+    <?php endforeach; ?>
   </div><!-- /.chat -->
 
-  <form action="comment" method="post">
-    <?php echo \Form::csrf(); ?>
-    <div class="box-footer">
-      <div class="form-group">
-        <label for="">コメント</label>
-        <input type=hidden name="thread_id" value=<?php echo $comment['thread_id'];?> />
-        <textarea name="comment" class="form-control" rows="5" ></textarea>
-      </div>
-    </div>
-    <div class="box-footer">
-      <input type="submit" value="投稿" class="btn btn-success btn-lg"/>
-    </div>
-  </form>
+  <div class="box-header">
+    <i class="fa fa-comments-o"></i>
+    <h3 class="box-title">募集プロジェクトに対するコメント</h3>
+  </div>
+
+  <div class="box-body chat" id="chat-box">
+    <?php $i=1; foreach ($rec_comments as $comment ): ?>
+      <div class="item">
+        <img src='<?php echo Config::get("USER_IMG_URL"), Auth::get("thumbnail"); ?>' class='online'>
+        <p class="message">
+          <small style="margin-top:5px;" class="text-muted pull-right">
+            <i class="fa fa-clock-o"></i>
+            <?php echo date($comment['date']);?>
+          </small>
+          <a href="/author/detail" class="name">
+            <?php echo "No.".$i++." : ".Model_User::getName($comment['user_id']); ?>
+          </a>
+          <?php echo nl2br($comment['comment']); ?>
+        </p>
+      </div><!-- /.item -->
+    <?php endforeach; ?>
+  </div><!-- /.chat -->
+
 </div><!-- /.box (chat box) -->
