@@ -68,7 +68,7 @@ class Controller_Author extends Controller_Template {
     $dev_id = Input::param('id');
     //developer情報取得
     $dev = Controller_Author::developer_get($dev_id);
-    
+
     //タイムラインの取得
     $timeline = Controller_Author::timeline_get($dev_id);
     //メッセージの取得
@@ -87,7 +87,7 @@ class Controller_Author extends Controller_Template {
     $this->template->content->messages = $messages;
     $this->template->content->newest_id = empty($key = key($messages)) ? 0 : $key;
     $this->template->content->timeline = $timeline;
-    $this->template->content->developer = $dev[2];
+    $this->template->content->developer = $dev;
     
   }
 
@@ -105,7 +105,7 @@ class Controller_Author extends Controller_Template {
     $user_id = Auth::get('id');
     
     //developer情報取得
-    $dev = Controller_Author::developer_get($user_id)[2];
+    $dev = Controller_Author::developer_get($user_id);
 
     // 初期表示時
     if (!Security::check_token()) {
@@ -192,7 +192,7 @@ class Controller_Author extends Controller_Template {
     //-------------サムネイル-------------
     //developerデータ再取得
     $dev = Controller_Author::developer_get($user_id);
-    $this->template->content->developer = $dev[2];
+    $this->template->content->developer = $dev;
   }
 
   /**
@@ -276,12 +276,14 @@ class Controller_Author extends Controller_Template {
     $user_model = Model_User::forge();
     //developer情報取得 
     $dev = $user_model->find('all',array('where' => array(array('id', $user_id))));
-
+    
     //データ整形
     foreach($dev as $val){
       $val['skill'] = Model_User::technology_decode($val['skill']);
     }
-    return $dev;
+    foreach($dev as $val){
+      return $val;
+    };
   }
   
   

@@ -56,4 +56,6 @@ class Model_Message extends \Orm\Model
     }
     return $message_diffs;
   }
+  
+  
 }

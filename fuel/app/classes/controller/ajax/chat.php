@@ -11,7 +11,7 @@
  * @package app
  * @extends Controller_Template
  */
-class Controller_Ajax_Message extends Controller_Rest {
+class Controller_Ajax_Chat extends Controller_Rest {
 
   /**
    * @brif    チャットの投稿
@@ -26,12 +26,12 @@ class Controller_Ajax_Message extends Controller_Rest {
       echo json_encode(false);
     }
     $request_path  = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
-    if (!$host_id = Input::post('host_id')) {
-      $host_id = Auth::get('id');
+    if (!$group_id = Input::post('group_id')) {
+      $group_id = Input::post('group_id');
     }
     $newest_id     = Input::post('newest_id', null);
-    Model_Message::insert($host_id,Input::post('body', null));
-    $message_diffs = Model_Message::getDiff($host_id, $newest_id);
+    Model_Groupchatcomment::insert($group_id,Input::post('body', null));
+    $message_diffs = Model_Groupchatcomment::getDiff($group_id, $newest_id);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($message_diffs);
   }
@@ -43,15 +43,10 @@ class Controller_Ajax_Message extends Controller_Rest {
    */
   public function post_refresh() {
     $request_path  = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
-    $host_id       = Auth::get('id');
+    $group_id      = Input::post('group_id');
     $newest_id     = Input::post('newest_id', null);
-    if ($request_path != '/' && $request_path != '/admin/dashboard') {
-      $host_id = Input::post('host_id');
-    }
-    $message_diffs = Model_Message::getDiff($host_id, $newest_id);
+    $message_diffs = Model_Message::getDiff($group_id, $newest_id);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($message_diffs);
   }
-  
-  
 }

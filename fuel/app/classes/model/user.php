@@ -128,7 +128,15 @@ class Model_User extends \Orm\Model
     ->where('id', $id)
     ->execute()
     ->as_array();
-    return $user_data[0]['thumbnail'];
+    foreach($user_data as $val){
+      if(empty($val['thumbnail'])){
+        return "/assets/img/user/noimage.png";
+      }else{
+        return $val['thumbnail'];
+      }
+    }
+    
+    
   }
   
   //technologyをjson形式にencode
