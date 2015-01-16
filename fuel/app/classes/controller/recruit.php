@@ -63,23 +63,40 @@ class Controller_Recruit extends Controller_Template {
     $this->template->subtitle = '詳細';
     $this->template->content = View::forge('recruit/detail');
 
-    if (!$id = Input::get('id',null)) {
+    if (!$id = Input::param('id',null)) {
       Response::redirect('recruit/list');
     }
 
+    
     $recruit_model = new Model_Recruit();
 
     $recruit_model->updateCount($id);
     $recruit = $recruit_model->find($id);
     $recruit['skill'] = json_decode($recruit['skill']);
+    
+    
+    $join = Model_Recruitjoin::check($id);
+    
+      
+        
+          
+            
+              
 
-    $this->template->content->set_safe('recruit', $recruit);
-
+    $this->template->content->recruit = $recruit;
+    $this->template->content->joint = $join;
+    
+    
+    // 初期表示時
+    if (!Security::check_token()) {
+      return;
+    }
     //コメント格納
     $validation    = Model_Comment::validate();
     $comment_data  = $validation->validated();
-    $recruit_path  = Config::get('UPLOAD_DIR') . $user_id . '/recruit/' . $recruit_id;
-    $comment_data += array('user_id'=>Auth::get('id'),'com_url'=>$recruit_path);
+    $text= Input::param('comment');
+    $recruit_path  = Config::get('UPLOAD_DIR') . $recruit['user_id'] . '/recruit/' . $recruit['recruit_id'];
+    $comment_data = array('user_id'=>Auth::get('id'),'comment'=>$text['comment'],'com_url'=>$recruit_path);
     $insert_id     = Model_comment::insert($comment_data);
   }
 
@@ -281,7 +298,60 @@ class Controller_Recruit extends Controller_Template {
         // 不要セッションを削除し一覧へ
         MyUtil::set_alert('success','   削除されました');
        Response::redirect('admin/recruit');
+  }
+  
+  /**
+   * @brif    募集への参加
+   * @access  public
+   * @return
+   */
+   public function action_joinadd()
+  {
+   $this->template->subtitle = '詳細';
+   $this->template->content = View::forge('recruit/detail');
+     if (!$id = Input::get('id',null)) {
+       Response::redirect('recruit/list');
+    }
+    
+    $recruit_model = new Model_Recruit();
+    $recruit_model->updateCount($id);
+    $recruit = $recruit_model->find($id);
+    $recruit['skill'] = json_decode($recruit['skill']);
 
+    $this->template->content->set_safe('recruit', $recruit);
+    
+    $recruitjoin_model = new Model_Recruitjoin();
+    $recruitjoin_model->insert($id);
+    
+     $join = Model_Recruitjoin::check($id);
+     $this->template->content->joint = $join;
+    
 
+//    $this->template->content->set_safe('recruit', $recruit);
+  }
+  
+  
+  public function action_joindelete()
+  {
+     $this->template->subtitle = '詳細';
+   $this->template->content = View::forge('recruit/detail');
+     if (!$id = Input::get('id',null)) {
+       Response::redirect('recruit/list');
+    }
+    
+    $recruit_model = new Model_Recruit();
+    $recruit_model->updateCount($id);
+    $recruit = $recruit_model->find($id);
+    $recruit['skill'] = json_decode($recruit['skill']);
+    
+    $this->template->content->set_safe('recruit', $recruit);
+     
+    $recruitjoin_model = new Model_Recruitjoin();
+    $recruitjoin_model->deleterecruit($id);
+    
+    $join = Model_Recruitjoin::check($id);
+    $this->template->content->joint = $join;
+    
   }
 }
+

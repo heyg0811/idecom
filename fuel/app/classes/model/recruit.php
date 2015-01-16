@@ -74,9 +74,15 @@ class Model_Recruit extends MyModel
   
   public static function DeleteEmpty($id)
   {
+      /**
+   * @brif    募集を削除
+   * @access  public
+   * @return　
+   */
     $query = DB::delete('recruit')
               ->where('id',$id)
               ->execute();
-    
   }
+  
+  
 }
