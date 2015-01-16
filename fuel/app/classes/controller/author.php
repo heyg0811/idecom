@@ -283,7 +283,7 @@ class Controller_Author extends Controller_Template {
     }
     foreach($dev as $val){
       return $val;
-    };
+    }
   }
     
   
