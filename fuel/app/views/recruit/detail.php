@@ -8,6 +8,7 @@
     width: 100%;
   }
 </style>
+<div>
 <div class="col-sm-4" >
   <div class="box box-solid bg-red-gradient">
     <div class="box-header">
@@ -18,11 +19,14 @@
       <div>
         <hr>
         <div class="row">
-          <div class="col-xs-4 author-grade">学年</div><div class="col-xs-8 author-grade responsib">3A</div>
+          <div class="col-xs-4 author-grade">学年</div>
+          <div class="col-xs-8 author-grade responsib">3A</div>
         </div>
         <hr>
         <div class="row">
-          <div class="col-xs-4 author-grade">専攻</div><div class="col-xs-8 author-grade">ITスペシャリスト</div>
+          <div class="col-xs-4 author-grade">専攻</div>
+          <div class="col-xs-8 author-grade">ITスペシャリスト</div>
+
         </div>
         <hr>
       </div>
@@ -58,3 +62,19 @@
     </div>
   </div>
 </div>
+</div>
+
+  <form action="recruit" method="post">
+    <?php echo \Form::csrf(); ?>
+    <div class="box-footer">
+      <div class="form-group">
+        <label for="">募集者へのコメント</label>
+        <textarea name="comment" class="form-control" rows="5" ></textarea>
+      </div>
+    </div>
+    <div class="box-footer">
+      <input type="submit" value="投稿" class="btn btn-success btn-lg"/>
+    </div>
+  </form>
+
+

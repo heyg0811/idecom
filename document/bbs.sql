@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:8889
--- Generation Time: 2014 年 11 月 28 日 06:15
+-- Generation Time: 2015 年 1 月 13 日 06:19
 -- サーバのバージョン： 5.5.38
 -- PHP Version: 5.6.2
 
@@ -84,6 +84,7 @@ INSERT INTO `bbs_comment` (`id`, `thread_id`, `user_id`, `comment`, `date`) VALU
 CREATE TABLE `bbs_thread` (
 `id` int(11) NOT NULL,
   `user_id` int(10) NOT NULL,
+  `category` int(2) NOT NULL,
   `title` text NOT NULL,
   `date` varchar(20) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
@@ -92,25 +93,25 @@ CREATE TABLE `bbs_thread` (
 -- テーブルのデータのダンプ `bbs_thread`
 --
 
-INSERT INTO `bbs_thread` (`id`, `user_id`, `title`, `date`) VALUES
-(12, 0, 'asdfasdfasdadadf', '2014'),
-(13, 0, 'fadfadfasdf', '2014'),
-(14, 0, 'asdfasdfasdfr', '2014'),
-(32, 2, 'asdasdasd', '2014-11-18 19:20:17'),
-(33, 2, 'asdasda', '2014-11-18 19:21:15'),
-(34, 2, 'asdasdasdasd', '2014-11-18 19:21:22'),
-(35, 2, 'Fuel PHPでのweb開発が捗る件について', '2014-11-19 22:43:12'),
-(36, 2, 'komobiu', '2014-11-19 22:50:17'),
-(37, 2, 'jpjpjpjpjpj', '2014-11-20 01:15:54'),
-(38, 2, 'hohohohoho', '2014-11-20 01:54:41'),
-(39, 2, 'fafafafafafaf', '2014-11-21 12:57:34'),
-(40, 2, '', '2014-11-21 13:19:07'),
-(41, 2, 'sdfgsdfg', '2014-11-21 13:20:51'),
-(42, 2, 'sfsdfsfsdfｇにっｊｓぴｆｊｇぴｄｊｇｐうぃえｒんぐぇｒっっｓｄｆｇｓｄｇ', '2014-11-21 13:35:01'),
-(43, 2, '', '2014-11-21 13:36:44'),
-(44, 2, 'あいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえお', '2014-11-21 13:39:51'),
-(45, 2, 'asdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfg', '2014-11-21 13:43:19'),
-(46, 2, 'aazazaza', '2014-11-25 15:08:03');
+INSERT INTO `bbs_thread` (`id`, `user_id`, `category`, `title`, `date`) VALUES
+(12, 0, 1, 'asdfasdfasdadadf', '2014'),
+(13, 0, 0, 'fadfadfasdf', '2014'),
+(14, 0, 0, 'asdfasdfasdfr', '2014'),
+(32, 2, 0, 'asdasdasd', '2014-11-18 19:20:17'),
+(33, 2, 0, 'asdasda', '2014-11-18 19:21:15'),
+(34, 2, 0, 'asdasdasdasd', '2014-11-18 19:21:22'),
+(35, 2, 0, 'Fuel PHPでのweb開発が捗る件について', '2014-11-19 22:43:12'),
+(36, 2, 0, 'komobiu', '2014-11-19 22:50:17'),
+(37, 2, 0, 'jpjpjpjpjpj', '2014-11-20 01:15:54'),
+(38, 2, 0, 'hohohohoho', '2014-11-20 01:54:41'),
+(39, 2, 0, 'fafafafafafaf', '2014-11-21 12:57:34'),
+(40, 2, 0, '', '2014-11-21 13:19:07'),
+(41, 2, 0, 'sdfgsdfg', '2014-11-21 13:20:51'),
+(42, 2, 0, 'sfsdfsfsdfｇにっｊｓぴｆｊｇぴｄｊｇｐうぃえｒんぐぇｒっっｓｄｆｇｓｄｇ', '2014-11-21 13:35:01'),
+(43, 2, 0, '', '2014-11-21 13:36:44'),
+(44, 2, 0, 'あいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえおあいうえお', '2014-11-21 13:39:51'),
+(45, 2, 0, 'asdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfgasdfg', '2014-11-21 13:43:19'),
+(46, 2, 1, 'aazazaza', '2014-11-25 15:08:03');
 
 --
 -- Indexes for dumped tables

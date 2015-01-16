@@ -1,3 +1,4 @@
+<div>
 <div class="col-sm-6 col-xs-12">
   <div class="col-xs-12" id="product">
     <div class="col-xs-12">
@@ -26,3 +27,17 @@
     </div>
   <?php endforeach; ?>
 </div>
+</div>
+
+<form action="product" method="post">
+    <?php echo \Form::csrf(); ?>
+    <div class="box-footer">
+      <div class="form-group">
+        <label for="">製作者へのコメント</label>
+        <textarea name="comment" class="form-control" rows="5" ></textarea>
+      </div>
+    </div>
+    <div class="box-footer">
+      <input type="submit" value="投稿" class="btn btn-success btn-lg"/>
+    </div>
+</form>
