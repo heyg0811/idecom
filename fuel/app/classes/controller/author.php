@@ -285,6 +285,6 @@ class Controller_Author extends Controller_Template {
       return $val;
     };
   }
-  
+    
   
 }
