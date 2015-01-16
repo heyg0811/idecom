@@ -325,12 +325,14 @@ class Controller_Recruit extends Controller_Template {
     
      $join = Model_Recruitjoin::check($id);
      $this->template->content->joint = $join;
-    
-
-//    $this->template->content->set_safe('recruit', $recruit);
+     MyUtil::set_alert('success','   参加しました');
   }
   
-  
+   /**
+   * @brif    募集への参加を削除
+   * @access  public
+   * @return
+   */
   public function action_joindelete()
   {
      $this->template->subtitle = '詳細';
@@ -351,7 +353,7 @@ class Controller_Recruit extends Controller_Template {
     
     $join = Model_Recruitjoin::check($id);
     $this->template->content->joint = $join;
-    
+        MyUtil::set_alert('success','   参加はキャンセルされました');
   }
 }
 
