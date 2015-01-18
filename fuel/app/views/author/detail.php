@@ -1,3 +1,7 @@
+<form action="/groupchat/chatcreate" method="post">
+ <input type="hidden" name="dev_id" value="<?php echo $developer["id"];?>">
+ <input type="submit" value="個別チャット">
+</form>
 <div class="col-xs-12 col-sm-4 col-md-4" id="user-box">
   <div class="box box-solid bg-green-gradient">
     <div class="box-header">
@@ -19,7 +23,7 @@
     </div>
     <div class="box-footer no-border text-black">
       <h3 class="box-title text-center">技術</h3>
-      <div class="row" id="timeline-box" >
+      <div class="row" id="" >
         <div class="col-sm-12">
           <?php $i = 0; ?>
           <?php if(!empty($developer['skill'])):?>
@@ -48,12 +52,12 @@
         <i class="fa fa-envelope"></i>
         <h3 class="box-title">TimeLine</h3>
       </div>
-      <div id="timeline-box">
-        <ul class="timeline" >
+      <div style>
+        <ul class="timeline" id="timeline-box">
           <?php foreach ($timeline as $value): ?>
             <li>
               <i class="fa <?php echo $value['icon']; ?>"></i>
-              <div class="timeline-item box box-solid timeline-body collapsed-box">
+              <div class="timeline-item box box-solid author-timeline-body collapsed-box">
                 <div class="box-header">
                   <h3 class="box-title"><?php echo $value['title']; ?></h3>
                   <div class="box-tools pull-right">
@@ -111,6 +115,7 @@
         </form>
       </div>
     </div><!-- /.box (chat box) -->
+    <form>
   </div>
 
 </div>

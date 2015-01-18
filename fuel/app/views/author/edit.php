@@ -11,11 +11,11 @@
       <div class="row">
         <div class="form-group">
           <div class="col-xs-12">
-            <h3>
+            <h3 class="col-xs-3">
               <?php echo Form::label('名前', 'nickname'); ?>
             </h3>
-            <div class="col-xs-6">
-            <?php echo Form::input('user[nickname]',$developer['nickname'],array('class'=>'form-control')); ?>
+            <div class="col-xs-9" style="margin-top:15px;">
+              <?php echo Form::input('user[nickname]',$developer['nickname'],array('class'=>'form-control')); ?>
             </div>
           </div>
         </div>
