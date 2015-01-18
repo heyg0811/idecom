@@ -38,7 +38,7 @@
               <?php echo Form::label($val, 'skill'); ?>
             </div>
             <div class="col-xs-6 ">
-              <?php echo Form::input('recruit[skill]['.$key.']','',array('class'=>'form-control')); ?>
+              <input type="text" class="form-control" name="<?php echo 'recruit[skill]['.$key.']'?>" data-slider-step="1" data-slider-range="0,100" data-slider="true">
             </div>
           </div>
         <?php endforeach; ?>
@@ -61,3 +61,4 @@
     </div>
   </form>
 </div><!-- /.box -->
+<?php echo Asset::js('simple-slider.min.js') ?>
