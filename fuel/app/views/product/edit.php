@@ -1,4 +1,5 @@
 <?php echo Asset::js('plugin/ckeditor/ckeditor.js'); ?>
+<?php echo Asset::js('simple-slider.min.js') ?>
 <!-- general form elements -->
 <div class="box box-primary">
   <div class="box-header">
@@ -28,7 +29,7 @@
               <?php echo Form::label($val, 'skill'); ?>
             </div>
             <div class="col-xs-6 ">
-              <input type="text" class="form-control" name="<?php echo 'product[skill]['.$key.']'?>" data-slider-step="1" data-slider-range="0,100" data-slider="true">
+              <?php echo Form::input('product[skill]['.$key.']','',array('class'=>'form-control','data-slider-step'=>'1','data-slider-range'=>'0,100','data-slider'=>'true')); ?>
             </div>
           </div>
         <?php endforeach; ?>
@@ -55,4 +56,3 @@
     </div>
   </form>
 </div><!-- /.box -->
-<?php echo Asset::js('simple-slider.min.js') ?>
