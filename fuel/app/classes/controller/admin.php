@@ -63,7 +63,6 @@ class Controller_Admin extends Controller_Template {
    * @return
    */
   public function action_product() {
-    Model_Developer::check();
     $this->template->subtitle = '作品';
     $this->template->content = View::forge('admin/product');
 

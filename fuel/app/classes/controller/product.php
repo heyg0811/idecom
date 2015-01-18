@@ -50,7 +50,6 @@ class Controller_Product extends Controller_Template {
       'where'    => array('status'     => Config::get('PROJECT.STATUS.ENABLE')),
       'order_by' => array('created_at' => 'desc'),
     );
-
     $this->template->content->products = Model_Product::find('all',$options);
   }
 
