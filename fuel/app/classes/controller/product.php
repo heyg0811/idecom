@@ -80,6 +80,10 @@ class Controller_Product extends Controller_Template {
     $product['images'] = $image_names;
     $this->template->content->set_safe('product', $product);
 
+    // 初期表示時
+    if (!Security::check_token()) {
+      return;
+    }
     //コメント格納
     $validation    = Model_Comment::validate();
     $comment_data  = $validation->validated();
