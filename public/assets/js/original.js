@@ -78,9 +78,9 @@ function author_height() {
 }
 
 //----------  timeline  scrollbar  ----------
-//$('#timeline-box').slimScroll({
-//});
-//----------  timeline  scrollbar end  ----------
+$('#timeline-box').slimScroll({
+});
+//----------  timeline  scrollbar  ----------
 
 //----------  slider  ----------
 $("[data-slider]")
@@ -95,5 +95,5 @@ $("[data-slider]")
     .nextAll(".output:first")
     .html(data.value.toFixed(0));  // 数値表示の小数点以下数
 }); 
-//----------  slider end  ----------
+//----------  slider  ----------
 //----------  author  ----------

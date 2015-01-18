@@ -30,14 +30,27 @@
     border-radius: 5px;
     
   }
-    .timeline-body{
+    .author-timeline-body{
     width : 80% ; /* IE8以下とAndroid4.3以下用フォールバック */
     width: -webkit-calc(100%  - 60px);
     width : calc(100%  - 60px) ;
   }
+
   
-
-
+  .timeline:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    width: 0px;
+    background: transparent;
+    left: 0px;
+    border: 0px solid #eee;
+    margin: 0;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+  }
   /* ------author css------ */
   
   
