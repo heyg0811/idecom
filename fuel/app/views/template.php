@@ -331,6 +331,7 @@
                       <li><a href="/admin/product"><i class="fa fa-angle-double-right"></i> 作品管理</a></li>
                       <li><a href="/admin/recruit"><i class="fa fa-angle-double-right"></i> 募集管理</a></li>
                       <li><a href="/author/edit"><i class="fa fa-angle-double-right"></i> プロフィール</a></li>
+                      <li><a href="/groupchat/chatroom"><i class="fa fa-angle-double-right"></i> プライベートチャット</a></li>
                     </ul>
                   </li>
                   <li>
