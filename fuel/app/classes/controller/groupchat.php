@@ -40,13 +40,15 @@ class Controller_Groupchat extends Controller_Template {
   public function action_chatroom(){
     $this->template->subtitle = 'チャット';
     $this->template->content = View::forge('groupchat/chat');
-    $groupchat_id = Input::get("name");
+    $groupchat_id = Input::get("num");
     $user_id = Auth::get('id');
+    
     
     $chat=array();
     if(!empty($groupchat_id)){
       $groupchat = Model_Groupchatcomment::find('all', array(
         'where'    => array(array('group_id','=',$groupchat_id)),
+        'order_by' => array('id'=>'desc'),
       ));
       foreach($groupchat as $val){
         $temp['id'] = $val['id'];
@@ -58,16 +60,50 @@ class Controller_Groupchat extends Controller_Template {
         
         array_push($chat,$temp);
       }
+      $this->template->content->newest_id = empty($key = key($groupchat)) ? 0 : $key;
+    }else{
+      $this->template->content->newest_id = 0;
     }
-    $groupchatlist = Model_Groupchat::find('all', array(
-      'where' => array(array('member', 'like', '%'.$user_id.'%'),
+    $templist = Model_Groupchat::find('all', array(
+      'where' => array(array('member', '=', $user_id),
       'or' => array(array('host_id','=',$user_id,),
     ))));
+    $groupchatlist = array();
+    foreach($templist as $val){
+      $temp['id'] = $val['id'];
+      if($val['host_id']===$user_id){
+        $temp['name'] = Model_User::getName($val['member']);
+      }else{
+        $temp['name'] = Model_User::getName($val['host_id']);
+      }
+      array_push($groupchatlist,$temp);
+    }
     $this->template->content->user = $user_id;
     $this->template->content->messages = $chat;
     $this->template->content->group_id = $groupchat_id;
-    $this->template->content->list = $groupchatlist;
-    $this->template->content->newest_id = '2';
+    $this->template->content->chatlist = $groupchatlist;
+    
+  }
+  public function action_chatcreate() {
+    $dev_id = Input::post('dev_id');
+    $my_id  = Auth::get('id');
+    $result=DB::query('select * from groupchat where (host_id = '.$my_id.' and member = '.$dev_id.') or (host_id = '.$dev_id.' and member = '.$my_id.')')->execute()->as_array();
+    
+    if(count($result)===1){
+      //ある場合
+      Response::redirect('groupchat/chatroom?num='.$result[0]['id']);
+    }else{
+      //ない場合
+      $chat = Model_Groupchat::forge();
+      //値設定
+      $data = array(
+        'host_id'  => $my_id,
+        'member'   => $dev_id,
+      );
+      $chat->set($data)->save();
+
+      Response::redirect('groupchat/chatroom?num='.$result[0]['id']);
+    }
   }
   
   public static function get_host_id($id) {
@@ -78,6 +114,8 @@ class Controller_Groupchat extends Controller_Template {
       $data = Model_Groupchat::find('all',array('where' => array(array('id', $id))))[1];
       return $data['menber'];
   }
+  
+  
   
   
 }

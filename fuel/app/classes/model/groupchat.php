@@ -11,7 +11,6 @@ class Model_Groupchat extends \Orm\Model {
     'id',
     'host_id',
     'member',
-    'name',
   );
   
   

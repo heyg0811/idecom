@@ -6,12 +6,12 @@
           <i class="fa fa-comments-o"></i>
           <h3 class="box-title">List</h3>
         </div>
-        <div class="box-body chat" id="chat-box">
+        <div class="box-body " id="">
           <div class="item" style="margin-bottom: 20px;">
-            <?php foreach($list as $val):?>
+            <?php foreach($chatlist as $val):?>
               <div class="row">
                 <div class="col-xs-12">
-                  <?php echo Html::anchor('/groupchat/chatroom?name='.$val['id'], $val["name"]);?>
+                  <?php echo Html::anchor('/groupchat/chatroom?num='.$val['id'], $val["name"]);?>
                 </div>
               </div>
             <?php endforeach?>
