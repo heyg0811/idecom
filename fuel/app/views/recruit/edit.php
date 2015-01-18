@@ -1,4 +1,5 @@
 <?php echo Asset::js('plugin/ckeditor/ckeditor.js'); ?>
+<?php echo Asset::js('simple-slider.min.js') ?>
 <!-- general form elements -->
 <div class="box box-danger">
   <div class="box-header">
@@ -35,10 +36,10 @@
         <?php foreach (Config::get('TECHNOLOGY') as $key => $val): ?>
           <div class="col-xs-6 col-sm-4 col-md-3" style="margin-bottom:10px;">
             <div class="col-xs-6 text-center ">
-              <?php echo Form::input('product[skill]['.$key.']','',array('class'=>'form-control','data-slider-step'=>'1','data-slider-range'=>'0,100','data-slider'=>'true')); ?>
+              <?php echo Form::label($val, 'skill'); ?>
             </div>
             <div class="col-xs-6 ">
-              <?php echo Form::input('recruit[skill]['.$key.']','',array('class'=>'form-control')); ?>
+              <?php echo Form::input('recruit[skill]['.$key.']','',array('class'=>'form-control','data-slider-step'=>'1','data-slider-range'=>'0,100','data-slider'=>'true')); ?>
             </div>
           </div>
         <?php endforeach; ?>
@@ -61,4 +62,3 @@
     </div>
   </form>
 </div><!-- /.box -->
-<?php echo Asset::js('simple-slider.min.js') ?>

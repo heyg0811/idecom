@@ -48,7 +48,6 @@ class Model_Recruit extends MyModel
     ->add_rule('max_length', 65535);
 
     $form_data = Input::post(static::$_table_name, null);
-
     foreach ($form_data['skill'] as $key => $val) {
       $validation->add('skill.' . $key, '技術')
       ->add_rule('max_length', 20);

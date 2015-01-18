@@ -72,18 +72,19 @@ class Controller_Recruit extends Controller_Template {
 
     $recruit_model->updateCount($id);
     $recruit = $recruit_model->find($id);
-    $recruit['skill'] = json_decode($recruit['skill']);
-    
-    
+    $temp = array();
+    foreach($recruit as $key => $val){
+      
+      $temp[$key]=$val;
+      if('skill'===$key){
+        $temp[$key] = json_decode($val);
+      }
+    }
     $join = Model_Recruitjoin::check($id);
     
-      
-        
-          
-            
-              
+    
 
-    $this->template->content->recruit = $recruit;
+    $this->template->content->recruit = $temp;
     $this->template->content->joint = $join;
     
     
