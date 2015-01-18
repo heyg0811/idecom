@@ -88,7 +88,6 @@
       </div>
     </div>
     <div class="box-footer">
-      <button type="submit" class="btn btn-success">プレビュー</button>
       <button type="submit" class="btn btn-success">更新</button>
     </div>
   </form>
