@@ -1,7 +1,3 @@
-<form action="/groupchat/chatcreate" method="post">
- <input type="hidden" name="dev_id" value="<?php echo $developer["id"];?>">
- <input type="submit" value="個別チャット">
-</form>
 <div class="col-xs-12 col-sm-4 col-md-4" id="user-box">
   <div class="box box-solid bg-green-gradient">
     <div class="box-header">
@@ -10,6 +6,15 @@
     <div class="box-body">
       <img src="<?php echo Model_User::getThumbnail($developer['id']);?>" class="author-thumbnail">
       <div>
+        <hr>
+        <div class="row">
+          <div class="col-xs-12">
+            <form action="/groupchat/chatcreate" method="post">
+             <input type="hidden" name="dev_id" value="<?php echo $developer["id"];?>">
+             <button type='submit' class="btn btn-info btn-flat"><i class="fa fa-comment-o"></i> PrivateChat</button>
+            </form>
+          </div>
+        </div>
         <hr>
         <div class="row">
           <div class="col-xs-4 author-grade">学年</div><div class="col-xs-8 author-grade responsib"><?php echo $developer['grade']; ?></div>

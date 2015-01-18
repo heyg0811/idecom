@@ -28,7 +28,7 @@
       <div class="box box-success">
         <div class="box-header">
           <i class="fa fa-comments-o"></i>
-          <h3 class="box-title">Chat</h3>
+          <h3 class="box-title">PrivateChat</h3>
           <div class="box-tools pull-right">
             <button id="message_refresh" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
           </div>
