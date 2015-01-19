@@ -71,13 +71,14 @@ class Model_Recruit extends MyModel
     return static::insert($insert_data);
   }
   
-  public static function DeleteEmpty($id)
-  {
-      /**
+       /**
    * @brif    募集を削除
    * @access  public
    * @return　
    */
+  public static function DeleteEmpty($id)
+  {
+ 
     $query = DB::delete('recruit')
               ->where('id',$id)
               ->execute();

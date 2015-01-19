@@ -263,4 +263,35 @@ class Controller_Product extends Controller_Template {
     MyUtil::set_alert('success','作品を更新しました');
     Response::redirect('admin/product');
   }
+  
+  
+  
+   public function action_delete() {
+    //  データの削除
+    $this->template->subtitle = '作品';
+    $this->template->content = View::forge('admin/product');
+      $options = array(
+      'where'    => array('status'     => Config::get('PROJECT.STATUS.ENABLE')),
+      'order_by' => array('created_at' => 'desc'),
+    );
+    $this->template->content->products = Model_Product::find('all',$options);
+
+      $user_id = Auth::get('id');
+      if (!$product_id = Input::get('id', null)) {
+        Response::redirect('admin/product');
+        $product_model = new Model_Product();
+        $product       = $product_model->find($product_id);
+        if ($product['user_id'] != $user_id || $product['status'] == '0') {
+          Response::redirect('admin/product');
+        }
+        Model_Product::DeleteEmpty($product_id);
+        Response::redirect('admin/recruit');
+      }
+       Model_Product::DeleteEmpty($product_id);
+       // 不要セッションを削除し一覧へ
+       MyUtil::set_alert('success','   削除されました');
+       Response::redirect('admin/product');
+  }
+  
+  
 }

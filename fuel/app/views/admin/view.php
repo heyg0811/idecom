@@ -14,7 +14,7 @@
             </div>
           </h4>
         </div>
-        <a href="detail?id=<?php echo $product['id']; ?>" class="small-box-footer">
+        <a href="../product/detail?id=<?php echo $product['id']; ?>" class="small-box-footer">
           More info <i class="fa fa-arrow-circle-right"></i>
         </a>
       </div>

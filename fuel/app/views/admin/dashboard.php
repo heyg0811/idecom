@@ -5,7 +5,7 @@
     <div class="small-box bg-aqua">
       <div class="inner">
         <h3>
-          <?php echo 150; ?>
+          <?php echo Model_Product::showCount(); ?>
         </h3>
         <p>
           作品閲覧数

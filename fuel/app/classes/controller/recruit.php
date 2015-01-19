@@ -283,12 +283,11 @@ class Controller_Recruit extends Controller_Template {
     );
     $this->template->content->recruits = Model_Recruit::find('all',$options);
 
-
       $user_id = Auth::get('id');
       if (!$recruit_id = Input::get('id', null)) {
         Response::redirect('admin/recruit');
         $recruit_model = new Model_Recruit();
-        $recruit = $recruit_model->find($recruit_id);
+        $recruit       = $recruit_model->find($recruit_id);
         if ($recruit['user_id'] != $user_id || $recruit['status'] == '0') {
           Response::redirect('admin/recruit');
         }
@@ -296,8 +295,8 @@ class Controller_Recruit extends Controller_Template {
         Response::redirect('admin/recruit');
       }
        Model_Recruit::DeleteEmpty($recruit_id);
-        // 不要セッションを削除し一覧へ
-        MyUtil::set_alert('success','   削除されました');
+       // 不要セッションを削除し一覧へ
+       MyUtil::set_alert('success','   削除されました');
        Response::redirect('admin/recruit');
   }
   

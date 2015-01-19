@@ -74,7 +74,37 @@ class Model_Product extends MyModel
     return static::insert($insert_data);
   }
 
+  /**
+   * @brif    ナイスの更新
+   * @access  public
+   * @return
+   */
   public static function updateNice($id) {
     DB::query('UPDATE product SET nice = nice + 1 WHERE id = '. $id)->execute();
+  }
+
+  /**
+   * @brif    全ての閲覧数
+   * @access  public
+   * @return  String
+   */
+  public static function showCount(){
+     $user_id = Auth::get('id');
+       $query =  DB::query('select SUM(count) as count from product where user_id = '.$user_id)->execute()->as_array();
+    
+    return $query[0]['count'];
+  }
+  
+  
+        /**
+   * @brif    作品を削除
+   * @access  public
+   * @return　
+   */
+   public static function DeleteEmpty($id)
+  {
+    $query = DB::delete('product')
+              ->where('id',$id)
+              ->execute();
   }
 }
