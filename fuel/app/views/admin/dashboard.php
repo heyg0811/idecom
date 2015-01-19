@@ -24,7 +24,7 @@
     <div class="small-box bg-green">
       <div class="inner">
         <h3>
-          <?php echo 53; ?>
+         <?php echo Model_Recruitjoin::AllcountEmty() ?>
         </h3>
         <p>
           プロジェクト応募数
@@ -43,7 +43,7 @@
     <div class="small-box bg-yellow">
       <div class="inner">
         <h3>
-          <?php echo 43; ?>
+          <?php echo 43 ?>
         </h3>
         <p>
           自分へのコメント
