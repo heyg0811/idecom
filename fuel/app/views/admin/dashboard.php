@@ -14,7 +14,7 @@
       <div class="icon">
         <i class="ion ion-ios7-speedometer-outline"></i>
       </div>
-      <a href="view" class="small-box-footer">
+      <a href="/admin/view" class="small-box-footer">
         詳細 <i class="fa fa-arrow-circle-right"></i>
       </a>
     </div>
@@ -33,7 +33,7 @@
       <div class="icon">
         <i class="ion ion-connection-bars"></i>
       </div>
-      <a href="subscription" class="small-box-footer">
+      <a href="admin/subscription" class="small-box-footer">
         詳細 <i class="fa fa-arrow-circle-right"></i>
       </a>
     </div>
@@ -52,7 +52,7 @@
       <div class="icon">
         <i class="ion ion-android-forums"></i>
       </div>
-      <a href="comment" class="small-box-footer">
+      <a href="admin/comment" class="small-box-footer">
         詳細 <i class="fa fa-arrow-circle-right"></i>
       </a>
     </div>
@@ -71,7 +71,7 @@
       <div class="icon">
         <i class="ion ion-thumbsup"></i>
       </div>
-      <a href="nice" class="small-box-footer">
+      <a href="admin/nice" class="small-box-footer">
         詳細 <i class="fa fa-arrow-circle-right"></i>
       </a>
     </div>
