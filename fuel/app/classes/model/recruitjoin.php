@@ -63,5 +63,37 @@ class Model_Recruitjoin extends MyModel
                   ->execute();
       return count($query);
   }
+  
+  
+  
+     /**
+   * @brif    募集に参加している全ての人数をカウント
+   * @access  public
+   * @return　int型
+   */
+  public static function AllcountEmty(){
+     $user_id = Auth::get('id');
+  
+    // $query   = DB::select('*')
+    //               ->from('recruit_join')
+    //               ->where('recruit_id','in',array(
+    //                     ->select('id')
+    //                     ->from('recruit')
+    //                     ->where('user_id','=',$user_id)
+    //                     )
+   $query = DB::query('select * 
+                      from recruit_join
+                      where recruit_id in
+                        (select id
+                         from recruit
+                         where user_id = '.$user_id.')')
+                         ->execute();
+                         
+                      
+                        
+                       
+             
+      return count($query);
+  }
 }
 ?>

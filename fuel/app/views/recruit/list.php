@@ -21,6 +21,7 @@
             </h4>
             <p style="height:100px;">
               <?php echo $recruit['outline'];?>
+              
             </p>
           </div>
           <a href="detail?id=<?php echo $recruit['id']; ?>" class="small-box-footer">
