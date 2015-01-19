@@ -10,7 +10,7 @@
           </h2>
           <h4>
             <div style="margin-left:25%;">
-               <?php echo '募集数：'.$recruit['subscriber'];?>
+               <?php echo '応募数：'.(Model_Recruitjoin::countEmty($recruit['id']));  ?>
             </div>
           </h4>
         </div>
