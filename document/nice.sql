@@ -1,17 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 4.2.10
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost:8889
--- Generation Time: 2014 年 12 月 04 日 13:15
--- サーバのバージョン： 5.5.38
--- PHP Version: 5.6.2
+-- ホスト: 127.0.0.1
+-- 生成日時: 2015 年 1 月 20 日 03:46
+-- サーバのバージョン: 5.5.40-0ubuntu0.14.04.1
+-- PHP のバージョン: 5.5.9-1ubuntu4.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
--- Database: `idecom_db`
+-- データベース: `idecom_db`
 --
 
 -- --------------------------------------------------------
@@ -20,9 +26,13 @@ SET time_zone = "+00:00";
 -- テーブルの構造 `nice`
 --
 
-CREATE TABLE `nice` (
-  `id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `nice` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `nice` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `path` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=18 ;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
