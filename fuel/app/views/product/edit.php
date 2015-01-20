@@ -47,6 +47,10 @@
         <?php echo Form::file('thumbnail'); ?>
       </div>
       <div class="form-group">
+        <?php echo Form::label('ファイル', 'file'); ?>
+        <?php echo Form::file('file'); ?>
+      </div>
+      <div class="form-group">
         <?php echo Form::label('その他画像', 'other'); ?>
         <?php echo html_tag('iframe',array('width'=>'100%', 'height'=>'300px', 'src'=>'http://idecom-heyg0811.c9.io/assets/js/plugin/kcfinder/browse.php?type=other&langCode=ja')); ?>
       </div>

@@ -17,6 +17,8 @@ class Model_Product extends MyModel
     'count',
     'source',
     'created_at',
+    'zip',
+    'zip_name',
   );
   protected static $primary_key = array('id');
 

@@ -79,7 +79,6 @@ class Controller_Product extends Controller_Template {
     }
     $product['images'] = $image_names;
     $this->template->content->set_safe('product', $product);
-
     // 初期表示時
     if (!Security::check_token()) {
       return;
@@ -87,7 +86,7 @@ class Controller_Product extends Controller_Template {
     //コメント格納
     $validation    = Model_Comment::validate();
     $comment_data  = $validation->validated();
-    $product_path  = Config::get('UPLOAD_DIR') . $user_id . '/product/' . $product_id;
+    $product_path  = Config::get('UPLOAD_DIR') . $product['user_id'] . '/product/' . $product['id'];
     $comment_data += array('user_id'=>Auth::get('id'),'com_url'=>$product_path);
     $insert_id     = Model_comment::insert($comment_data);
   }
@@ -161,6 +160,28 @@ class Controller_Product extends Controller_Template {
     	Upload::save();
     	if($file = Upload::get_files(0)){
     	  $product_data += array('thumbnail'   => $user_id. '/product/' . $product_id . '/' .$file['saved_as']);
+    	}
+    }
+    
+    // fileアップロード
+    $upload_file = Input::file('file');
+    if ($upload_file['size'] !== 0) {
+    	$up_config  = array(
+    		'path'          => $product_path,
+    		'randomize' => true,
+    		'auto_rename'   => true,
+    		'ext_whitelist' => array('zip'),
+    	);
+    	Upload::process($up_config);
+    	if (!Upload::is_valid()) {
+    		MyUtil::set_alert('danger','ファイルアップロードに失敗しました');
+    		return Response::redirect('product/edit?id='.$product_id);
+    	}
+    	
+    	Upload::save();
+    	if($up_file = Upload::get_files(0)){
+    	  $product_data += array('zip' => $user_id. '/product/' . $product_id . '/' .$up_file['saved_as']);
+    	  $product_data += array('zip_name' => $up_file['name']);
     	}
     }
 
@@ -258,13 +279,47 @@ class Controller_Product extends Controller_Template {
       MyUtil::set_alert('danger','投稿時にエラーが発生しました');
       return ;
     }
+    
+    // fileアップロード
+    $upload_file = Input::file('file');
+    if ($upload_file['size'] !== 0) {
+    	$up_config  = array(
+    		'path'          => $product_path,
+    		'randomize' => true,
+    		'auto_rename'   => true,
+    		'ext_whitelist' => array('zip'),
+    	);
+    	Upload::process($up_config);
+    	if (!Upload::is_valid()) {
+    		MyUtil::set_alert('danger','ファイルアップロードに失敗しました');
+    		return Response::redirect('product/edit?id='.$product_id);
+    	}
+    	Upload::save();
+    	if($up_file = Upload::get_files(0)){
+    	  $product_data += array('zip' => $user_id. '/product/' . $product_id . '/');
+    	  $product_data += array('zip_name' => $up_file['saved_as']);
+    	}
+    }
+
+    // データの追加
+    if ($product_model->updateById($product_id, $product_data) !== true) {
+      // エラー設定
+      MyUtil::set_alert('danger','投稿時にエラーが発生しました');
+      return ;
+    }
 
     // 不要セッションを削除し一覧へ
     MyUtil::set_alert('success','作品を更新しました');
     Response::redirect('admin/product');
   }
   
-  
+  public function action_download(){
+    $this->template->subtitle = 'ダウンロード';
+    $this->template->content  = View::forge('product/list');
+    File::download(Config::get("UPLOAD_DIR").Input::post('zip_path'));
+    
+    Response::redirect('product/detail?id='.Input::post('id'));
+  }
   
    public function action_delete() {
     //  データの削除

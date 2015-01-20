@@ -29,15 +29,24 @@
 </div>
 </div>
 
-<form action="product" method="post">
+<form action="detail?id=<?php echo $product['id'];?>" method="post">
     <?php echo \Form::csrf(); ?>
+    <input type="hidden" value="<?php echo $product['id'];?>" name="id">
     <div class="box-footer">
       <div class="form-group">
         <label for="">製作者へのコメント</label>
-        <textarea name="comment" class="form-control" rows="5" ></textarea>
+        <textarea name="comment[comment]" class="form-control" rows="5" ></textarea>
       </div>
     </div>
     <div class="box-footer">
       <input type="submit" value="投稿" class="btn btn-success btn-lg"/>
+    </div>
+</form>
+
+<form action="/product/download" method="post">
+  <input type="hidden" value="<?php echo $product['id'];?>" name="id">
+  <input type="hidden" value="<?php echo $product['zip'].$product['zip_name'];?>" name="zip_path">
+    <div class="box-footer">
+      <input type="submit" value="ダウンロード" class="btn btn-success btn-lg"/>
     </div>
 </form>
