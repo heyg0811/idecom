@@ -84,5 +84,11 @@ class Model_Recruit extends MyModel
               ->execute();
   }
   
+  public static function addNice($id) {
+    DB::query('UPDATE recruit SET nice = nice + 1 WHERE id = '. $id)->execute();
+  }
   
+  public static function rmNice($id) {
+    DB::query('UPDATE recruit SET nice = nice - 1 WHERE id = '. $id)->execute();
+  }
 }

@@ -84,7 +84,7 @@ class Controller_Recruit extends Controller_Template {
     
     
 
-    $this->template->content->recruit = $temp;
+    $this->template->content->set_safe('recruit',$temp);
     $this->template->content->joint = $join;
     
     

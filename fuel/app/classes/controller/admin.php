@@ -97,7 +97,12 @@ class Controller_Admin extends Controller_Template {
   public function action_view() {
     $this->template->subtitle = 'アクセスカウンタ';
     $this->template->content = View::forge('admin/view');
-    $this->template->content->products = Model_Product::find('all');
+    $options = array(
+      'where'    => array('user_id' => Auth::get('id')),
+      'where'    => array('status'  => Config::get('PROJECT.STATUS.ENABLE')),
+      'order_by' => array('created_at' => 'desc'),
+    );
+    $this->template->content->products = Model_Product::find('all', $options);
   }
 
   /**

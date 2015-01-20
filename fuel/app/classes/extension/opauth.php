@@ -179,7 +179,6 @@ class Auth_Opauth extends Auth\Auth_Opauth
       array(
         // got their name? full name? or first and last to make up a full name?
         'nickname' => empty($nickname) ? $user['nickname'] : $nickname,
-        'password_change' => false,
       )
     );
 

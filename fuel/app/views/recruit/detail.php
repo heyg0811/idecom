@@ -53,14 +53,16 @@
   </div>
 </div>
 <div class="col-sm-8">
-  <div class="box box-solid">
+  <div class="box box-solid box-danger">
     <div class="box-header">
-      <?php if($joint):?>
-         <a href="joindelete?id=<?php echo $recruit['id']; ?>" class="btn btn-danger pull-right">キャンセル</a>
+      <div class="box-tools pull-right">
+        <?php if($joint):?>
+          <a href="joindelete?id=<?php echo $recruit['id']; ?>" class="btn btn-danger btn-md"><i class="fa fa-times"></i> キャンセル</a>
         <?php else:?>
-          <a href="joinadd?id=<?php echo $recruit['id']; ?>" class="btn btn-danger pull-right">参加！</a>
-           
+          <a href="joinadd?id=<?php echo $recruit['id']; ?>" class="btn btn-danger btn-md"><i class="fa fa-check"></i> 参加！</a>
         <?php endif?>
+      </div>
+      
       <h3 class="box-title">募集詳細</h3>
     </div>
     <div class="box-body">
@@ -69,18 +71,4 @@
   </div>
 </div>
 </div>
-
-  <form action="detail" method="post">
-    <?php echo \Form::csrf(); ?>
-    <input type="hidden" name="id" value="<?php echo $recruit['id'];?>">
-    <div class="box-footer">
-      <div class="form-group">
-        <label for="">募集者へのコメント</label>
-        <textarea name="comment[comment]" class="form-control" rows="5" ></textarea>
-      </div>
-    </div>
-    <div class="box-footer">
-      <input type="submit" value="投稿" class="btn btn-success btn-lg"/>
-    </div>
-  </form>
 

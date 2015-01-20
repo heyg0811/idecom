@@ -1,5 +1,5 @@
 <?php
-class Model_Nice extends \Orm\Model
+class Model_Nice extends MyModel
 {
   // テーブル情報を設定
   protected static $_table_name = 'nice';
@@ -10,22 +10,14 @@ class Model_Nice extends \Orm\Model
     'nice',
   );
   protected static $primary_key = array('id');
-	/**
-	 * @brif    入力チェック
-	 * @access  private
-	 * @return
-	 */
-  public static function validate(){
-		$validation = Validation::forge();
-		$validation->add('nice', 'nice')
-		->add_rule('required')
-		->add_rule('min_length', 1)
-		->add_rule('max_length', 10);
 
-		$validation->run();
-		return $validation;
-	}
-	public static function updateNice($id) {
-    DB::query('UPDATE $_table_name SET nice = nice + 1 WHERE id = '. $id)->execute();
+  public static function get_nice_btn(){
+    MyUtil::parse_uri($_SERVER["REQUEST_URI"],$id,$path);
+    $result = DB::select('id')->from('nice')->where('user_id',Auth::get('id'))->where('path',$path)->execute()->as_array();
+    if (count($result)) {
+      return "<i class='fa fa-thumbs-o-down'></i> 取り消す";
+    } else {
+      return "<i class='fa fa-thumbs-o-up'></i> いいね";
+    }
   }
 }

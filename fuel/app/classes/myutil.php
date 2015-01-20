@@ -36,7 +36,7 @@ class MyUtil {
 	  Session::set_flash('alert',$alert);
 	}
 	
-	public static function getDevice(){
+	public static function get_device(){
     //ユーザーエージェント取得
 		$ua = $_SERVER['HTTP_USER_AGENT'];
 
@@ -53,5 +53,10 @@ class MyUtil {
 		}
 
 		return $ua;
+	}
+	
+	public static function parse_uri($url, &$id, &$path) {
+	  $id   = str_replace('id=','',parse_url($url, PHP_URL_QUERY));
+	  $path = parse_url($url, PHP_URL_PATH) . '?id=' .$id;
 	}
 }

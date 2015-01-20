@@ -12,7 +12,7 @@
     <?php foreach($user_list as $user): ?>
       <div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom:10px;">
         <div class="small-box bg-green author-list-radius">
-          <img src="<?php echo $user['thumbnail']; ?>" class="author-list-thumbnail">
+          <img src="<?php echo Config::get("USER_IMG_URL").$user['thumbnail']; ?>" class="author-list-thumbnail">
           <div class="inner">
           <h4>
             <i class="fa fa-user" style="margin-right:4px;"><?php echo $user['name'];?></i>

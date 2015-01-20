@@ -19,9 +19,13 @@
         <div class="small-box bg-blue">
           <img src="<?php echo Config::get('UPLOAD_URL') . $product['thumbnail']; ?>" class="img-responsive">
           <div class="inner">
-            <h4>
-              <i class="fa fa-desktop" style="margin-right:4px;"></i><?php echo $product['title']; ?>
-            </h4>
+            <h4><i class="fa fa-desktop" style="margin-right:4px;"></i> <?php echo $product['title']; ?></h4>
+            <div class="col-xs-6 text-center">
+              <h4><i class="fa fa-thumbs-o-up"></i> <?php echo $product['nice']; ?></h4>
+            </div>
+            <div class="col-xs-6 text-center">
+              <h4><i class="fa fa-eye"></i> <?php echo $product['count']; ?></h4>
+            </div>
             <p style="height:100px;">
               <?php echo $product['outline'];?>
             </p>

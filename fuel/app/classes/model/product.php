@@ -107,4 +107,12 @@ class Model_Product extends MyModel
               ->where('id',$id)
               ->execute();
   }
+  
+  public static function addNice($id) {
+    DB::query('UPDATE product SET nice = nice + 1 WHERE id = '. $id)->execute();
+  }
+  
+  public static function rmNice($id) {
+    DB::query('UPDATE product SET nice = nice - 1 WHERE id = '. $id)->execute();
+  }
 }

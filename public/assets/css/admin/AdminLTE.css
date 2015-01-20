@@ -1360,14 +1360,11 @@ body > .header .logo .icon {
   }
 }
 @media screen and (max-width: 480px) {
-  .small-box {
+  .small-box h4{
     text-align: center;
   }
   .small-box .icon {
     display: none;
-  }
-  .small-box p {
-    font-size: 12px;
   }
 }
 /*

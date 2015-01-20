@@ -130,7 +130,7 @@ class Model_User extends \Orm\Model
     ->as_array();
     foreach($user_data as $val){
       if(empty($val['thumbnail'])){
-        return "/assets/img/user/noimage.png";
+        return "noimage.png";
       }else{
         return $val['thumbnail'];
       }

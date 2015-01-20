@@ -1,6 +1,6 @@
 <!-- Small boxes (Stat box) -->
 <div class="row">
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-xs-6">
     <!-- small box -->
     <div class="small-box bg-aqua">
       <div class="inner">
@@ -19,7 +19,7 @@
       </a>
     </div>
   </div><!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
+  <div class="col-xs-6">
     <!-- small box -->
     <div class="small-box bg-green">
       <div class="inner">
@@ -33,45 +33,7 @@
       <div class="icon">
         <i class="ion ion-connection-bars"></i>
       </div>
-      <a href="admin/subscription" class="small-box-footer">
-        詳細 <i class="fa fa-arrow-circle-right"></i>
-      </a>
-    </div>
-  </div><!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-yellow">
-      <div class="inner">
-        <h3>
-          <?php echo 43 ?>
-        </h3>
-        <p>
-          自分へのコメント
-        </p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-android-forums"></i>
-      </div>
-      <a href="admin/comment" class="small-box-footer">
-        詳細 <i class="fa fa-arrow-circle-right"></i>
-      </a>
-    </div>
-  </div><!-- ./col -->
-  <div class="col-lg-3 col-xs-6">
-    <!-- small box -->
-    <div class="small-box bg-red">
-      <div class="inner">
-        <h3>
-          <?php echo 65; ?>
-        </h3>
-        <p>
-          いいね!!
-        </p>
-      </div>
-      <div class="icon">
-        <i class="ion ion-thumbsup"></i>
-      </div>
-      <a href="admin/nice" class="small-box-footer">
+      <a href="/admin/subscription" class="small-box-footer">
         詳細 <i class="fa fa-arrow-circle-right"></i>
       </a>
     </div>
@@ -88,15 +50,12 @@
     <div class="nav-tabs-custom">
       <!-- Tabs within a box -->
       <ul class="nav nav-tabs pull-right">
-        <li class="active"><a href="#revenue-chart" data-toggle="tab">Total</a></li>
-        <li><a href="#revenue-chart" data-toggle="tab">Page</a></li>
-        <li><a href="#revenue-chart" data-toggle="tab">Products</a></li>
+        <li class="active"><a href="#projects-chart" data-toggle="tab">Projects</a></li>
         <li class="pull-left header"><i class="fa fa-inbox"></i> Access Counter</li>
       </ul>
       <div class="tab-content no-padding">
         <!-- Morris chart - Sales -->
-        <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 300px;"></div>
-        <div class="chart tab-pane" id="sales-chart" style="position: relative; height: 300px;"></div>
+        <div class="chart tab-pane active" id="projects-chart" style="position: relative; height: 300px;"></div>
       </div>
     </div><!-- /.nav-tabs-custom -->
 
@@ -113,7 +72,7 @@
         <?php foreach ($messages as $message): ?>
           <!-- chat item -->
           <div class="item">
-            <img src='<?php echo Auth::get("thumbnail"); ?>' class='online'>
+            <img src='<?php echo Config::get("USER_IMG_URL").Model_User::getThumbnail($message["user_id"]); ?>' class='online'>
             <p class="message">
               <a href="/author/detail?id=<?php echo $message['user_id']?>" class="name">
                 <small class="text-muted pull-right">
@@ -177,10 +136,32 @@
     });
     function prependChatItem(messages){
       for (var i=0;i<messages.length;i++){
-        var chat_item = '<div class="item"><img src="<?php ;?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
+        var chat_item = '<div class="item"><img src="<?php echo Config::get("USER_IMG_URL");?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
         $('#chat-box').prepend(chat_item);
         newest_id = messages[i]['id'];
       }
     }
+    
+    var area = new Morris.Area({
+        element: 'projects-chart',
+        resize: true,
+        data: [
+            {y: '2015-01', item1: 6, item2: 6},
+            {y: '2014-12', item1: 8, item2: 4},
+            {y: '2014-11', item1: 2, item2: 9},
+            {y: '2014-10', item1: 7, item2: 7},
+            {y: '2014-09', item1: 2, item2: 4},
+            {y: '2014-08', item1: 10, item2: 3},
+            {y: '2014-07', item1: 5, item2: 5},
+            {y: '2014-06', item1: 3, item2: 7},
+            {y: '2014-05', item1: 7, item2: 10},
+            {y: '2014-04', item1: 8, item2: 3}
+        ],
+        xkey: 'y',
+        ykeys: ['item1', 'item2'],
+        labels: ['Item 1', 'Item 2'],
+        lineColors: ['#a0d0e0', '#3c8dbc'],
+        hideHover: 'auto'
+    });
   });
 </script>
