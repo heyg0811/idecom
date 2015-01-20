@@ -39,33 +39,24 @@
   <?php endforeach; ?>
 </div>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#nice').on('click', function(event){
-      $('#nice').attr('disabled', true);
-      if ($('#nice').text() == ' いいね') {
-        $.ajax({
-        url: '/ajax/nice/add',
-        type: 'POST',
-        }).done(function(){
-          $('#nice').html("<i class='fa fa-thumbs-o-down'></i> 取り消す");
-          $('#nice').attr('disabled', false);
-        }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-          alert('いいね中にエラーが発生しました');
-          $('#nice').attr('disabled', false);
-        });
-      } else if ($('#nice').text() == ' 取り消す') {
-        $.ajax({
-        url: '/ajax/nice/remove',
-        type: 'POST',
-        }).done(function(){
-          $('#nice').html("<i class='fa fa-thumbs-o-up'></i> いいね");
-          $('#nice').attr('disabled', false);
-        }).fail(function(XMLHttpRequest, textStatus, errorThrown){
-          alert('取り消し中にエラーが発生しました');
-          $('#nice').attr('disabled', false);
-        });
-      }
-    });
-  });
-</script>
+<form action="detail?id=<?php echo $product['id'];?>" method="post">
+    <?php echo \Form::csrf(); ?>
+    <input type="hidden" value="<?php echo $product['id'];?>" name="id">
+    <div class="box-footer">
+      <div class="form-group">
+        <label for="">製作者へのコメント</label>
+        <textarea name="comment[comment]" class="form-control" rows="5" ></textarea>
+      </div>
+    </div>
+    <div class="box-footer">
+      <input type="submit" value="投稿" class="btn btn-success btn-lg"/>
+    </div>
+</form>
+
+<form action="/product/download" method="post">
+  <input type="hidden" value="<?php echo $product['id'];?>" name="id">
+  <input type="hidden" value="<?php echo $product['zip'].$product['zip_name'];?>" name="zip_path">
+    <div class="box-footer">
+      <input type="submit" value="ダウンロード" class="btn btn-success btn-lg"/>
+    </div>
+</form>
