@@ -51,7 +51,7 @@
       </div>
       <div class="form-group">
         <?php echo Form::label('その他画像', 'other'); ?>
-        <?php echo html_tag('iframe',array('width'=>'100%', 'height'=>'300px', 'src'=>'http://idecom-heyg0811.c9.io/assets/js/plugin/kcfinder/browse.php?type=other&langCode=ja')); ?>
+        <?php echo html_tag('iframe',array('width'=>'100%', 'height'=>'300px', 'src'=>'http://idecom-b1225-8.c9.io/assets/js/plugin/kcfinder/browse.php?type=other&langCode=ja')); ?>
       </div>
     </div>
     <div class="box-footer">

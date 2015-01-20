@@ -4,7 +4,7 @@
       <h3 class="box-title "><?php echo $developer['nickname']; ?></h3>
     </div>
     <div class="box-body">
-      <img src="<?php echo Config::get("USER_IMG_URL").Model_User::getThumbnail($developer['id']);?>" class="author-thumbnail">
+      <img src="<?php echo Model_User::getThumbnail($developer['id']);?>" class="author-thumbnail">
       <div>
         <hr>
         <div class="row">
