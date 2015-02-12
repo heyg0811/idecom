@@ -10,16 +10,6 @@
       <button class="btn btn-danger btn-sm" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse"><i class="fa fa-minus"></i></button>
     </div>
   </div>
-  <?php if (isset($errmsg)): ?>
-    <div style="margin:15px;">
-      <div class="alert alert-danger alert-dismissable">
-        <i class="fa fa-ban"></i>
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-        <b>警告!</b> <?php echo $errmsg; ?>
-      </div>
-      <?php if (isset($errors)) {echo $errors;} ?>
-    </div>
-  <?php endif;?>
   <form action="" method="post" enctype="multipart/form-data">
     <div class="box-body">
       <?php echo Form::csrf(); ?>

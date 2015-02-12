@@ -25,23 +25,20 @@
     </div>
     <div class="box-footer no-border text-black">
       <h3 class="box-title text-center">技術</h3>
-      <div class="row" id="" >
+      <div class="row">
         <div class="col-sm-12">
-          <?php $i = 0; ?>
-          <?php if(!empty($developer['skill'])):?>
-            <?php foreach ($developer['skill'] as $tec): ?>
-              <?php if (!empty($tec)): ?>
-                <div class="clearfix">
-                  <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.' . $i); ?></p></span>
-                  <small class="pull-right"><?php echo $tec; ?>%</small>
-                </div>
-                <div class="progress xs">
-                  <div class="progress-bar progress-bar-green" style="width: <?php echo $tec; ?>%;"></div>
-                </div>
-              <?php endif; ?>
-              <?php $i++; ?>
-            <?php endforeach; ?>
-          <?php endif;?>
+          <?php foreach ($developer['skill'] as $key => $skill): ?>
+            <?php if (!empty($skill)): ?>
+              <!-- Progress bars -->
+              <div class="clearfix">
+                <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.'.$key); ?></p></span>
+                <small class="pull-right"><?php echo $skill; ?>%</small>
+              </div>
+              <div class="progress xs">
+                <div class="progress-bar progress-bar-green" style="width: <?php echo $skill; ?>%;"></div>
+              </div>
+            <?php endif; ?>
+          <?php endforeach; ?>
         </div>
       </div>
     </div>
@@ -54,7 +51,7 @@
         <i class="fa fa-envelope"></i>
         <h3 class="box-title">TimeLine</h3>
       </div>
-      <div style>
+      <div>
         <ul class="timeline" id="timeline-box">
           <?php foreach ($timeline as $value): ?>
             <li>
