@@ -316,13 +316,15 @@ class Controller_Product extends Controller_Template {
   public function action_download(){
     $this->template->subtitle = 'ダウンロード';
     $this->template->content  = View::forge('product/list');
-    if (empty(Input::get('zip_path'))) {
+    $zip_path = Input::get('zip_path',null);
+    $product_id = Input::get('id',null);
+    if (empty($zip_path)) {
       MyUtil::set_alert('danger','ソースコードがありません');
-      return Response::redirect('product/detail?id='.Input::get('id'));
+      return Response::redirect('product/detail?id='.$product_id);
     }
-    File::download(Config::get("UPLOAD_DIR").Input::get('zip_path'));
+    File::download(Config::get("UPLOAD_DIR").$zip_path);
     MyUtil::set_alert('success','ダウンロードしています。');
-    Response::redirect('product/detail?id='.Input::get('id'));
+    Response::redirect('product/detail?id='.$product_id);
   }
   
    public function action_delete() {
