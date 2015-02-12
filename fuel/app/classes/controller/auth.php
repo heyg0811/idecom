@@ -119,21 +119,13 @@ class Controller_Auth extends Controller_Template {
       $this->template->content->set_safe('errmsg','パスワード設定中にエラーが発生しました');
       return ;
     }
-
-    Controller_Auth::update_user(array('password_change'=>true));
     
-    //インスタンス生成
-    $developer_model = Model_Developer::forge();
-    
-    //値設定
+    // パスワード変更フラグ
+    $user = Model_User::find(Auth::get('id'));
     $data = array(
-      'user_id' => Auth::get('id'),
+      'password_change' => 1,
     );
-    //Developer登録
-    foreach($developer_model as $val)
-    {
-      $val->set($data)->save();
-    }
+    $user->set($data)->save();
     
     Response::redirect('/');
   }
@@ -208,112 +200,4 @@ class Controller_Auth extends Controller_Template {
     $this->template->content = View::forge('auth/error');
   }
   
-  public function update_user($values, $username = null)
-	{
-		$username = $username ?: $this->user['username'];
-		$current_values = \DB::select_array(\Config::get('simpleauth.table_columns', array('*')))
-			->where('username', '=', $username)
-			->from(\Config::get('simpleauth.table_name'))
-			->execute(\Config::get('simpleauth.db_connection'));
-
-		if (empty($current_values))
-		{
-			throw new \SimpleUserUpdateException('Username not found', 4);
-		}
-
-		$update = array();
-		if (array_key_exists('username', $values))
-		{
-			throw new \SimpleUserUpdateException('Username cannot be changed.', 5);
-		}
-		if (array_key_exists('password', $values))
-		{
-			if (empty($values['old_password'])
-				or $current_values->get('password') != $this->hash_password(trim($values['old_password'])))
-			{
-				throw new \SimpleUserWrongPassword('Old password is invalid');
-			}
-
-			$password = trim(strval($values['password']));
-			if ($password === '')
-			{
-				throw new \SimpleUserUpdateException('Password can\'t be empty.', 6);
-			}
-			$update['password'] = $this->hash_password($password);
-			unset($values['password']);
-		}
-		if (array_key_exists('old_password', $values))
-		{
-			unset($values['old_password']);
-		}
-		if (array_key_exists('email', $values))
-		{
-			$email = filter_var(trim($values['email']), FILTER_VALIDATE_EMAIL);
-			if ( ! $email)
-			{
-				throw new \SimpleUserUpdateException('Email address is not valid', 7);
-			}
-			$matches = \DB::select()
-				->where('email', '=', $email)
-				->where('id', '!=', $current_values[0]['id'])
-				->from(\Config::get('simpleauth.table_name'))
-				->execute(\Config::get('simpleauth.db_connection'));
-			if (count($matches))
-			{
-				throw new \SimpleUserUpdateException('Email address is already in use', 11);
-			}
-			$update['email'] = $email;
-			unset($values['email']);
-		}
-		if (array_key_exists('group', $values))
-		{
-			if (is_numeric($values['group']))
-			{
-				$update['group'] = (int) $values['group'];
-			}
-			unset($values['group']);
-		}
-		if (array_key_exists('nickname', $values))
-		{
-			if (is_numeric($values['nickname']))
-			{
-				$update['nickname'] = (int) $values['nickname'];
-			}
-			unset($values['nickname']);
-		}
-		if ( ! empty($values))
-		{
-			$profile_fields['password_change'] = $current_values->get('password_change') ?: array();
-			foreach ($values as $key => $val)
-			{
-				if ($val === null)
-				{
-					unset($profile_fields[$key]);
-				}
-				else
-				{
-					$profile_fields[$key] = $val;
-				}
-			}
-			$update['password_change'] = $profile_fields['password_change'];
-		}
-
-		$update['updated_at'] = \Date::forge()->get_timestamp();
-
-		$affected_rows = \DB::update(\Config::get('simpleauth.table_name'))
-			->set($update)
-			->where('username', '=', $username)
-			->execute(\Config::get('simpleauth.db_connection'));
-
-		// Refresh user
-		if ($this->user['username'] == $username)
-		{
-			$this->user = \DB::select_array(\Config::get('simpleauth.table_columns', array('*')))
-				->where('username', '=', $username)
-				->from(\Config::get('simpleauth.table_name'))
-				->execute(\Config::get('simpleauth.db_connection'))->current();
-		}
-
-		return $affected_rows > 0;
-	}
 }
