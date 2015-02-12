@@ -37,11 +37,11 @@ return array(
   */
 
   /*
-   *  idecom.heyg.pw
+   *  idecom.heyg.jp
    */
   'GOOGLE' => array(
-    'CLIENTID' => '659226090229-v9gvnai3n3gm5qsefoh1e186jfj0em0n.apps.googleusercontent.com',
-    'CLIENTSECRET' => 'e_3cxYRoIS5P0_yHFTKXB0U2',
+    'CLIENTID' => '659226090229-g83avc52kbosen3bntt8pllg64j1va9q.apps.googleusercontent.com',
+    'CLIENTSECRET' => '26B6juJYBUcFuZt5ObVO0t0b',
   ),
 
   /*
@@ -75,4 +75,8 @@ return array(
   //   'CLIENTID' => '659226090229-fqf0kmesiuihqintja6jfvq6llqb4sdu.apps.googleusercontent.com',
   //   'CLIENTSECRET' => '8BH6wmN2z7pQiae8mIxtpjer',
   // ),
+  
+  'KCFINDER' => array(
+    'DOMAIN' => 'idecom.heyg.jp',
+  ),
 );

@@ -141,7 +141,7 @@ $_CONFIG = array(
     '_sessionVar' => "KCFINDER",
     '_sessionLifetime' => 30,
     // '_sessionDir' => "session_save_path",
-    '_sessionDomain' => "idecom-heyg0811.c9.io",
+    '_sessionDomain' => Config::get('KCFINDER.DOMAIN'),
     '_sessionPath' => session_save_path(),
 
     //'_cssMinCmd' => "java -jar /path/to/yuicompressor.jar --type css {file}",
