@@ -18,7 +18,8 @@ class Controller_Admin extends Controller_Template {
    * @access public
    * @return
    */
-  public function before() {
+  public function before()
+  {
     // 決まり文句
     parent::before();
     $this->template->title = '管理';
@@ -30,7 +31,8 @@ class Controller_Admin extends Controller_Template {
    * @access  public
    * @return   Response
    */
-  public function after($response) {
+  public function after($response)
+  {
     // 決まり文句
     $response = parent::after($response);
     return $response;
@@ -41,7 +43,8 @@ class Controller_Admin extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_dashboard() {
+  public function action_dashboard()
+  {
     $this->template->subtitle          = '一覧';
     $this->template->content           = View::forge('admin/dashboard');
     $messages = Model_Message::find('all', array(
@@ -62,12 +65,16 @@ class Controller_Admin extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_product() {
+  public function action_product()
+  {
     $this->template->subtitle = '作品';
     $this->template->content = View::forge('admin/product');
 
     $options = array(
-      'where'    => array('status' => Config::get('PROJECT.STATUS.ENABLE')),
+      'where'     => array(
+        array('user_id' => Auth::get('id')),
+        array('status' => Config::get('PROJECT.STATUS.ENABLE'))
+      ),
       'order_by' => array('created_at' => 'desc'),
     );
     $this->template->content->products = Model_Product::find('all',$options);
@@ -78,12 +85,16 @@ class Controller_Admin extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_recruit() {
+  public function action_recruit()
+  {
     $this->template->subtitle = '募集';
     $this->template->content = View::forge('admin/recruit');
 
     $options = array(
-      'where'    => array('status' => Config::get('PROJECT.STATUS.ENABLE')),
+      'where'     => array(
+        array('user_id'=> Auth::get('id')),
+        array('status' => Config::get('PROJECT.STATUS.ENABLE'))
+      ),
       'order_by' => array('created_at' => 'desc'),
     );
     $this->template->content->recruits = Model_Recruit::find('all',$options);
@@ -94,7 +105,8 @@ class Controller_Admin extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_view() {
+  public function action_view()
+  {
     $this->template->subtitle = 'アクセスカウンタ';
     $this->template->content = View::forge('admin/view');
     $options = array(
@@ -110,10 +122,16 @@ class Controller_Admin extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_subscription() {
+  public function action_subscription()
+  {
     $this->template->subtitle = 'プロジェクト応募数';
     $this->template->content = View::forge('admin/subscription');
-    $this->template->content->recruits = Model_Recruit::find('all');
+    $options = array(
+      'where'    => array('user_id' => Auth::get('id')),
+      'where'    => array('status'  => Config::get('PROJECT.STATUS.ENABLE')),
+      'order_by' => array('created_at' => 'desc'),
+    );
+    $this->template->content->recruits = Model_Recruit::find('all', $options);
   }
 
   /**
@@ -121,7 +139,8 @@ class Controller_Admin extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_comment() {
+  public function action_comment()
+  {
     $this->template->subtitle = '自分へのコメント';
     $this->template->content  = View::forge('admin/comment');
     // 初期表示時
@@ -145,17 +164,31 @@ class Controller_Admin extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_nice() {
+  public function action_nice()
+  {
     $this->template->subtitle = 'いいね!!';
     $this->template->content = View::forge('admin/nice');
     $this->template->content->products = Model_Product::find('all');
 
-// いいね!!クリック時カウントアップ（簡易版）
+    // いいね!!クリック時カウントアップ（簡易版）
     if(isset($_POST['nice'])) {
       Model_Nice::updateNice();
     }
-
-
   }
 
+  /**
+   * @brif    応募毎の参加者リスト
+   * @access  public
+   * @return
+   */
+  public function action_joinlist()
+  {
+    $this->template->subtitle = '参加者一覧';
+    $this->template->content = View::forge('admin/joinlist');
+    $recruit_id = Input::get('id',null);
+    $options = array(
+      'where' => array('recruit_id'=>$recruit_id),
+    );
+    $this->template->content->joins = Model_RecruitJoin::find('all',$options);
+  }
 }

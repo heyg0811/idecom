@@ -15,7 +15,7 @@
       <h3 class="box-title">募集タイトル</h3>
     </div>
     <div class="box-body">
-      <img src='<?php echo Config::get("UPLOAD_URL"),$recruit["thumbnail"]; ?>' class='recruit-thumbnail'>
+      <img src='<?php echo Config::get("UPLOAD_URL"),$recruit["thumbnail"]; ?>' class='recruit-thumbnail'  style="margin-left:auto;margin-right:auto;">
       <div>
         <hr>
         <div class="row">
@@ -53,16 +53,17 @@
   </div>
 </div>
 <div class="col-sm-8">
-  <div class="box box-solid box-danger">
-    <div class="box-header">
-      <div class="box-tools pull-right">
-        <?php if($joint):?>
-          <a href="joindelete?id=<?php echo $recruit['id']; ?>" class="btn btn-danger btn-md"><i class="fa fa-times"></i> キャンセル</a>
-        <?php else:?>
-          <a href="joinadd?id=<?php echo $recruit['id']; ?>" class="btn btn-danger btn-md"><i class="fa fa-check"></i> 参加！</a>
-        <?php endif?>
-      </div>
-      
+  <div class="box box-danger">
+    <div class="box-header ui-sortable-handle">
+      <?php if ($recruit['user_id'] != Auth::get('id')): ?>
+        <div class="box-tools pull-right">
+          <?php if($joint):?>
+            <a href="unjoin?id=<?php echo $recruit['id']; ?>" class="btn btn-default btn-md"><i class="fa fa-times"></i> キャンセル</a>
+          <?php else:?>
+            <a href="join?id=<?php echo $recruit['id']; ?>" class="btn btn-default btn-md"><i class="fa fa-check"></i> 参加！</a>
+          <?php endif; ?>
+        </div>
+      <?php endif; ?>
       <h3 class="box-title">募集詳細</h3>
     </div>
     <div class="box-body">

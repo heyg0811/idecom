@@ -1,8 +1,8 @@
 <!-- Small boxes (Stat box) -->
 <div class="row">
-  <div class="col-xs-6">
+  <div class="col-sm-6">
     <!-- small box -->
-    <div class="small-box bg-aqua">
+    <div class="small-box bg-blue">
       <div class="inner">
         <h3>
           <?php echo Model_Product::showCount(); ?>
@@ -19,15 +19,15 @@
       </a>
     </div>
   </div><!-- ./col -->
-  <div class="col-xs-6">
+  <div class="col-sm-6">
     <!-- small box -->
-    <div class="small-box bg-green">
+    <div class="small-box bg-red">
       <div class="inner">
         <h3>
-         <?php echo Model_Recruitjoin::AllcountEmty() ?>
+         <?php echo Model_Recruitjoin::countByUserId(); ?>
         </h3>
         <p>
-          プロジェクト応募数
+          応募数
         </p>
       </div>
       <div class="icon">
@@ -162,6 +162,10 @@
         labels: ['Item 1', 'Item 2'],
         lineColors: ['#a0d0e0', '#3c8dbc'],
         hideHover: 'auto'
+    });
+    //SLIMSCROLL FOR CHAT WIDGET
+    $('#chat-box').slimScroll({
+        height: '350px'
     });
   });
 </script>

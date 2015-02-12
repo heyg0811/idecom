@@ -4,15 +4,12 @@
       <h3 class="box-title "><?php echo $developer['nickname']; ?></h3>
     </div>
     <div class="box-body">
-      <img src="<?php echo Model_User::getThumbnail($developer['id']);?>" class="author-thumbnail">
+      <img src="<?php echo Config::get("USER_IMG_URL").Model_User::getThumbnail($developer['id']);?>" class="author-thumbnail">
       <div>
         <hr>
         <div class="row">
           <div class="col-xs-12">
-            <form action="/groupchat/chatcreate" method="post">
-             <input type="hidden" name="dev_id" value="<?php echo $developer["id"];?>">
-             <button type='submit' class="btn btn-info btn-flat"><i class="fa fa-comment-o"></i> PrivateChat</button>
-            </form>
+            <a href="/groupchat/chatcreate?id=<?php echo $developer["id"];?>" class="btn btn-info btn-flat btn-block"><i class="fa fa-comment-o"></i> PrivateChat</a>
           </div>
         </div>
         <hr>
@@ -32,18 +29,18 @@
         <div class="col-sm-12">
           <?php $i = 0; ?>
           <?php if(!empty($developer['skill'])):?>
-          <?php foreach ($developer['skill'] as $tec): ?>
-            <?php if (!empty($tec)): ?>
-              <div class="clearfix">
-                <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.' . $i); ?></p></span>
-                <small class="pull-right"><?php echo $tec; ?>%</small>
-              </div>
-              <div class="progress xs">
-                <div class="progress-bar progress-bar-green" style="width: <?php echo $tec; ?>%;"></div>
-              </div>
-            <?php endif; ?>
-            <?php $i++; ?>
-          <?php endforeach; ?>
+            <?php foreach ($developer['skill'] as $tec): ?>
+              <?php if (!empty($tec)): ?>
+                <div class="clearfix">
+                  <span class="pull-left"><p><?php echo Config::get('TECHNOLOGY.' . $i); ?></p></span>
+                  <small class="pull-right"><?php echo $tec; ?>%</small>
+                </div>
+                <div class="progress xs">
+                  <div class="progress-bar progress-bar-green" style="width: <?php echo $tec; ?>%;"></div>
+                </div>
+              <?php endif; ?>
+              <?php $i++; ?>
+            <?php endforeach; ?>
           <?php endif;?>
         </div>
       </div>
@@ -81,48 +78,44 @@
     </div>
   </div>
   <hr>
+  <!-- Chat box -->
   <div class="box box-success" id="message-box">
-    <!-- Chat box -->
-    <div class="box box-success">
-      <div class="box-header">
-        <i class="fa fa-comments-o"></i>
-        <h3 class="box-title">Chat</h3>
-        <div class="box-tools pull-right">
-          <button id="message_refresh" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-        </div>
+    <div class="box-header">
+      <i class="fa fa-comments-o"></i>
+      <h3 class="box-title">Chat</h3>
+      <div class="box-tools pull-right">
+        <button id="message_refresh" type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
       </div>
-      <div class="chat" id="chat-box">
-        <?php foreach ($messages as $message): ?>
-          <!-- chat item -->
-          <div class="item">
-            <img src='<?php echo $message['thumbnail'];?>' class='online'>
-            <p class="message">
-              <a href="/author/detail?id=<?php echo $message['user_id'];?>" class="name">
-                <small class="text-muted pull-right">
-                  <i class="fa fa-clock-o"></i> <?php echo date('Y-m-d H:i:s',$message['created_at']);?>
-                </small>
-                <?php echo Model_User::getName($message['user_id']); ?>
-              </a>
-              <?php echo $message['body']; ?>
-            </p>
-          </div><!-- /.item -->
-        <?php endforeach; ?>
-      </div><!-- /.chat -->
-      <div class="box-footer">
-        <form id="message_form">
-          <input type="hidden" name="id" value="<?php echo $developer["id"];?>">
-          <div class="input-group">
-            <input id="message_body" class="form-control" placeholder="Type message..."/>
-            <div class="input-group-btn">
-              <button class="btn btn-success"><i class="fa fa-plus"></i></button>
-            </div>
+    </div>
+    <div class="chat" id="chat-box">
+      <?php foreach ($messages as $message): ?>
+        <!-- chat item -->
+        <div class="item">
+          <img src='<?php echo Config::get("USER_IMG_URL").$message['thumbnail'];?>' class='online'>
+          <p class="message">
+            <a href="/author/detail?id=<?php echo $message['user_id'];?>" class="name">
+              <small class="text-muted pull-right">
+                <i class="fa fa-clock-o"></i> <?php echo date('Y-m-d H:i:s',$message['created_at']);?>
+              </small>
+              <?php echo Model_User::getName($message['user_id']); ?>
+            </a>
+            <?php echo $message['body']; ?>
+          </p>
+        </div><!-- /.item -->
+      <?php endforeach; ?>
+    </div><!-- /.chat -->
+    <div class="box-footer">
+      <form id="message_form">
+        <input type="hidden" name="id" value="<?php echo $developer["id"];?>">
+        <div class="input-group">
+          <input id="message_body" class="form-control" placeholder="Type message..."/>
+          <div class="input-group-btn">
+            <button class="btn btn-success"><i class="fa fa-plus"></i></button>
           </div>
-        </form>
-      </div>
-    </div><!-- /.box (chat box) -->
-    <form>
-  </div>
-
+        </div>
+      </form>
+    </div>
+  </div><!-- /.box (chat box) -->
 </div>
 
 
@@ -167,7 +160,7 @@
     function prependChatItem(messages){
       
       for (var i=0;i<messages.length;i++){
-        var chat_item = '<div class="item"><img src="<?php //echo Config::get("THUMBNAIL_URL");?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
+        var chat_item = '<div class="item"><img src="<?php echo Config::get("USER_IMG_URL"); ?>' + messages[i]['thumbnail'] + '" alt="user image" class="online" /><p class="message"><a href="#" class="name"><small class="text-muted pull-right"><i class="fa fa-clock-o"></i> '+ messages[i]['date'] + '</small>' + messages[i]['user_name'] +'</a>' + messages[i]['body'] + '</p></div>';
         $('#chat-box').prepend(chat_item);
         newest_id = messages[i]['id'];
       }

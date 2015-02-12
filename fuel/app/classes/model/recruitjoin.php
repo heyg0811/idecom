@@ -7,10 +7,11 @@ class Model_Recruitjoin extends MyModel
     'id',
     'recruit_id',
     'user_id',
+    'body',
   );
     protected static $primary_key = array('id');
     
-      /**
+  /**
    * @brif    募集に参加情報を追加
    * @access  public
    * @return
@@ -29,16 +30,10 @@ class Model_Recruitjoin extends MyModel
    * @return　int型
    */
   public static function check($recruit_id){
-      $user_id = Auth::get('id');
-      $query   = DB::select('*')
-                  ->from('recruit_join')
-                  ->where('recruit_id','=',$recruit_id) 
-                  ->and_where('user_id','=',$user_id)
-                  ->execute();
-      return count($query);
+    return DB::select('id')->from(static::$_table_name)->where('recruit_id','=',$recruit_id)->where('user_id','=',Auth::get('id'))->as_object()->execute()->count();
   }
   
-     /**
+ /**
    * @brif    募集への参加情報を削除
    * @access  public
    * @return　
@@ -51,49 +46,24 @@ class Model_Recruitjoin extends MyModel
                   ->execute();
   }
   
-    /**
+  /**
    * @brif    募集に参加している人数をカウント
    * @access  public
    * @return　int型
    */
-  public static function countEmty($recruit_id){
-     $query   = DB::select('*')
-                  ->from('recruit_join')
-                  ->where('recruit_id','=',$recruit_id) 
-                  ->execute();
-      return count($query);
+  public static function countByRecruitId($recruit_id){
+    return DB::select('id')->from(static::$_table_name)->where('recruit_id','=',$recruit_id)->as_object()->execute()->count();
   }
   
   
   
-     /**
+  /**
    * @brif    募集に参加している全ての人数をカウント
    * @access  public
    * @return　int型
    */
-  public static function AllcountEmty(){
-     $user_id = Auth::get('id');
-  
-    // $query   = DB::select('*')
-    //               ->from('recruit_join')
-    //               ->where('recruit_id','in',array(
-    //                     ->select('id')
-    //                     ->from('recruit')
-    //                     ->where('user_id','=',$user_id)
-    //                     )
-   $query = DB::query('select * 
-                      from recruit_join
-                      where recruit_id in
-                        (select id
-                         from recruit
-                         where user_id = '.$user_id.')')
-                         ->execute();
-                         
-                      
-                        
-                       
-             
-      return count($query);
+  public static function countByUserId(){
+    return DB::select('id')->from(static::$_table_name)->where('user_id','=',Auth::get('id'))->as_object()->execute()->count();
   }
 }
 ?>

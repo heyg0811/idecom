@@ -305,27 +305,25 @@ class Controller_Recruit extends Controller_Template {
    * @access  public
    * @return
    */
-   public function action_joinadd()
+   public function action_join()
   {
-   $this->template->subtitle = '詳細';
-   $this->template->content = View::forge('recruit/detail');
-     if (!$id = Input::get('id',null)) {
-       Response::redirect('recruit/list');
+    $id = Input::get('id',null);
+    if (empty($id)) {
+      MyUtil::set_alert('danger','リクエストが不正です');
+      Response::redirect(Input::referrer());
     }
     
-    $recruit_model = new Model_Recruit();
-    $recruit_model->updateCount($id);
-    $recruit = $recruit_model->find($id);
-    $recruit['skill'] = json_decode($recruit['skill']);
-
-    $this->template->content->set_safe('recruit', $recruit);
+    $recruit = Model_Recruit::find($id);
+    if ($recruit['user_id'] == Auth::get('id')) {
+      MyUtil::set_alert('danger','リクエストが不正です');
+      Response::redirect(Input::referrer());
+    }
     
     $recruitjoin_model = new Model_Recruitjoin();
     $recruitjoin_model->insert($id);
     
-     $join = Model_Recruitjoin::check($id);
-     $this->template->content->joint = $join;
-     MyUtil::set_alert('success','   参加しました');
+    MyUtil::set_alert('success','参加しました');
+    Response::redirect(Input::referrer());
   }
   
    /**
@@ -333,27 +331,18 @@ class Controller_Recruit extends Controller_Template {
    * @access  public
    * @return
    */
-  public function action_joindelete()
+  public function action_unjoin()
   {
-     $this->template->subtitle = '詳細';
-   $this->template->content = View::forge('recruit/detail');
-     if (!$id = Input::get('id',null)) {
-       Response::redirect('recruit/list');
+    if (!$id = Input::get('id',null)) {
+      MyUtil::set_alert('danger','リクエストが不正です');
+      Response::redirect(Input::referrer());
     }
-    
-    $recruit_model = new Model_Recruit();
-    $recruit_model->updateCount($id);
-    $recruit = $recruit_model->find($id);
-    $recruit['skill'] = json_decode($recruit['skill']);
-    
-    $this->template->content->set_safe('recruit', $recruit);
      
     $recruitjoin_model = new Model_Recruitjoin();
     $recruitjoin_model->deleterecruit($id);
     
-    $join = Model_Recruitjoin::check($id);
-    $this->template->content->joint = $join;
-        MyUtil::set_alert('success','   参加はキャンセルされました');
+    MyUtil::set_alert('danger','参加はキャンセルされました');
+    Response::redirect(Input::referrer());
   }
 }
 

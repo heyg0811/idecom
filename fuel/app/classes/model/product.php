@@ -91,9 +91,7 @@ class Model_Product extends MyModel
    * @return  String
    */
   public static function showCount(){
-     $user_id = Auth::get('id');
-       $query =  DB::query('select SUM(count) as count from product where user_id = '.$user_id)->execute()->as_array();
-    
+    $query =  DB::query('select SUM(count) as count from product where status = '. Config::get('PROJECT.STATUS.ENABLE') .' AND user_id = ' . Auth::get('id'))->execute()->as_array();
     return $query[0]['count'];
   }
   

@@ -13,7 +13,7 @@
     transition: all .2s ease-in-out;
   }
 
-    .author-list-thumbnail{
+  .author-list-thumbnail{
     width: 100%;
     max-width: 100%;
     height: auto;
@@ -21,7 +21,6 @@
     line-height: 1.42857143;
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 4px;
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
@@ -30,7 +29,7 @@
     border-radius: 5px;
     
   }
-    .author-timeline-body{
+  .author-timeline-body{
     width : 80% ; /* IE8以下とAndroid4.3以下用フォールバック */
     width: -webkit-calc(100%  - 60px);
     width : calc(100%  - 60px) ;
@@ -53,10 +52,30 @@
   }
   /* ------author css------ */
   
+  #filters > li > a {
+    cursor: pointer;
+  }
   
+  #filter-top {
+    margin-bottom:15px;
+  }
   
+  .nav.nav-pills.nav-stacked.recruit> li.active > a,
+  .nav.nav-pills.nav-stacked.recruit> li.active > a:hover {
+    border-left-color: #f56954;
+  }
   
+  .nav.nav-pills.recruit> li.active > a,
+  .nav.nav-pills.recruit> li.active > a:hover {
+    border-top-color: #f56954;
+  }
   
+  .nav.nav-pills.nav-stacked.author> li.active > a,
+  .nav.nav-pills.nav-stacked.recruit> li.active > a:hover {
+    border-left-color: #00a65a;
+  }
   
-  
-  
+  .nav.nav-pills.author> li.active > a,
+  .nav.nav-pills.author> li.active > a:hover {
+    border-top-color: #00a65a;
+  }

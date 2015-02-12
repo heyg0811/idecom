@@ -19,7 +19,7 @@
       </div>
       <div class="form-group">
         <?php echo Form::label('分類', 'category'); ?>
-        <?php echo Form::select('product[category]','', Config::get('CATEGORY.NAME'),array('class'=>'form-control')); ?>
+        <?php echo Form::select('product[category]','', Config::get('PROJECT.CATEGORY.NAME'),array('class'=>'form-control')); ?>
       </div>
       <?php echo Form::label('技術', 'skill'); ?>
       <div class="row">
@@ -47,12 +47,12 @@
         <?php echo Form::file('thumbnail'); ?>
       </div>
       <div class="form-group">
-        <?php echo Form::label('ファイル', 'file'); ?>
+        <?php echo Form::label('ソースコード', 'file'); ?>
         <?php echo Form::file('file'); ?>
       </div>
       <div class="form-group">
         <?php echo Form::label('その他画像', 'other'); ?>
-        <?php echo html_tag('iframe',array('width'=>'100%', 'height'=>'300px', 'src'=>'http://idecom-b1225-8.c9.io//assets/js/plugin/kcfinder/browse.php?type=other&langCode=ja')); ?>
+        <?php echo html_tag('iframe',array('width'=>'100%', 'height'=>'300px', 'src'=>'http://idecom-heyg0811.c9.io/assets/js/plugin/kcfinder/browse.php?type=other&langCode=ja')); ?>
       </div>
     </div>
     <div class="box-footer">

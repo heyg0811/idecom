@@ -160,6 +160,7 @@ class Auth_Opauth extends Auth\Auth_Opauth
       isset($user['full_name']) ? $user['full_name'] : (
         isset($user['first_name'], $user['last_name']) ? $user['first_name'].' '.$user['last_name'] : null
     ));
+    
     $user_id = \Auth::create_user(
 
       // username

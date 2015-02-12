@@ -111,7 +111,7 @@ class Form extends Fuel\Core\Form
 	 */
 	public static function select($field, $values = null, array $options = array(), array $attributes = array())
 	{
-		static::$instance->restration($field, $value);
+		static::$instance->restration($field, $values);
 		return static::$instance->select($field, $values, $options, $attributes);
 	}
 

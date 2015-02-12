@@ -14,7 +14,7 @@ class Model_User extends \Orm\Model
     'nickname',
     'grade',
     'major',
-    'genre',
+    'category',
     'skill',
     'status',
     'password_change',

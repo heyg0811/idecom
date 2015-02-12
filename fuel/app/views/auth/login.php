@@ -18,9 +18,8 @@
 
     </div>
     <div class="footer">
-    <input type="submit" class='btn bg-olive btn-block' value="ログイン">
-    <?php echo Html::anchor('auth/oauth/google', 'Googleよりログイン', array('class'=>'btn bg-red btn-block')); ?>
-      <p><a href="#">I forgot my password</a></p>
+      <input type="submit" class='btn bg-olive btn-block' value="ログイン">
+      <?php echo Html::anchor('auth/oauth/google', '<i class="fa fa-google-plus"></i> Googleよりログイン', array('class'=>'btn btn-block btn-social btn-google-plus')); ?>
     </div>
   </form>
 </div>

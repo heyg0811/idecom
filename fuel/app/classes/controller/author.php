@@ -122,7 +122,7 @@ class Controller_Author extends Controller_Template {
       'nickname'  => $input_data["nickname"],
       'grade'     => $input_data["grade"],
       'major'     => $input_data["major"],
-      'genre'     => $input_data["genre"],
+      'category'     => $input_data["category"],
       'skill'     => Model_Developer::technology_encode($input_data['skill']),
       'status'    => $input_data["status"],
     );
@@ -221,7 +221,7 @@ class Controller_Author extends Controller_Template {
     }else{
       //developerデータ取得
       $dev_list = $dev_model->find('all',array('where' => array(
-          array('genre', $filter),array('status', '1')
+          array('category', $filter),array('status', '1')
         )));
     }
     //userデータ取得
@@ -240,7 +240,7 @@ class Controller_Author extends Controller_Template {
       }else{
         $temp['thumbnail'] = "/assets/img/user/noimage.png";
       }
-      $temp['genre'] = $dev['genre'];
+      $temp['category'] = $dev['category'];
       
       array_push($view_list,$temp);
     }

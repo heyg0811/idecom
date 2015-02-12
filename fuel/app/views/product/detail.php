@@ -9,7 +9,7 @@
 <div class="col-sm-7 col-xs-12" id="product">
   <div class="row">
     <div class="small-box bg-blue">
-      <img src="<?php echo Config::get('UPLOAD_URL') . $product['thumbnail']; ?>" class="img-responsive">
+      <img src="<?php echo Config::get('UPLOAD_URL') . $product['thumbnail']; ?>" class="img-responsive" style="margin-left:auto;margin-right:auto;">
       <div class="inner">
         <h4><i class="fa fa-desktop" style="margin-right:4px;"></i> <?php echo $product['title']; ?></h4>
         <div class="col-xs-6 text-center">

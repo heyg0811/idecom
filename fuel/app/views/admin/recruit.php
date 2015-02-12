@@ -6,12 +6,12 @@
     <div class="panel box box-danger">
       <div class="row">
         <div class="col-sm-4">
-          <img src="<?php echo Config::get('UPLOAD_URL') . $recruit['thumbnail']; ?>" class="img-responsive">
+          <a href="/recruit/detail?id=<?php echo $recruit['id']; ?>"><img src="<?php echo Config::get('UPLOAD_URL') . $recruit['thumbnail']; ?>" class="img-responsive"></a>
         </div>
         <div class="col-sm-7 bbs-box">
           <div class="box-header">
             <div class="box-title">
-              <i class="fa fa-fw fa-comment-o"></i> <?php echo $recruit['title']; ?>
+              <a href="/recruit/detail?id=<?php echo $recruit['id']; ?>"><i class="fa fa-fw fa-comment-o"></i> <?php echo $recruit['title']; ?></a>
             </div>
             <div class="text-muted pull-right" style="margin-top:10px;">
               <i class="fa fa-clock-o"></i>

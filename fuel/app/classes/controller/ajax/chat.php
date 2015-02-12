@@ -30,8 +30,14 @@ class Controller_Ajax_Chat extends Controller_Rest {
       $group_id = Input::post('group_id');
     }
     $newest_id     = Input::post('newest_id', null);
-    Model_Groupchatcomment::insert($group_id,Input::post('body', null));
-    $message_diffs = Model_Groupchatcomment::getDiff($group_id, $newest_id);
+    $data = array(
+      'group_id' => $group_id,
+      'user_id'  => Auth::get('id'),
+      'body'     => $body,
+      'created_at'     => time(),
+    );
+    Model_GroupChatComment::insert($data);
+    $message_diffs = Model_GroupChatComment::getDiff($group_id, $newest_id);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($message_diffs);
   }
@@ -45,7 +51,7 @@ class Controller_Ajax_Chat extends Controller_Rest {
     $request_path  = parse_url($_SERVER['HTTP_REFERER'], PHP_URL_PATH);
     $group_id      = Input::post('group_id');
     $newest_id     = Input::post('newest_id', null);
-    $message_diffs = Model_Message::getDiff($group_id, $newest_id);
+    $message_diffs = Model_GroupChatComment::getDiff($group_id, $newest_id);
     header('Content-Type: application/json; charset=utf-8');
     echo json_encode($message_diffs);
   }

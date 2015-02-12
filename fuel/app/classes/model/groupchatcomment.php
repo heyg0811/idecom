@@ -4,26 +4,16 @@
  *
  * @author b1225
  */
-class Model_Groupchatcomment extends \Orm\Model {
+class Model_GroupChatComment extends MyModel {
   // テーブル情報を設定
   protected static $_table_name = 'groupchat_comment';
   protected static $_properties = array(
     'id',
     'group_id',
     'user_id',
-    'text',
-    'date',
+    'body',
+    'created_at',
   );
-  
-  public static function insert($group_id, $body){
-    list($insert_id, $rows_affected) = DB::insert('groupchat_comment')->set(array(
-      'group_id'    => $group_id,
-      'user_id'    => Auth::get('id'),
-      'text'       => $body,
-      'date' => time(),
-    ))->execute();
-    return $insert_id;
-  }
 
   public static function getDiff($group_id, $newest_id){
     // 新しいデータ取得
@@ -37,7 +27,7 @@ class Model_Groupchatcomment extends \Orm\Model {
     // フォーム用に整形
     foreach ($message_diffs as &$message) {
       $user_data = Model_User::getUser($message['user_id']);
-      $message['date']      = date('Y-m-d H:i:s',$message['date']);
+      $message['date']      = date('Y-m-d H:i:s',$message['created_at']);
       $message['user_name'] = Model_User::getName($message['user_id']);
       $message['thumbnail'] = $user_data[0]['thumbnail'];
     }

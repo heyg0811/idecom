@@ -59,4 +59,11 @@ class MyUtil {
 	  $id   = str_replace('id=','',parse_url($url, PHP_URL_QUERY));
 	  $path = parse_url($url, PHP_URL_PATH) . '?id=' .$id;
 	}
+	
+	public static function is_active($val,$set_val){
+		if ($val == $set_val) {
+			return 'active';
+		}
+		return '';
+	}
 }

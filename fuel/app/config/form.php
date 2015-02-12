@@ -24,7 +24,7 @@ return array(
 	// regular form definitions
 	'prep_value'                 => true,
 	'auto_id'                    => true,
-	'auto_id_prefix'             => 'form_',
+	'auto_id_prefix'             => '',
 	'form_method'                => 'post',
 	'form_template'              => "\n\t\t{open}\n\t\t<div class=\"box-body\">\n{fields}\n\t\t</div>\n\t\t{close}\n",
 	'fieldset_template'          => "\n\t\t<div>{open}<div>\n{fields}</div></div>\n\t\t{close}\n",

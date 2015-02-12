@@ -80,18 +80,6 @@
                           <small>Member since <?php echo date('Y-m-d',Auth::get('created_at'));?></small>
                         </p>
                       </li
-                      <!-- Menu Body -->
-                      <li class="user-body">
-                        <div class="col-xs-4 text-center">
-                          <a href="#">Followers</a>
-                        </div>
-                        <div class="col-xs-4 text-center">
-                          <a href="#">Sales</a>
-                        </div>
-                        <div class="col-xs-4 text-center">
-                          <a href="#">Friends</a>
-                        </div>
-                      </li>
                       <!-- Menu Footer-->
                       <li class="user-footer">
                         <div class="pull-left">
@@ -231,6 +219,8 @@
           <?php echo Asset::js('admin/AdminLTE/dashboard.js'); ?>
 
           <?php echo Asset::js('admin/plugins/bootstrap-slider/bootstrap-slider.js'); ?>
+
+          <?php echo Asset::js('classie.js'); ?>
 
           <!-- Original -->
           <?php echo Asset::js('original.js'); ?>
