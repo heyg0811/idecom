@@ -105,12 +105,12 @@ class Controller_Groupchat extends Controller_Template {
   }
   
   public static function get_host_id($id) {
-      $data = Model_GroupChat::find('all',array('where' => array(array('id', $id))))[1];
-      return $data['host_id'];
+      $data = Model_GroupChat::find('all',array('where' => array(array('id', $id))));
+      return $data[1]['host_id'];
   }
   public static function get_menber($id) {
-      $data = Model_GroupChat::find('all',array('where' => array(array('id', $id))))[1];
-      return $data['menber'];
+      $data = Model_GroupChat::find('all',array('where' => array(array('id', $id))));
+      return $data[1]['menber'];
   }
   
   
